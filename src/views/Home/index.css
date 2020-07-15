@@ -13,24 +13,8 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-@media only screen and (max-width: 68.75em) {
-  html {
-    font-size: 50%;
-  }
-}
 
-body {
-  font-family: "Nunito Sans", sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #655a56;
-  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: calc(100vh - 2 * 4vw);
-}
-
-.container {
+.homepage-container {
   max-width: 100%;
   background-color: #fff;
   border-radius: 6px;
@@ -41,8 +25,9 @@ body {
   grid-template-columns: 1.1fr 2fr 1.1fr;
   grid-template-areas: "head head head" "list recipe shopping";
 }
+
 @media only screen and (max-width: 68.75em) {
-  .container {
+  .homepage-container {
     width: 100%;
     margin: 0;
     border-radius: 0;
@@ -259,6 +244,8 @@ body {
 .likes__panel:hover,
 .likes__field:hover + .likes__panel {
   visibility: visible;
+  border-radius: 10px;
+  margin-right: 20px;
   opacity: 1;
 }
 .likes__icon {
