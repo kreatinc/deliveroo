@@ -1,11 +1,11 @@
 import React from "react";
-import List from "./List";
 import Pagination from "./Pagination";
+import VisibleRecipes from "./VisibleResults";
 
 const Result = () => {
   return (
     <div className="results">
-      <List />
+      <VisibleRecipes />
       <Pagination />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 
-const List = () => {
+const List = ({ todos }) => {
   return (
     <ul className="results__list">
       <Item></Item>
