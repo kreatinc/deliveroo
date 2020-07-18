@@ -1,4 +1,4 @@
-const companiesById = (state = {}, action) => {
+const byId = (state = {}, action) => {
   if (action.response) {
     return {
       ...state,
@@ -8,6 +8,6 @@ const companiesById = (state = {}, action) => {
   return state;
 };
 
-export default companiesById;
+export default byId;
 
-export const getCompany = (state, id) => state[id];
+export const getProduct = (state, id) => state[id];

@@ -10,13 +10,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-let VisibleRecipes = ({ products, fetchProducts }) => {
+let VisibleProducts = ({ products, fetchProducts }) => {
   useEffect(() => {
     fetchProducts().then(() => console.log("done !"));
   }, []);
   return <List products={products} />;
 };
 
-VisibleRecipes = connect(mapStateToProps, actions)(VisibleRecipes);
+VisibleProducts = connect(mapStateToProps, actions)(VisibleProducts);
 
-export default VisibleRecipes;
+export default VisibleProducts;
