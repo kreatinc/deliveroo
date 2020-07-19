@@ -1,18 +1,18 @@
 import React from "react";
-
+import icons from "../../../assets/img/icons.svg";
 const RecipeDetails = () => {
   return (
     <div className="recipe__details">
       <div className="recipe__info">
         <svg className="recipe__info-icon">
-          <use href="img/icons.svg#icon-stopwatch"></use>
+          <use href={icons + "#icon-stopwatch"}></use>
         </svg>
         <span className="recipe__info-data recipe__info-data--minutes">45</span>
         <span className="recipe__info-text"> minutes</span>
       </div>
       <div className="recipe__info">
         <svg className="recipe__info-icon">
-          <use href="img/icons.svg#icon-man"></use>
+          <use href={icons + "#icon-man"}></use>
         </svg>
         <span className="recipe__info-data recipe__info-data--people">4</span>
         <span className="recipe__info-text"> servings</span>
@@ -20,19 +20,19 @@ const RecipeDetails = () => {
         <div className="recipe__info-buttons">
           <button className="btn-tiny">
             <svg>
-              <use href="img/icons.svg#icon-circle-with-minus"></use>
+              <use href={icons + "#icon-heart"}></use>
             </svg>
           </button>
           <button className="btn-tiny">
             <svg>
-              <use href="img/icons.svg#icon-circle-with-plus"></use>
+              <use href={icons + "#icon-heart"}></use>
             </svg>
           </button>
         </div>
       </div>
-      <button className="recipe__love">
+      <button className="recipe__love" onClick={() => alert("hello world")}>
         <svg className="header__likes">
-          <use href="img/icons.svg#icon-heart-outlined"></use>
+          <use href={icons + "#icon-heart-outlined"}></use>
         </svg>
       </button>
     </div>

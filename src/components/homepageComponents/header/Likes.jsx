@@ -1,11 +1,12 @@
 import React from "react";
+import icons from "../../../assets/img/icons.svg";
 
 const Likes = () => {
   return (
     <div className="likes">
       <div className="likes__field">
         <svg className="likes__icon">
-          <use href="img/icons.svg#icon-heart"></use>
+          <use href={icons + "#icon-heart"}></use>
         </svg>
       </div>
       <div className="likes__panel">

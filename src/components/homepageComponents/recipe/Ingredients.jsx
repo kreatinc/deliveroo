@@ -1,24 +1,28 @@
 import React from "react";
 import Ingredient from "./Ingredient";
+import icons from "../../../assets/img/icons.svg";
+const Ingredients = ({ recipe }) => {
+  if (recipe) {
+    const recipeElements = recipe.replace("[", "").replace("]", "");
+    const recipeArray = recipeElements.split(",");
+    return (
+      <div className="recipe__ingredients">
+        <ul className="recipe__ingredient-list">
+          {recipeArray.map((ingredient, i) => (
+            <Ingredient ingredient={ingredient} key={i} />
+          ))}
+        </ul>
 
-const Ingredients = () => {
-  return (
-    <div className="recipe__ingredients">
-      <ul className="recipe__ingredient-list">
-        <Ingredient />
-        <Ingredient />
-        <Ingredient />
-        <Ingredient />
-      </ul>
-
-      <button className="btn-small recipe__btn">
-        <svg className="search__icon">
-          <use href="img/icons.svg#icon-shopping-cart"></use>
-        </svg>
-        <span>Add to shopping list</span>
-      </button>
-    </div>
-  );
+        <button className="btn-small recipe__btn">
+          <svg className="search__icon">
+            <use href={icons + "#icon-shopping-cart"}></use>
+          </svg>
+          <span>Add to shopping list</span>
+        </button>
+      </div>
+    );
+  }
+  return <p>Cannot find product</p>;
 };
 
 export default Ingredients;

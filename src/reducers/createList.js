@@ -11,10 +11,10 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case "FETCH_TODOS_REQUEST":
+    case "FETCH_PRODUCTS_REQUEST":
       return true;
-    case "FETCH_TODOS_SUCCESS":
-    case "FETCH_TODOS_FAILURE":
+    case "FETCH_PRODUCTS_SUCCESS":
+    case "FETCH_PRODUCTS_FAILURE":
       return false;
     default:
       return state;
@@ -40,3 +40,5 @@ export default combineReducers({
 });
 
 export const getProductsIds = (state) => state.ids;
+export const getIsFetching = (state) => state.isFetching;
+export const getErrorMessage = (state) => state.errorMessage;

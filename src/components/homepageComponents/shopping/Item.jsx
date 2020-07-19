@@ -1,4 +1,5 @@
 import React from "react";
+import icons from "../../../assets/img/icons.svg";
 
 const Item = () => (
   <li className="shopping__item">
@@ -9,7 +10,7 @@ const Item = () => (
     <p className="shopping__description">Pasta</p>
     <button className="shopping__delete btn-tiny">
       <svg>
-        <use href="img/icons.svg#icon-circle-with-cross"></use>
+        <use href={icons + "#icon-circle-with-cross"}></use>
       </svg>
     </button>
   </li>

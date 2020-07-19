@@ -1,11 +1,12 @@
 import React from "react";
 
-const Figure = () => {
+const Figure = ({ product }) => {
+  console.log("the product is ", product);
   return (
     <figure className="recipe__fig">
-      <img src="img/test-1.jpg" alt="Tomato" className="recipe__img" />
+      <img src={product.image} alt={product.name} className="recipe__img" />
       <h1 className="recipe__title">
-        <span>Pasta with something on it</span>
+        <span>{product.description}</span>
       </h1>
     </figure>
   );
