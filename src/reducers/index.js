@@ -1,10 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import createList, * as fromCreateList from "./createList";
 import byId, * as fromById from "./byId";
+import shoppingList, * as fromShoppingList from "./shoppingList";
 
 const rootReducer = combineReducers({
   byId,
   createList,
+  shoppingList,
 });
 
 export default rootReducer;
@@ -30,4 +32,8 @@ export const getIsFetching = (state) => {
 
 export const getErrorMessage = (state) => {
   return fromCreateList.getErrorMessage(state.createList);
+};
+
+export const getShoppingList = (state) => {
+  return fromShoppingList.getShoppingListItems(state.shoppingList);
 };

@@ -12,12 +12,16 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-let Recipe = ({ product }) => {
+let Recipe = ({ product, dispatch }) => {
   return (
     <div className="recipe">
       <Figure product={product} />
       <Details product={product} />
-      <Ingredients recipe={product.recipe} />
+      <Ingredients
+        recipe={product.recipe}
+        product={product}
+        dispatch={dispatch}
+      />
     </div>
   );
 };

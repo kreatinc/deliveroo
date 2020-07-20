@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Item from "./Item";
+import { getShoppingList } from "../../../reducers";
+import * as actions from "../../../actions";
+import { connect } from "react-redux";
 
-const List = () => {
+const mapStateToProps = (state) => {
+  return {
+    shoppingList: getShoppingList(state),
+  };
+};
+
+let List = ({ shoppingList, dispatch }) => {
+  useEffect(() => {
+    dispatch(actions.getShoppingList());
+  }, []);
   return (
     <ul className="shopping__list">
-      <Item></Item>
+      {shoppingList &&
+        shoppingList.map((item) => <Item item={item} dispatch={dispatch} />)}
     </ul>
   );
 };
+
+List = connect(mapStateToProps, null)(List);
 
 export default List;

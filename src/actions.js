@@ -30,9 +30,32 @@ const receiveRecipes = (response) => {
   };
 };
 
+const addToShoppingList = (item) => {
+  return {
+    type: "ADD_LIST_ITEM",
+    item,
+  };
+};
+
+const getShoppingList = () => {
+  return {
+    type: "GET_LIST_ITEMS_REQUEST",
+  };
+};
+
+const removeItemFromShoppingList = (id) => {
+  return {
+    type: "REMOVE_LIST_ITEM",
+    id,
+  };
+};
+
 export {
   fetchProducts,
   receiveRecipes,
   fetchRecipesFailure,
   fetchRecipesRequest,
+  addToShoppingList,
+  getShoppingList,
+  removeItemFromShoppingList,
 };

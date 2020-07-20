@@ -1,7 +1,8 @@
 import React from "react";
 import Ingredient from "./Ingredient";
 import icons from "../../../assets/img/icons.svg";
-const Ingredients = ({ recipe }) => {
+import { addToShoppingList } from "../../../actions";
+const Ingredients = ({ recipe, product, dispatch }) => {
   if (recipe) {
     const recipeElements = recipe.replace("[", "").replace("]", "");
     const recipeArray = recipeElements.split(",");
@@ -13,7 +14,12 @@ const Ingredients = ({ recipe }) => {
           ))}
         </ul>
 
-        <button className="btn-small recipe__btn">
+        <button
+          className="btn-small recipe__btn"
+          onClick={() => {
+            dispatch(addToShoppingList(product.name));
+          }}
+        >
           <svg className="search__icon">
             <use href={icons + "#icon-shopping-cart"}></use>
           </svg>
