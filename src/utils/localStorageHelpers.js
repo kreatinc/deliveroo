@@ -11,17 +11,19 @@ const getShoppingList = () => {
 
 const removeItemFromShoppingList = (id) => {
   try {
-    return JSON.parse(localStorage.getItem(id));
+    const shoppingList = getShoppingList();
+    delete shoppingList[`${id}`];
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+    return getShoppingList();
   } catch (error) {
     console.log("there was an error while removing the item from the list");
   }
 };
 
 const addToShoppingList = (item) => {
-  const id = v4();
   try {
     const items = getShoppingList();
-    const newShoppingList = { ...items, [id]: item };
+    const newShoppingList = { ...items, [item.id]: item };
     localStorage.setItem("shoppingList", JSON.stringify(newShoppingList));
     return getShoppingList();
   } catch (error) {
@@ -29,4 +31,30 @@ const addToShoppingList = (item) => {
   }
 };
 
-export { getShoppingList, addToShoppingList, removeItemFromShoppingList };
+const getLikedProducts = () => {
+  try {
+    const res = JSON.parse(localStorage.getItem("likesList"));
+    return res;
+  } catch (error) {
+    console.log("there was an error while getting from likes list");
+  }
+};
+
+const addToLikeList = (item) => {
+  try {
+    const items = getLikedProducts();
+    const newLikesList = { ...items, [item.id]: item };
+    localStorage.setItem("likesList", JSON.stringify(newLikesList));
+    return getLikedProducts();
+  } catch (error) {
+    console.log("there was an error while adding to the likes list");
+  }
+};
+
+export {
+  getShoppingList,
+  addToShoppingList,
+  removeItemFromShoppingList,
+  getLikedProducts,
+  addToLikeList,
+};

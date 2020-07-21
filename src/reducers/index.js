@@ -2,11 +2,13 @@ import { combineReducers } from "@reduxjs/toolkit";
 import createList, * as fromCreateList from "./createList";
 import byId, * as fromById from "./byId";
 import shoppingList, * as fromShoppingList from "./shoppingList";
+import likesList, * as fromLikesList from "./likesList";
 
 const rootReducer = combineReducers({
   byId,
   createList,
   shoppingList,
+  likesList,
 });
 
 export default rootReducer;
@@ -36,4 +38,12 @@ export const getErrorMessage = (state) => {
 
 export const getShoppingList = (state) => {
   return fromShoppingList.getShoppingListItems(state.shoppingList);
+};
+
+export const getLikedProducts = (state) => {
+  return fromLikesList.getLikedListItems(state.likesList);
+};
+
+export const getIsProductLiked = (state, id) => {
+  return fromLikesList.isProductLiked(state.likesList, id);
 };

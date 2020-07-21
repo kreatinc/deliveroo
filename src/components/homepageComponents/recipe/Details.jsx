@@ -1,6 +1,7 @@
 import React from "react";
 import icons from "../../../assets/img/icons.svg";
-const RecipeDetails = () => {
+import { addToLikeList } from "actions";
+const RecipeDetails = ({ product, dispatch, isLiked }) => {
   return (
     <div className="recipe__details">
       <div className="recipe__info">
@@ -30,9 +31,16 @@ const RecipeDetails = () => {
           </button>
         </div>
       </div>
-      <button className="recipe__love" onClick={() => alert("hello world")}>
+      <button
+        className="recipe__love"
+        onClick={() => dispatch(addToLikeList(product))}
+      >
         <svg className="header__likes">
-          <use href={icons + "#icon-heart-outlined"}></use>
+          <use
+            href={
+              isLiked ? icons + "#icon-heart" : icons + "#icon-heart-outlined"
+            }
+          ></use>
         </svg>
       </button>
     </div>

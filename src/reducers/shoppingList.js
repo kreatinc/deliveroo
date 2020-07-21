@@ -24,6 +24,6 @@ export default shoppingList;
 export const getShoppingListItems = (state) => {
   if (state) {
     const keys = Object.keys(state);
-    return keys.map((key) => ({ key, name: state[key] }));
+    return keys.map((key) => ({ key, details: state[key] }));
   }
 };

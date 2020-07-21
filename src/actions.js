@@ -43,6 +43,19 @@ const getShoppingList = () => {
   };
 };
 
+const getLikedProducts = () => {
+  return {
+    type: "GET_LIKE_LIST",
+  };
+};
+
+const addToLikeList = (item) => {
+  return {
+    type: "ADD_TO_LIKE_LIST",
+    item,
+  };
+};
+
 const removeItemFromShoppingList = (id) => {
   return {
     type: "REMOVE_LIST_ITEM",
@@ -58,4 +71,6 @@ export {
   addToShoppingList,
   getShoppingList,
   removeItemFromShoppingList,
+  getLikedProducts,
+  addToLikeList,
 };
