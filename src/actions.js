@@ -1,16 +1,44 @@
-import * as recipeServices from "./services/recipeServices";
+import * as ProductServices from "./services/productServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts } from "./utils/schema";
 
 const fetchProducts = () => (dispatch) => {
-  dispatch(fetchRecipesRequest());
-  return recipeServices.fetchRecipes().then(
-    (response) => dispatch(receiveRecipes(response)),
+  dispatch(fetchProductsRequest());
+  return ProductServices.fetchProducts().then(
+    (response) => dispatch(receiveProducts(response)),
     (error) => dispatch(fetchRecipesFailure(error))
   );
 };
 
-const fetchRecipesRequest = () => {
+const fetchProduct = (productId) => (dispatch) => {
+  dispatch(fetchProductRequest());
+  return ProductServices.fetchProduct(productId).then((response) =>
+    dispatch(receiveProduct(response), (error) =>
+      dispatch(fetchProductFailure(error))
+    )
+  );
+};
+
+const receiveProduct = (response) => {
+  return {
+    type: "FETCH_PRODUCT_SUCCESS",
+    response: normalize(response.data.data, arrayOfProducts),
+  };
+};
+
+const fetchProductRequest = () => {
+  return {
+    type: "FETCH_PRODUCT_REQUEST",
+  };
+};
+const fetchProductFailure = (error) => {
+  return {
+    type: "FETCH_PRODUCT_FAILURE",
+    message: error.message || "there was an error while fetching the product",
+  };
+};
+
+const fetchProductsRequest = () => {
   return {
     type: "FETCH_PRODUCTS_REQUEST",
   };
@@ -23,7 +51,7 @@ const fetchRecipesFailure = (error) => {
   };
 };
 
-const receiveRecipes = (response) => {
+const receiveProducts = (response) => {
   return {
     type: "FETCH_PRODUCTS_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
@@ -63,14 +91,26 @@ const removeItemFromShoppingList = (id) => {
   };
 };
 
+const removeIngredient = (ingredient, productId) => {
+  return {
+    type: "REMOVE_INGREDIENT",
+    ingredient,
+    productId,
+  };
+};
+
 export {
   fetchProducts,
-  receiveRecipes,
+  receiveProducts as receiveRecipes,
   fetchRecipesFailure,
-  fetchRecipesRequest,
+  fetchProductsRequest as fetchRecipesRequest,
   addToShoppingList,
   getShoppingList,
   removeItemFromShoppingList,
   getLikedProducts,
   addToLikeList,
+  removeIngredient,
+  fetchProductFailure,
+  fetchProductRequest,
+  fetchProduct,
 };

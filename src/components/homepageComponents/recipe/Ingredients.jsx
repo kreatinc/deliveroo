@@ -1,16 +1,19 @@
 import React from "react";
 import Ingredient from "./Ingredient";
 import icons from "../../../assets/img/icons.svg";
-import { addToShoppingList } from "../../../actions";
-const Ingredients = ({ recipe, product, dispatch }) => {
-  if (recipe) {
-    const recipeElements = recipe.replace("[", "").replace("]", "");
-    const recipeArray = recipeElements.split(",");
+import { addToShoppingList, fetchProduct } from "../../../actions";
+const Ingredients = ({ ingredients, product, dispatch }) => {
+  if (ingredients) {
     return (
       <div className="recipe__ingredients">
         <ul className="recipe__ingredient-list">
-          {recipeArray.map((ingredient, i) => (
-            <Ingredient ingredient={ingredient} key={i} />
+          {ingredients.map((ingredient, i) => (
+            <Ingredient
+              ingredient={ingredient}
+              dispatch={dispatch}
+              product={product}
+              key={i}
+            />
           ))}
         </ul>
 
@@ -18,6 +21,7 @@ const Ingredients = ({ recipe, product, dispatch }) => {
           className="btn-small recipe__btn"
           onClick={() => {
             dispatch(addToShoppingList(product));
+            window.location.reload();
           }}
         >
           <svg className="search__icon">

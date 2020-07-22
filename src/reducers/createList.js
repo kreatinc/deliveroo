@@ -23,10 +23,10 @@ const isFetching = (state = false, action) => {
 
 const errorMessage = (state = null, action) => {
   switch (action.type) {
-    case "FETCH_TODOS_FAILURE":
+    case "FETCH_PRODUCTS_FAILURE":
       return action.message;
-    case "FETCH_TODOS_REQUEST":
-    case "FETCH_TODOS_SUCCESS":
+    case "FETCH_PRODUCTS_REQUEST":
+    case "FETCH_PRODUCTS_SUCCESS":
       return null;
     default:
       return state;

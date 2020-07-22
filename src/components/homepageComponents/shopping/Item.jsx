@@ -2,7 +2,7 @@ import React from "react";
 import icons from "../../../assets/img/icons.svg";
 import { removeItemFromShoppingList } from "actions";
 
-const Item = ({ item, dispatch }) => {
+const Item = ({ item, itemId, dispatch }) => {
   return (
     <li className="shopping__item">
       <div className="shopping__count">
@@ -13,7 +13,7 @@ const Item = ({ item, dispatch }) => {
       <button
         className="shopping__delete btn-tiny"
         onClick={() => {
-          dispatch(removeItemFromShoppingList(item.key));
+          dispatch(removeItemFromShoppingList(itemId));
         }}
       >
         <svg>

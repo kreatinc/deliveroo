@@ -10,6 +10,7 @@ const getShoppingList = () => {
 };
 
 const removeItemFromShoppingList = (id) => {
+  console.log("the id of the product is ", id);
   try {
     const shoppingList = getShoppingList();
     delete shoppingList[`${id}`];
@@ -21,9 +22,10 @@ const removeItemFromShoppingList = (id) => {
 };
 
 const addToShoppingList = (item) => {
+  const id = v4();
   try {
     const items = getShoppingList();
-    const newShoppingList = { ...items, [item.id]: item };
+    const newShoppingList = { ...items, [id]: item };
     localStorage.setItem("shoppingList", JSON.stringify(newShoppingList));
     return getShoppingList();
   } catch (error) {

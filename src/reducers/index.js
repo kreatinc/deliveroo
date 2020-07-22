@@ -3,6 +3,7 @@ import createList, * as fromCreateList from "./createList";
 import byId, * as fromById from "./byId";
 import shoppingList, * as fromShoppingList from "./shoppingList";
 import likesList, * as fromLikesList from "./likesList";
+import convertStringToArray from "utils/convertStringToArray";
 
 const rootReducer = combineReducers({
   byId,
@@ -46,4 +47,11 @@ export const getLikedProducts = (state) => {
 
 export const getIsProductLiked = (state, id) => {
   return fromLikesList.isProductLiked(state.likesList, id);
+};
+
+export const getProductIngredients = (state, id) => {
+  const product = fromById.getProduct(state.byId, id);
+  if (product) {
+    return convertStringToArray(product.recipe);
+  }
 };

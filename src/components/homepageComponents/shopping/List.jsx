@@ -18,7 +18,12 @@ let List = ({ shoppingList, dispatch }) => {
     <ul className="shopping__list">
       {shoppingList &&
         shoppingList.map((item) => (
-          <Item item={item.details} key={item.key} dispatch={dispatch} />
+          <Item
+            item={item.details}
+            itemId={item.key}
+            key={item.key}
+            dispatch={dispatch}
+          />
         ))}
     </ul>
   );

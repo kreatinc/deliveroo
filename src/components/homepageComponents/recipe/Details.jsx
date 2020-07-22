@@ -24,11 +24,6 @@ const RecipeDetails = ({ product, dispatch, isLiked }) => {
               <use href={icons + "#icon-heart"}></use>
             </svg>
           </button>
-          <button className="btn-tiny">
-            <svg>
-              <use href={icons + "#icon-heart"}></use>
-            </svg>
-          </button>
         </div>
       </div>
       <button
