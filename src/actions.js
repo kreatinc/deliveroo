@@ -1,6 +1,6 @@
 import * as ProductServices from "./services/productServices";
 import { normalize } from "normalizr";
-import { arrayOfProducts } from "./utils/schema";
+import { arrayOfProducts, arrayOfComments } from "./utils/schema";
 
 const fetchProducts = () => (dispatch) => {
   dispatch(fetchProductsRequest());
@@ -19,12 +19,36 @@ const fetchProduct = (productId) => (dispatch) => {
   );
 };
 
+// const receiveProductLikes = (response) => {};
+// const fetchProductLikesFailure = () => {};
+
+// const fetchProductComments = (productId) => (dispatch) => {
+//   return ProductServices.fetchProductComments(productId).then(
+//     (response) => dispatch(receiveProductComments(response)),
+//     (error) => dispatch(fetchProductCommentsFailure(error))
+//   );
+// };
+
 const receiveProduct = (response) => {
   return {
     type: "FETCH_PRODUCT_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
   };
 };
+
+// const fetchProductCommentsFailure = (error) => {
+//   return {
+//     type: "FETCH_PRODUCT_COMMENTS_FAILURE",
+//     message: error.message,
+//   };
+// };
+
+// const receiveProductComments = (response) => {
+//   return {
+//     type: "FETCH_PRODUCT_COMMENTS_SUCCESS",
+//     response: normalize(response.data.data, arrayOfComments),
+//   };
+// };
 
 const fetchProductRequest = () => {
   return {

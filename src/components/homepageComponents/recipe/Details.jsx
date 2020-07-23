@@ -1,7 +1,7 @@
 import React from "react";
 import icons from "../../../assets/img/icons.svg";
 import { addToLikeList } from "actions";
-const RecipeDetails = ({ product, dispatch, isLiked }) => {
+const RecipeDetails = ({ product, dispatch, isLiked, likes }) => {
   return (
     <div className="recipe__details">
       <div className="recipe__info">
@@ -19,11 +19,22 @@ const RecipeDetails = ({ product, dispatch, isLiked }) => {
         <span className="recipe__info-text"> servings</span>
 
         <div className="recipe__info-buttons">
-          <button className="btn-tiny">
-            <svg>
-              <use href={icons + "#icon-heart"}></use>
-            </svg>
-          </button>
+          {likes &&
+            likes.map((_, i) => {
+              if (i >= 5) return;
+              return (
+                <>
+                  <button className="btn-tiny">
+                    <svg>
+                      <use href={icons + "#icon-heart"}></use>
+                    </svg>
+                  </button>
+                  <button className="btn-tiny">
+                    ({likes && likes.length})
+                  </button>
+                </>
+              );
+            })}
         </div>
       </div>
       <button

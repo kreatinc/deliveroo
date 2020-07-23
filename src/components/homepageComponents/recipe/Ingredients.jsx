@@ -2,7 +2,7 @@ import React from "react";
 import Ingredient from "./Ingredient";
 import icons from "../../../assets/img/icons.svg";
 import { addToShoppingList, fetchProduct } from "../../../actions";
-const Ingredients = ({ ingredients, product, dispatch }) => {
+const Ingredients = ({ ingredients, product, likes, dispatch }) => {
   if (ingredients) {
     return (
       <div className="recipe__ingredients">

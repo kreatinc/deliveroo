@@ -3,6 +3,7 @@ import createList, * as fromCreateList from "./createList";
 import byId, * as fromById from "./byId";
 import shoppingList, * as fromShoppingList from "./shoppingList";
 import likesList, * as fromLikesList from "./likesList";
+import CommentsList, * as fromCommentsList from "./CommentsList";
 import convertStringToArray from "utils/convertStringToArray";
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   createList,
   shoppingList,
   likesList,
+  CommentsList,
 });
 
 export default rootReducer;
@@ -53,5 +55,18 @@ export const getProductIngredients = (state, id) => {
   const product = fromById.getProduct(state.byId, id);
   if (product) {
     return convertStringToArray(product.recipe);
+  }
+};
+export const getLikes = (state, id) => {
+  const product = fromById.getProduct(state.byId, id);
+  if (product) {
+    return product.likes;
+  }
+};
+
+export const getProductComments = (state, id) => {
+  const product = fromById.getProduct(state.byId, id);
+  if (product) {
+    return fromCommentsList.getComments(product.id);
   }
 };

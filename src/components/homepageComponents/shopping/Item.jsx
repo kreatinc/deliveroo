@@ -9,7 +9,7 @@ const Item = ({ item, itemId, dispatch }) => {
         <input type="number" value="500" step="100" />
         <p>g</p>
       </div>
-      <p className="shopping__description">{item.name}</p>
+      <p className="shopping__description">{item.title}</p>
       <button
         className="shopping__delete btn-tiny"
         onClick={() => {

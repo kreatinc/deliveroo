@@ -8,8 +8,8 @@ const Like = ({ item }) => {
           <img src={item.image} alt={item.description} />
         </figure>
         <div className="likes__data">
-          <h4 className="likes__name">{item.name}</h4>
-          <p className="likes__author">{item.company.name}</p>
+          <h4 className="likes__name">{item.title}</h4>
+          <p className="likes__author">{item.company.title}</p>
         </div>
       </a>
     </li>

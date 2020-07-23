@@ -15,6 +15,7 @@ let Likes = ({ likedProducts, dispatch }) => {
   useEffect(() => {
     dispatch(actions.getLikedProducts());
   }, []);
+
   return (
     <div className="likes">
       <div className="likes__field">
