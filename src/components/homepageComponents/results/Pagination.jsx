@@ -1,21 +1,34 @@
 import React from "react";
-const Pagination = () => {
+import icons from "assets/img/icons.svg";
+import { getPaginationData } from "reducers";
+import { connect } from "react-redux";
+import * as actions from "actions";
+
+const mapStateToProps = (state) => {
+  return {
+    pagination: getPaginationData(state),
+  };
+};
+
+let Pagination = ({ pagination, fetchProducts }) => {
   return (
     <div className="results__pages">
       <button className="btn-inline results__btn--prev">
         <svg className="search__icon">
-          <use href="img/icons.svg#icon-triangle-left"></use>
+          <use href={icons + "#icon-triangle-left"}></use>
         </svg>
-        <span>Page 1</span>
+        <span>Page {pagination.from}</span>
       </button>
       <button className="btn-inline results__btn--next">
-        <span>Page 3</span>
+        <span>Page {pagination.to}</span>
         <svg className="search__icon">
-          <use href="img/icons.svg#icon-triangle-right"></use>
+          <use href={icons + "#icon-triangle-right"}></use>
         </svg>
       </button>
     </div>
   );
 };
+
+Pagination = connect(mapStateToProps, actions)(Pagination);
 
 export default Pagination;

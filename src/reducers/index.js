@@ -3,15 +3,17 @@ import createList, * as fromCreateList from "./createList";
 import byId, * as fromById from "./byId";
 import shoppingList, * as fromShoppingList from "./shoppingList";
 import likesList, * as fromLikesList from "./likesList";
-import CommentsList, * as fromCommentsList from "./CommentsList";
+import commentsList, * as fromCommentsList from "./commentsList";
 import convertStringToArray from "utils/convertStringToArray";
+import pagination, * as fromPagination from "./pagination";
 
 const rootReducer = combineReducers({
   byId,
   createList,
   shoppingList,
   likesList,
-  CommentsList,
+  commentsList,
+  pagination,
 });
 
 export default rootReducer;
@@ -67,6 +69,10 @@ export const getLikes = (state, id) => {
 export const getProductComments = (state, id) => {
   const product = fromById.getProduct(state.byId, id);
   if (product) {
-    return fromCommentsList.getComments(product.id);
+    return fromCommentsList.getComments(state.commentsList, product.id);
   }
+};
+
+export const getPaginationData = (state) => {
+  return fromPagination.getPaginationData(state.pagination);
 };

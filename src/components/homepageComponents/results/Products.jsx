@@ -3,6 +3,7 @@ import List from "./List";
 import { getVisibleProducts, getIsFetching, getErrorMessage } from "reducers";
 import { connect } from "react-redux";
 import * as actions from "../../../actions";
+import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -12,20 +13,21 @@ const mapStateToProps = (state) => {
   };
 };
 
-let VisibleProducts = ({
+let Products = ({
   products,
   isFetching,
   errorMessage,
   fetchProducts,
+  location,
 }) => {
   useEffect(() => {
     fetchProducts().then(() => console.log("done !"));
   }, []);
   if (isFetching) console.log("i am fetching the products");
   if (errorMessage) return <p>there was an error while fetching</p>;
-  return <List products={products} />;
+  return <List products={products} location={location} />;
 };
 
-VisibleProducts = connect(mapStateToProps, actions)(VisibleProducts);
+Products = withRouter(connect(mapStateToProps, actions)(Products));
 
-export default VisibleProducts;
+export default Products;

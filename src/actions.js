@@ -79,6 +79,7 @@ const receiveProducts = (response) => {
   return {
     type: "FETCH_PRODUCTS_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
+    meta: response.data.meta,
   };
 };
 

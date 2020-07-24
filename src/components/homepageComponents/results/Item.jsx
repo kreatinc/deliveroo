@@ -1,11 +1,15 @@
 import React from "react";
 
-const Item = ({ product }) => {
-  console.log("the product is :", product);
+const Item = ({ product, isActive }) => {
+  console.log("is active :", isActive);
   return (
     <li>
       <a
-        className="results__link results__link--active"
+        className={
+          isActive
+            ? "results__link results__link--active"
+            : "results__link results__link"
+        }
         href={"#" + product.id}
       >
         <figure className="results__fig">

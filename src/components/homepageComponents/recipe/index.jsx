@@ -12,9 +12,8 @@ import {
 } from "reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Comments from "./Comments";
-import Comment from "./Comment";
-
+import Comments from "./Comments.jsx";
+import Comment from "./Comment.jsx";
 const mapStateToProps = (state, ownProps) => {
   return {
     product: getVisibleProduct(state, ownProps.location.hash.replace("#", "")),
@@ -31,7 +30,14 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-let Product = ({ product, dispatch, isLiked, ingredients, likes }) => {
+let Product = ({
+  product,
+  dispatch,
+  isLiked,
+  ingredients,
+  likes,
+  comments,
+}) => {
   return (
     <div className="recipe">
       <Figure product={product} />
@@ -46,7 +52,7 @@ let Product = ({ product, dispatch, isLiked, ingredients, likes }) => {
         product={product}
         dispatch={dispatch}
       />
-      <Comments></Comments>
+      <Comments comments={comments} />
     </div>
   );
 };
