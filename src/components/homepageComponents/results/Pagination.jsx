@@ -11,20 +11,37 @@ const mapStateToProps = (state) => {
 };
 
 let Pagination = ({ pagination, fetchProducts }) => {
+  const firstPage = pagination.currentPage - 1 !== 0;
+  const lastPage = pagination.currentPage !== pagination.lastPage;
   return (
     <div className="results__pages">
-      <button className="btn-inline results__btn--prev">
-        <svg className="search__icon">
-          <use href={icons + "#icon-triangle-left"}></use>
-        </svg>
-        <span>Page {pagination.from}</span>
-      </button>
-      <button className="btn-inline results__btn--next">
-        <span>Page {pagination.to}</span>
-        <svg className="search__icon">
-          <use href={icons + "#icon-triangle-right"}></use>
-        </svg>
-      </button>
+      {firstPage && (
+        <button
+          className="btn-inline results__btn--prev"
+          onClick={() => {
+            fetchProducts(pagination.prevLink);
+          }}
+        >
+          <svg className="search__icon">
+            <use href={icons + "#icon-triangle-left"}></use>
+          </svg>
+          <span>Page {pagination.currentPage - 1}</span>
+        </button>
+      )}
+      {lastPage && (
+        <button
+          className="btn-inline results__btn--next"
+          onClick={() => {
+            console.log("the page right is :", pagination.next);
+            fetchProducts(pagination.nextLink);
+          }}
+        >
+          <span>Page {pagination.currentPage + 1}</span>
+          <svg className="search__icon">
+            <use href={icons + "#icon-triangle-right"}></use>
+          </svg>
+        </button>
+      )}
     </div>
   );
 };

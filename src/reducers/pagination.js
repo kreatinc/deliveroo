@@ -6,6 +6,8 @@ const pagination = (state = {}, action) => {
         from: action.meta.from,
         to: action.meta.to,
         lastPage: action.meta.last_page,
+        prevLink: action.links.prev,
+        nextLink: action.links.next,
       };
     default:
       return state;

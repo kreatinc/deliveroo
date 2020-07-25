@@ -1,6 +1,12 @@
 import apiClient from "./apiClient";
 
-const fetchProducts = () => {
+const fetchProducts = (link) => {
+  console.log("the link is :", link);
+  if (link !== null) {
+    const res = link.replace("http://localhost:8000/api", "");
+    console.log("the res is the following :", res);
+    return apiClient.get(res);
+  }
   return apiClient.get("/products");
 };
 

@@ -1,12 +1,12 @@
 import * as ProductServices from "./services/productServices";
 import { normalize } from "normalizr";
-import { arrayOfProducts, arrayOfComments } from "./utils/schema";
+import { arrayOfProducts, product } from "./utils/schema";
 
-const fetchProducts = () => (dispatch) => {
+const fetchProducts = (link = null) => (dispatch) => {
   dispatch(fetchProductsRequest());
-  return ProductServices.fetchProducts().then(
+  return ProductServices.fetchProducts(link).then(
     (response) => dispatch(receiveProducts(response)),
-    (error) => dispatch(fetchRecipesFailure(error))
+    (error) => dispatch(fetchProductsFailure(error))
   );
 };
 
@@ -32,7 +32,7 @@ const fetchProduct = (productId) => (dispatch) => {
 const receiveProduct = (response) => {
   return {
     type: "FETCH_PRODUCT_SUCCESS",
-    response: normalize(response.data.data, arrayOfProducts),
+    response: normalize(response.data.data, product),
   };
 };
 
@@ -68,7 +68,7 @@ const fetchProductsRequest = () => {
   };
 };
 
-const fetchRecipesFailure = (error) => {
+const fetchProductsFailure = (error) => {
   return {
     type: "FETCH_PRODUCTS_FAILURE",
     message: error.message || "There was an error while fetching the products",
@@ -79,6 +79,7 @@ const receiveProducts = (response) => {
   return {
     type: "FETCH_PRODUCTS_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
+    links: response.data.links,
     meta: response.data.meta,
   };
 };
@@ -127,7 +128,7 @@ const removeIngredient = (ingredient, productId) => {
 export {
   fetchProducts,
   receiveProducts as receiveRecipes,
-  fetchRecipesFailure,
+  fetchProductsFailure as fetchRecipesFailure,
   fetchProductsRequest as fetchRecipesRequest,
   addToShoppingList,
   getShoppingList,

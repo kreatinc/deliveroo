@@ -21,7 +21,7 @@ const Ingredients = ({ ingredients, product, likes, dispatch }) => {
           className="btn-small recipe__btn"
           onClick={() => {
             dispatch(addToShoppingList(product));
-            window.location.reload();
+            dispatch(fetchProduct(product.id));
           }}
         >
           <svg className="search__icon">
