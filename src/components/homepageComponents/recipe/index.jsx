@@ -13,7 +13,7 @@ import {
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./Comments.jsx";
-import Comment from "./Comment.jsx";
+
 const mapStateToProps = (state, ownProps) => {
   return {
     product: getVisibleProduct(state, ownProps.location.hash.replace("#", "")),

@@ -7,9 +7,18 @@ import commentsList, * as fromCommentsList from "./commentsList";
 import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
 
+const idsByFilter = combineReducers({
+  tortya: createList("tortya"),
+  cakes: createList("cakes"),
+  tacos: createList("tacos"),
+  croissant: createList("croissant"),
+  pizza: createList("pizza"),
+  others: createList("others"),
+});
+
 const rootReducer = combineReducers({
   byId,
-  createList,
+  idsByFilter,
   shoppingList,
   likesList,
   commentsList,
@@ -22,8 +31,8 @@ export default rootReducer;
 and we'll create a list for each category
 */
 
-export const getVisibleProducts = (state) => {
-  const ids = fromCreateList.getProductsIds(state.createList);
+export const getVisibleProducts = (state, filter) => {
+  const ids = fromCreateList.getProductsIds(state.idsByFilter[filter]);
   return ids.map((id) => fromById.getProduct(state.byId, id));
 };
 
@@ -33,12 +42,12 @@ export const getVisibleProduct = (state, id) => {
   return "cannot find this product";
 };
 
-export const getIsFetching = (state) => {
-  return fromCreateList.getIsFetching(state.createList);
+export const getIsFetching = (state, filter) => {
+  return fromCreateList.getIsFetching(state.idsByFilter[filter]);
 };
 
-export const getErrorMessage = (state) => {
-  return fromCreateList.getErrorMessage(state.createList);
+export const getErrorMessage = (state, filter) => {
+  return fromCreateList.getErrorMessage(state.idsByFilter[filter]);
 };
 
 export const getShoppingList = (state) => {
