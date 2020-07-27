@@ -2,12 +2,31 @@ import * as ProductServices from "./services/productServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "./utils/schema";
 
-const fetchProducts = (link = null) => (dispatch) => {
+const fetchProducts = (paginationLink = null, category = "others") => (
+  dispatch
+) => {
   dispatch(fetchProductsRequest());
-  return ProductServices.fetchProducts(link).then(
-    (response) => dispatch(receiveProducts(response)),
+  return ProductServices.fetchProducts(paginationLink, category).then(
+    (response) => {
+      dispatch(receiveProducts(category, response));
+    },
     (error) => dispatch(fetchProductsFailure(error))
   );
+};
+
+const fetchCategories = () => (dispatch) => {
+  return ProductServices.fetchCategories().then((response) =>
+    dispatch(receiveCategories(response), (error) =>
+      console.log("there an error while fetching the categories")
+    )
+  );
+};
+
+const receiveCategories = (response) => {
+  return {
+    type: "FETCH_CATEGORIES_SUCCESS",
+    response: response.data.data,
+  };
 };
 
 const fetchProduct = (productId) => (dispatch) => {
@@ -75,10 +94,12 @@ const fetchProductsFailure = (error) => {
   };
 };
 
-const receiveProducts = (response) => {
+const receiveProducts = (category, response) => {
+  console.log("the response is :", response);
   return {
     type: "FETCH_PRODUCTS_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
+    category,
     links: response.data.links,
     meta: response.data.meta,
   };
@@ -139,4 +160,5 @@ export {
   fetchProductFailure,
   fetchProductRequest,
   fetchProduct,
+  fetchCategories,
 };

@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import * as actions from "../../../actions";
 import { withRouter } from "react-router-dom";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    products: getVisibleProducts(state),
-    isFetching: getIsFetching(state),
-    errorMessage: getErrorMessage(state),
+    products: getVisibleProducts(state, ownProps.match.params.category),
+    isFetching: getIsFetching(state, ownProps.match.params.category),
+    errorMessage: getErrorMessage(state, ownProps.match.params.category),
   };
 };
 
@@ -18,13 +18,17 @@ let Products = ({
   isFetching,
   errorMessage,
   fetchProducts,
+  match,
   location,
 }) => {
   useEffect(() => {
-    fetchProducts().then(() => console.log("done !"));
-  }, []);
+    fetchProducts(null, match.params.category).then(() =>
+      console.log("done !")
+    );
+  }, [match.params.category, fetchProducts]);
   if (isFetching) console.log("i am fetching the products");
   if (errorMessage) return <p>there was an error while fetching</p>;
+  if (!match.params.category) return <p>Please select a category</p>;
   return <List products={products} location={location} />;
 };
 

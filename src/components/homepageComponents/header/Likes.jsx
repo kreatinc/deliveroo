@@ -27,7 +27,11 @@ let Likes = ({ likedProducts, dispatch }) => {
         <ul className="likes__list">
           {likedProducts &&
             likedProducts.map((item) => (
-              <Like item={item.details} key={item.details.id} />
+              <Like
+                item={item.details}
+                dispatch={dispatch}
+                key={item.details.id}
+              />
             ))}
         </ul>
       </div>

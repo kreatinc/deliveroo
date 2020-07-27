@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import Figure from "./Figure";
 import Details from "./Details";
 import Ingredients from "./Ingredients";
-import { fetchProductLikes } from "actions";
 import {
   getVisibleProduct,
   getIsProductLiked,
   getProductIngredients,
   getLikes,
   getProductComments,
+  getCategories,
 } from "reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./Comments.jsx";
+import { fetchCategories } from "actions";
+import Category from "../header/Category";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -27,6 +29,7 @@ const mapStateToProps = (state, ownProps) => {
       state,
       ownProps.location.hash.replace("#", "")
     ),
+    categories: getCategories(state),
   };
 };
 
@@ -37,22 +40,37 @@ let Product = ({
   ingredients,
   likes,
   comments,
+  categories,
+  match,
 }) => {
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
+  if (categories) console.log("cat are :", categories);
+  if (match.params.category) {
+    return (
+      <div className="recipe">
+        <Figure product={product} />
+        <Details
+          product={product}
+          dispatch={dispatch}
+          isLiked={isLiked}
+          likes={likes}
+        />
+        <Ingredients
+          ingredients={ingredients}
+          product={product}
+          dispatch={dispatch}
+        />
+        <Comments comments={comments} />
+      </div>
+    );
+  }
   return (
-    <div className="recipe">
-      <Figure product={product} />
-      <Details
-        product={product}
-        dispatch={dispatch}
-        isLiked={isLiked}
-        likes={likes}
-      />
-      <Ingredients
-        ingredients={ingredients}
-        product={product}
-        dispatch={dispatch}
-      />
-      <Comments comments={comments} />
+    <div className="category">
+      {categories.map((category) => (
+        <Category category={category} />
+      ))}
     </div>
   );
 };

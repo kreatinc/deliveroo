@@ -371,6 +371,58 @@ html {
   float: right;
 }
 
+.category {
+  background-color: #f9f5f3;
+  border-top: 1px solid #fff;
+  margin-top: 10px;
+}
+.category__fig {
+  height: 30rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  transform: scale(1.04) translateY(-1px);
+  transform-origin: top;
+}
+
+.category__fig::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+  opacity: 0.6;
+  border-radius: 10px;
+}
+.category__img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+}
+.category__title {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -200%) skewY(-6deg);
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.75rem;
+  text-transform: uppercase;
+  width: 70%;
+  line-height: 1.95;
+  text-align: center;
+}
+.category__title span {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 1.3rem 2rem;
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
 .recipe {
   background-color: #f9f5f3;
   border-top: 1px solid #fff;
@@ -381,6 +433,7 @@ html {
   transform: scale(1.04) translateY(-1px);
   transform-origin: top;
 }
+
 .recipe__fig::before {
   content: "";
   display: block;

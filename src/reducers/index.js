@@ -6,8 +6,9 @@ import likesList, * as fromLikesList from "./likesList";
 import commentsList, * as fromCommentsList from "./commentsList";
 import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
+import categoriesList, * as fromCategoriesList from "./categoriesList";
 
-const idsByFilter = combineReducers({
+const idsByCategory = combineReducers({
   tortya: createList("tortya"),
   cakes: createList("cakes"),
   tacos: createList("tacos"),
@@ -18,10 +19,11 @@ const idsByFilter = combineReducers({
 
 const rootReducer = combineReducers({
   byId,
-  idsByFilter,
+  idsByCategory,
   shoppingList,
   likesList,
   commentsList,
+  categoriesList,
   pagination,
 });
 
@@ -31,9 +33,12 @@ export default rootReducer;
 and we'll create a list for each category
 */
 
-export const getVisibleProducts = (state, filter) => {
-  const ids = fromCreateList.getProductsIds(state.idsByFilter[filter]);
-  return ids.map((id) => fromById.getProduct(state.byId, id));
+export const getVisibleProducts = (state, category) => {
+  if (category !== undefined) {
+    const ids = fromCreateList.getProductsIds(state.idsByCategory[category]);
+    return ids.map((id) => fromById.getProduct(state.byId, id));
+  }
+  return [];
 };
 
 export const getVisibleProduct = (state, id) => {
@@ -42,12 +47,18 @@ export const getVisibleProduct = (state, id) => {
   return "cannot find this product";
 };
 
-export const getIsFetching = (state, filter) => {
-  return fromCreateList.getIsFetching(state.idsByFilter[filter]);
+export const getIsFetching = (state, category) => {
+  if (category) {
+    return fromCreateList.getIsFetching(state.idsByCategory[category]);
+  }
+  return;
 };
 
-export const getErrorMessage = (state, filter) => {
-  return fromCreateList.getErrorMessage(state.idsByFilter[filter]);
+export const getErrorMessage = (state, category) => {
+  if (category) {
+    return fromCreateList.getErrorMessage(state.idsByCategory[category]);
+  }
+  return;
 };
 
 export const getShoppingList = (state) => {
@@ -84,4 +95,8 @@ export const getProductComments = (state, id) => {
 
 export const getPaginationData = (state) => {
   return fromPagination.getPaginationData(state.pagination);
+};
+
+export const getCategories = (state) => {
+  return fromCategoriesList.getCategories(state.categoriesList);
 };

@@ -1,7 +1,6 @@
 import React from "react";
 
 const Item = ({ product, isActive }) => {
-  console.log("is active :", isActive);
   return (
     <li>
       <a

@@ -1,22 +1,20 @@
 import convertStringToArray from "../utils/convertStringToArray";
 const byId = (state = {}, action) => {
-  if (action.response) {
-    return {
-      ...state,
-      ...action.response.entities.products,
-    };
+  switch (action.type) {
+    case "FETCH_PRODUCTS_SUCCESS":
+    case "FETCH_PRODUCT_SUCCESS":
+      return { ...state, ...action.response.entities.products };
+    case "REMOVE_INGREDIENT":
+      return {
+        ...state,
+        [action.productId]: handleRemoveIngredient(
+          state[action.productId],
+          action
+        ),
+      };
+    default:
+      return state;
   }
-  if (action.type === "REMOVE_INGREDIENT") {
-    console.log("the state inside of the reducer is :", state);
-    return {
-      ...state,
-      [action.productId]: handleRemoveIngredient(
-        state[action.productId],
-        action
-      ),
-    };
-  }
-  return state;
 };
 
 const handleRemoveIngredient = (state, action) => {

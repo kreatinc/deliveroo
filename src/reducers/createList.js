@@ -1,17 +1,17 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-const createList = (filter) => {
+const createList = (category) => {
   const ids = (state = [], action) => {
     switch (action.type) {
       case "FETCH_PRODUCTS_SUCCESS":
-        return filter === action.filter ? action.response.result : state;
+        return category === action.category ? action.response.result : state;
       default:
         return state;
     }
   };
 
   const isFetching = (state = false, action) => {
-    if (action.filter !== filter) return state;
+    if (action.category !== category) return state;
     switch (action.type) {
       case "FETCH_PRODUCTS_REQUEST":
         return true;
@@ -24,7 +24,7 @@ const createList = (filter) => {
   };
 
   const errorMessage = (state = null, action) => {
-    if (action.filter !== filter) return state;
+    if (action.category !== category) return state;
     switch (action.type) {
       case "FETCH_PRODUCTS_FAILURE":
         return action.message;
