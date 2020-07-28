@@ -44,7 +44,7 @@ export const getVisibleProducts = (state, category) => {
 export const getVisibleProduct = (state, id) => {
   const product = fromById.getProduct(state.byId, id);
   if (product) return product;
-  return "cannot find this product";
+  return undefined;
 };
 
 export const getIsFetching = (state, category) => {

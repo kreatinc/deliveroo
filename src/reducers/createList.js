@@ -4,6 +4,7 @@ const createList = (category) => {
   const ids = (state = [], action) => {
     switch (action.type) {
       case "FETCH_PRODUCTS_SUCCESS":
+        console.log("the res is :", action);
         return category === action.category ? action.response.result : state;
       default:
         return state;

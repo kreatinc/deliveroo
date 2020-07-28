@@ -27,7 +27,7 @@ let Pagination = ({ pagination, fetchProducts }) => {
           <svg className="search__icon">
             <use href={icons + "#icon-triangle-left"}></use>
           </svg>
-          <span>Page {pagination.currentPage - 1}</span>
+          <span>Page {pagination.currentPage - 1 || 1}</span>
         </button>
       )}
       {category && lastPage && (
@@ -38,7 +38,7 @@ let Pagination = ({ pagination, fetchProducts }) => {
             fetchProducts(pagination.nextLink, category);
           }}
         >
-          <span>Page {pagination.currentPage + 1}</span>
+          <span>Page {pagination.currentPage + 1 || 1}</span>
           <svg className="search__icon">
             <use href={icons + "#icon-triangle-right"}></use>
           </svg>

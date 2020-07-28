@@ -7,7 +7,7 @@ import Shopping from "components/homepageComponents/shopping";
 
 const Home = () => {
   return (
-    <div class="homepage-container">
+    <div className="homepage-container">
       <Header />
       <Result />
       <Recipe />

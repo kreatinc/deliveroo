@@ -7,6 +7,8 @@ import Logo from "./Logo";
 import { connect } from "react-redux";
 import { getLikedProducts } from "reducers";
 import * as actions from "../../../actions";
+import Button from "./Button";
+import { useParams } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,11 +17,24 @@ const mapStateToProps = (state) => {
 };
 
 let Header = ({ getLikedProducts, fetchProduct, searchProduct }) => {
+  const { category } = useParams();
   return (
     <header className="header">
       <Logo logo={logo} />
-      <Search searchProduct={searchProduct} />
-      <Likes getLikedProducts={getLikedProducts} fetchProduct={fetchProduct} />
+      {category && <Search searchProduct={searchProduct} />}
+      {category && (
+        <Likes
+          getLikedProducts={getLikedProducts}
+          fetchProduct={fetchProduct}
+        />
+      )}
+      <Button
+        onClick={() => {
+          // TO-DO : logout logic
+        }}
+      >
+        Logout
+      </Button>
     </header>
   );
 };

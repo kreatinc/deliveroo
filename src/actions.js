@@ -5,12 +5,12 @@ import { arrayOfProducts, product } from "./utils/schema";
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
 ) => {
-  dispatch(fetchProductsRequest());
+  dispatch(fetchProductsRequest(category));
   return ProductServices.fetchProducts(paginationLink, category).then(
     (response) => {
-      dispatch(receiveProducts(category, response));
+      dispatch(receiveProducts(response, category));
     },
-    (error) => dispatch(fetchProductsFailure(error))
+    (error) => dispatch(fetchProductsFailure(error, category))
   );
 };
 
@@ -81,21 +81,22 @@ const fetchProductFailure = (error) => {
   };
 };
 
-const fetchProductsRequest = () => {
+const fetchProductsRequest = (category = "others") => {
   return {
     type: "FETCH_PRODUCTS_REQUEST",
+    category,
   };
 };
 
-const fetchProductsFailure = (error) => {
+const fetchProductsFailure = (error, category) => {
   return {
     type: "FETCH_PRODUCTS_FAILURE",
     message: error.message || "There was an error while fetching the products",
+    category,
   };
 };
 
-const receiveProducts = (category, response) => {
-  console.log("the response is :", response);
+const receiveProducts = (response, category = "others") => {
   return {
     type: "FETCH_PRODUCTS_SUCCESS",
     response: normalize(response.data.data, arrayOfProducts),
@@ -147,9 +148,12 @@ const removeIngredient = (ingredient, productId) => {
 };
 
 const searchProduct = (productName) => (dispatch) => {
-  dispatch(fetchProductsRequest);
+  dispatch(fetchProductsRequest());
   return ProductServices.searchProduct(productName).then(
-    (response) => receiveProducts(response),
+    (response) => {
+      console.log("the response is the following : ", response);
+      dispatch(receiveProducts(response));
+    },
     (error) => dispatch(fetchProductsFailure(error))
   );
 };

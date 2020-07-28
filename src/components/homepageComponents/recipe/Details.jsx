@@ -23,7 +23,7 @@ const RecipeDetails = ({ product, dispatch, isLiked, likes }) => {
             likes.map((_, i) => {
               if (i >= 5) return;
               return (
-                <>
+                <React.Fragment key={i}>
                   <button className="btn-tiny">
                     <svg>
                       <use href={icons + "#icon-heart"}></use>
@@ -32,7 +32,7 @@ const RecipeDetails = ({ product, dispatch, isLiked, likes }) => {
                   <button className="btn-tiny">
                     ({likes && likes.length})
                   </button>
-                </>
+                </React.Fragment>
               );
             })}
         </div>

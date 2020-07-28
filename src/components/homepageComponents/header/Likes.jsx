@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import icons from "../../../assets/img/icons.svg";
 import Like from "./Like";
+import { useParams } from "react-router-dom";
 
 const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
+  const { category } = useParams();
   useEffect(() => {
     getLikedProducts();
   }, []);

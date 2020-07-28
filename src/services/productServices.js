@@ -24,7 +24,7 @@ const fetchCategories = () => {
 };
 
 const searchProduct = (productName) => {
-  return apiClient.get(`/products/${productName}`);
+  return apiClient.get(`/products?title=${productName}`);
 };
 
 export { fetchProducts, fetchProduct, fetchCategories, searchProduct };

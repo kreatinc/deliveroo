@@ -164,11 +164,11 @@ html {
   color: #968b87;
 }
 
-.loader {
+.load {
   margin: 5rem auto;
   text-align: center;
 }
-.loader svg {
+.load svg {
   height: 5.5rem;
   width: 5.5rem;
   fill: #f59a83;

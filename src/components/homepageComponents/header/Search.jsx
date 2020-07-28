@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import icons from "assets/img/icons.svg";
+import Button from "./Button";
 const Search = ({ searchProduct }) => {
   const inputEl = React.createRef();
   return (
@@ -10,18 +11,16 @@ const Search = ({ searchProduct }) => {
         className="search__field"
         placeholder="Search over 1,000,000 products..."
       />
-      <button
-        className="btn search__btn"
-        onClick={(e) => {
+      <Button
+        handleClick={(e) => {
           e.preventDefault();
           searchProduct(inputEl.current.value);
+          inputEl.current.value = "";
         }}
+        icons={icons}
       >
-        <svg className="search__icon">
-          <use href={icons + "#icon-magnifying-glass"}></use>
-        </svg>
-        <span>Search</span>
-      </button>
+        Search
+      </Button>
     </form>
   );
 };
