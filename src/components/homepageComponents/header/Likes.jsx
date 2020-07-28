@@ -1,19 +1,10 @@
 import React, { useEffect } from "react";
 import icons from "../../../assets/img/icons.svg";
 import Like from "./Like";
-import { connect } from "react-redux";
-import { getLikedProducts } from "reducers";
-import * as actions from "../../../actions";
 
-const mapStateToProps = (state) => {
-  return {
-    likedProducts: getLikedProducts(state),
-  };
-};
-
-let Likes = ({ likedProducts, dispatch }) => {
+const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
   useEffect(() => {
-    dispatch(actions.getLikedProducts());
+    getLikedProducts();
   }, []);
 
   return (
@@ -29,7 +20,7 @@ let Likes = ({ likedProducts, dispatch }) => {
             likedProducts.map((item) => (
               <Like
                 item={item.details}
-                dispatch={dispatch}
+                fetchProduct={fetchProduct}
                 key={item.details.id}
               />
             ))}
@@ -38,7 +29,5 @@ let Likes = ({ likedProducts, dispatch }) => {
     </div>
   );
 };
-
-Likes = connect(mapStateToProps, null)(Likes);
 
 export default Likes;

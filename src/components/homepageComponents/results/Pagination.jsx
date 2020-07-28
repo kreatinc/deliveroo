@@ -3,6 +3,7 @@ import icons from "assets/img/icons.svg";
 import { getPaginationData } from "reducers";
 import { connect } from "react-redux";
 import * as actions from "actions";
+import { useParams } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -11,15 +12,16 @@ const mapStateToProps = (state) => {
 };
 
 let Pagination = ({ pagination, fetchProducts }) => {
+  const { category } = useParams();
   const firstPage = pagination.currentPage - 1 !== 0;
   const lastPage = pagination.currentPage !== pagination.lastPage;
   return (
     <div className="results__pages">
-      {firstPage && (
+      {category && firstPage && (
         <button
           className="btn-inline results__btn--prev"
           onClick={() => {
-            fetchProducts(pagination.prevLink);
+            fetchProducts(pagination.prevLink, category);
           }}
         >
           <svg className="search__icon">
@@ -28,12 +30,12 @@ let Pagination = ({ pagination, fetchProducts }) => {
           <span>Page {pagination.currentPage - 1}</span>
         </button>
       )}
-      {lastPage && (
+      {category && lastPage && (
         <button
           className="btn-inline results__btn--next"
           onClick={() => {
             console.log("the page right is :", pagination.next);
-            fetchProducts(pagination.nextLink);
+            fetchProducts(pagination.nextLink, category);
           }}
         >
           <span>Page {pagination.currentPage + 1}</span>

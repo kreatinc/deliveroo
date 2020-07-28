@@ -46,7 +46,6 @@ let Product = ({
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
-  if (categories) console.log("cat are :", categories);
   if (match.params.category) {
     return (
       <div className="recipe">

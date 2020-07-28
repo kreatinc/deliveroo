@@ -118,13 +118,13 @@ const getShoppingList = () => {
   };
 };
 
-const getLikedProducts = () => {
+const getLikedProducts = () => (dispatch) => {
   return {
     type: "GET_LIKE_LIST",
   };
 };
 
-const addToLikeList = (item) => {
+const addToLikeList = (item) => (dispatch) => {
   return {
     type: "ADD_TO_LIKE_LIST",
     item,
@@ -146,6 +146,14 @@ const removeIngredient = (ingredient, productId) => {
   };
 };
 
+const searchProduct = (productName) => (dispatch) => {
+  dispatch(fetchProductsRequest);
+  return ProductServices.searchProduct(productName).then(
+    (response) => receiveProducts(response),
+    (error) => dispatch(fetchProductsFailure(error))
+  );
+};
+
 export {
   fetchProducts,
   receiveProducts as receiveRecipes,
@@ -161,4 +169,5 @@ export {
   fetchProductRequest,
   fetchProduct,
   fetchCategories,
+  searchProduct,
 };

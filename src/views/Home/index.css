@@ -244,7 +244,7 @@ html {
 .likes__panel:hover,
 .likes__field:hover + .likes__panel {
   visibility: visible;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-right: 20px;
   opacity: 1;
 }
@@ -632,6 +632,7 @@ html {
   font-size: 1.3rem;
   margin-top: 0.4rem;
   margin-right: 1.5rem;
+  text-align: center;
 }
 .shopping__delete {
   margin-top: 0.5rem;

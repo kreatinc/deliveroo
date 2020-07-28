@@ -28,7 +28,8 @@ let Products = ({
   }, [match.params.category, fetchProducts]);
   if (isFetching) console.log("i am fetching the products");
   if (errorMessage) return <p>there was an error while fetching</p>;
-  if (!match.params.category) return <p>Please select a category</p>;
+  if (!match.params.category)
+    return <h2 className="heading-2">Please select a category</h2>;
   return <List products={products} location={location} />;
 };
 
