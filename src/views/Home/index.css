@@ -46,6 +46,7 @@ html {
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-top: 5px;
   transition: all 0.2s;
 }
 .btn:hover,
@@ -191,6 +192,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 20px;
 }
 .header__logo {
   margin-left: 4rem;
@@ -256,7 +260,7 @@ html {
 .likes__panel {
   position: absolute;
   right: 0;
-  top: 10rem;
+  top: 4rem;
   z-index: 10;
   padding: 2rem 0;
   width: 34rem;

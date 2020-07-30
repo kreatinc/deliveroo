@@ -1,10 +1,15 @@
 import React from "react";
 import Card from "react-bulma-components/lib/components/card";
+import Button from "./Button";
+import sampleImage from "assets/img/test-1.jpg";
 const BannerComponent = () => {
   return (
     <Card>
       <header class="card-header">
-        <p class="card-header-title">Component</p>
+        <p class="card-header-title">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam,
+          necessitatibus.
+        </p>
         <a href="#" class="card-header-icon" aria-label="more options">
           <span class="icon">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -13,23 +18,17 @@ const BannerComponent = () => {
       </header>
       <div class="card-content">
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris.
-          <a href="#">@bulmaio</a>. <a href="#">#css</a>{" "}
-          <a href="#">#responsive</a>
+          <img style={{ borderRadius: "20px" }} src={sampleImage}></img>
           <br />
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">
-            Save
-          </a>
-          <a href="#" class="card-footer-item">
-            Edit
-          </a>
-          <a href="#" class="card-footer-item">
-            Delete
-          </a>
+        <footer class="card-footer mb-5">
+          <Button
+            onClick={() => {
+              // redirect to sign in/sign up page
+            }}
+          >
+            Take a look
+          </Button>
         </footer>
       </div>
     </Card>

@@ -7,8 +7,8 @@ import Logo from "./Logo";
 import { connect } from "react-redux";
 import { getLikedProducts } from "reducers";
 import * as actions from "../../../actions";
-import Button from "./Button";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import Button from "components/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -18,6 +18,8 @@ const mapStateToProps = (state) => {
 
 let Header = ({ getLikedProducts, fetchProduct, searchProduct }) => {
   const { category } = useParams();
+  const location = useLocation();
+  console.log("the curr location is the following :", location);
   return (
     <header className="header">
       <Logo logo={logo} />
@@ -28,13 +30,18 @@ let Header = ({ getLikedProducts, fetchProduct, searchProduct }) => {
           fetchProduct={fetchProduct}
         />
       )}
-      <Button
-        onClick={() => {
-          // TO-DO : logout logic
-        }}
-      >
-        Logout
-      </Button>
+
+      {location.pathname === "/" ? (
+        <Button>Login</Button>
+      ) : (
+        <Button
+          onClick={() => {
+            // TO-DO : logout logic
+          }}
+        >
+          Logout
+        </Button>
+      )}
     </header>
   );
 };

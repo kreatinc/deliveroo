@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import icons from "assets/img/icons.svg";
-import Button from "./Button";
+import Button from "components/Button";
 const Search = ({ searchProduct }) => {
   const inputEl = React.createRef();
   return (

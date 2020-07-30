@@ -3,27 +3,43 @@ import NavBar from "react-bulma-components/lib/components/navbar";
 import Container from "react-bulma-components/lib/components/container";
 import Columns from "react-bulma-components/lib/components/columns";
 import { Button } from "react-bulma-components/dist";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Logo from "./homepageComponents/header/Logo";
+import logo from "assets/img/logo.png";
 
 const NavBarComponent = () => {
   return (
-    <nav>
+    <nav className="welcome__nav">
       <NavBar>
-        <Container>
+        <Container className="welcome__nav">
           <Columns.Column size="three-quarters">
-            <Button className="is-large">Logo placeholder</Button>
+            <Logo logo={logo}></Logo>
           </Columns.Column>
           <Columns.Column>
             <div className="navbar-end">
               <Columns>
                 <Columns.Column>
-                  <Button className="is-large">
-                    <Link to="/register">Sign up</Link>
+                  <Button className="btn is-large">
+                    <NavLink
+                      style={{
+                        color: "white",
+                      }}
+                      to="/register"
+                    >
+                      Sign up
+                    </NavLink>
                   </Button>
                 </Columns.Column>
                 <Columns.Column>
-                  <Button className="is-large">
-                    <Link to="/login">Login</Link>
+                  <Button className="btn is-large">
+                    <NavLink
+                      style={{
+                        color: "white",
+                      }}
+                      to="/login"
+                    >
+                      Login
+                    </NavLink>
                   </Button>
                 </Columns.Column>
               </Columns>

@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.banner-header {
+.banner__header {
   margin-top: 100px;
   text-align: center;
   color: black;
@@ -21,17 +21,24 @@ code {
   font-family: "Times New Roman", Times, serif;
 }
 
+.welcome__nav {
+  margin-top: 5px;
+  background-color: rgb(249, 245, 243);
+  border-radius: 20px;
+}
+
 .banner-logo {
   padding-right: 5px;
 }
 
-.welcomepage-container {
+.welcome__container {
   margin-top: 2%;
 }
 
 .banner-card {
   border-radius: 10px;
   border-style: solid;
+  border-color: rgb(249, 245, 243);
 }
 
 .categories-list {

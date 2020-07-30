@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./Comments.jsx";
 import { fetchCategories } from "actions";
-import Category from "../header/Category";
+import Category from "./Category";
 import { getIsFetching } from "reducers/createList";
 
 const mapStateToProps = (state, ownProps) => {
