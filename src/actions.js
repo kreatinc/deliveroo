@@ -95,6 +95,17 @@ const fetchProductsFailure = (error, category) => {
     category,
   };
 };
+const fetchSearchProductsRequest = () => {
+  return {
+    type: "FETCH_SEARCH_PRODUCTS_REQUEST",
+  };
+};
+const fetchSearchProductsFailure = (error) => {
+  return {
+    type: "FETCH_SEARCH_PRODUCTS_FAILURE",
+    message: error.message || "There was an error while fetching the products",
+  };
+};
 
 const receiveProducts = (response, category = "others") => {
   return {
@@ -103,6 +114,13 @@ const receiveProducts = (response, category = "others") => {
     category,
     links: response.data.links,
     meta: response.data.meta,
+  };
+};
+
+const receiveSearchProducts = (response) => {
+  return {
+    type: "FETCH_SEARCH_PRODUCTS_SUCCESS",
+    response: normalize(response.data.data, arrayOfProducts),
   };
 };
 
@@ -147,15 +165,10 @@ const removeIngredient = (ingredient, productId) => {
   };
 };
 
-const searchProduct = (productName) => (dispatch) => {
-  dispatch(fetchProductsRequest());
-  return ProductServices.searchProduct(productName).then(
-    (response) => {
-      console.log("the response is the following : ", response);
-      dispatch(receiveProducts(response));
-    },
-    (error) => dispatch(fetchProductsFailure(error))
-  );
+const clearSearchResults = () => {
+  return {
+    type: "CLEAR_SEARCH_RESULTS",
+  };
 };
 
 export {
@@ -173,5 +186,7 @@ export {
   fetchProductRequest,
   fetchProduct,
   fetchCategories,
-  searchProduct,
+  fetchSearchProductsFailure,
+  receiveSearchProducts,
+  fetchSearchProductsRequest,
 };

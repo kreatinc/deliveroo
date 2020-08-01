@@ -9,6 +9,8 @@ import {
   getLikes,
   getProductComments,
   getCategories,
+  getSearchResults,
+  getIsSearching,
 } from "reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -16,6 +18,8 @@ import Comments from "./Comments.jsx";
 import { fetchCategories } from "actions";
 import Category from "./Category";
 import { getIsFetching } from "reducers/createList";
+import icons from "assets/img/icons.svg";
+import List from "../results/List";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -26,6 +30,8 @@ const mapStateToProps = (state, ownProps) => {
       state,
       ownProps.location.hash.replace("#", "")
     ),
+    searchResults: getSearchResults(state),
+    isSearching: getIsSearching(state),
     isFetching: getIsFetching(state, ownProps.match.params.category),
     ingredients: getProductIngredients(
       state,
@@ -44,12 +50,27 @@ let Product = ({
   comments,
   categories,
   match,
+  isSearching,
+  searchResults,
 }) => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
 
-  if (product === undefined && match.params.category) {
+  if (isSearching)
+    return (
+      <div className="load">
+        <svg>
+          <use href={icons + "#icon-cw"}></use>
+        </svg>
+      </div>
+    );
+
+  if (searchResults) {
+    return <List dispatch={dispatch} products={searchResults}></List>;
+  }
+
+  if (match.params.category && product === undefined) {
     return (
       <h2 className="heading-2" style={{ marginTop: "50%" }}>
         Please select a product
@@ -76,6 +97,7 @@ let Product = ({
       </div>
     );
   }
+
   return (
     <div className="category">
       {categories.map((category) => (

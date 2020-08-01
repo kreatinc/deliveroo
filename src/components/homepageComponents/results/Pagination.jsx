@@ -1,6 +1,6 @@
 import React from "react";
 import icons from "assets/img/icons.svg";
-import { getPaginationData } from "reducers";
+import { getPaginationData, getSearchResults } from "reducers";
 import { connect } from "react-redux";
 import * as actions from "actions";
 import { useParams } from "react-router-dom";
@@ -8,16 +8,17 @@ import { useParams } from "react-router-dom";
 const mapStateToProps = (state) => {
   return {
     pagination: getPaginationData(state),
+    searchResults: getSearchResults(state),
   };
 };
 
-let Pagination = ({ pagination, fetchProducts }) => {
+let Pagination = ({ pagination, fetchProducts, searchResults }) => {
   const { category } = useParams();
   const firstPage = pagination.currentPage - 1 !== 0;
   const lastPage = pagination.currentPage !== pagination.lastPage;
   return (
     <div className="results__pages">
-      {category && firstPage && (
+      {!searchResults && category && firstPage && (
         <button
           className="btn-inline results__btn--prev"
           onClick={() => {
@@ -30,7 +31,7 @@ let Pagination = ({ pagination, fetchProducts }) => {
           <span>Page {pagination.currentPage - 1 || 1}</span>
         </button>
       )}
-      {category && lastPage && (
+      {!searchResults && category && lastPage && (
         <button
           className="btn-inline results__btn--next"
           onClick={() => {

@@ -1,6 +1,7 @@
 import React from "react";
+import { clearSearchResults, fetchProduct } from "actions";
 
-const Item = ({ product, isActive }) => {
+const Item = ({ product, isActive, dispatch }) => {
   return (
     <li>
       <a
@@ -9,7 +10,7 @@ const Item = ({ product, isActive }) => {
             ? "results__link results__link--active"
             : "results__link results__link"
         }
-        href={"#" + product.id}
+        href={product.category.title + "#" + product.id}
       >
         <figure className="results__fig">
           <img src={product.image} alt={product.description} />

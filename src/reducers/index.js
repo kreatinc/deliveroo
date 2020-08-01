@@ -7,6 +7,7 @@ import commentsList, * as fromCommentsList from "./commentsList";
 import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
 import categoriesList, * as fromCategoriesList from "./categoriesList";
+import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   commentsList,
   categoriesList,
   pagination,
+  searchResultsList,
 });
 
 export default rootReducer;
@@ -99,4 +101,24 @@ export const getPaginationData = (state) => {
 
 export const getCategories = (state) => {
   return fromCategoriesList.getCategories(state.categoriesList);
+};
+
+export const getSearchResults = (state) => {
+  console.log(state.searchResultsList.searchResults);
+  const ids = fromSearchResultsList.getResultsIds(
+    state.searchResultsList.searchResults
+  );
+  console.log("the ids are the following :", ids);
+  if (ids) {
+    return ids.map((id) =>
+      fromSearchResultsList.getResult(state.searchResultsList.searchResults, id)
+    );
+  }
+  return undefined;
+};
+
+export const getIsSearching = (state) => {
+  return fromSearchResultsList.getIsSearching(
+    state.searchResultsList.isSearching
+  );
 };
