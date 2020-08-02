@@ -189,4 +189,5 @@ export {
   fetchSearchProductsFailure,
   receiveSearchProducts,
   fetchSearchProductsRequest,
+  clearSearchResults,
 };

@@ -8,7 +8,7 @@ let Search = ({ searchProduct, dispatch }) => {
   const inputEl = React.createRef();
   useEffect(() => {
     search(dispatch);
-  });
+  }, []);
   return (
     <form className="search">
       <input

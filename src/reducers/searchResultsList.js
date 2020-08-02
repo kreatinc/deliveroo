@@ -4,6 +4,8 @@ const searchResults = (state = [], action) => {
   switch (action.type) {
     case "FETCH_SEARCH_PRODUCTS_SUCCESS":
       return action.response;
+    case "CLEAR_SEARCH_RESULTS":
+      return [];
     case "FETCH_SEARCH_PRODUCTS_FAILURE":
       return action.message;
     default:

@@ -1,16 +1,22 @@
 import React from "react";
-import { clearSearchResults, fetchProduct } from "actions";
+import { clearSearchResults } from "actions";
+import { Link } from "react-router-dom";
 
 const Item = ({ product, isActive, dispatch }) => {
   return (
     <li>
-      <a
+      <Link
         className={
           isActive
             ? "results__link results__link--active"
             : "results__link results__link"
         }
-        href={product.category.title + "#" + product.id}
+        to={product.category.title + "#" + product.id}
+        onClick={() => {
+          if (dispatch) {
+            dispatch(clearSearchResults());
+          }
+        }}
       >
         <figure className="results__fig">
           <img src={product.image} alt={product.description} />
@@ -19,7 +25,7 @@ const Item = ({ product, isActive, dispatch }) => {
           <h4 className="results__name">{product.title}</h4>
           <p className="results__author">{product.company.title}</p>
         </div>
-      </a>
+      </Link>
     </li>
   );
 };

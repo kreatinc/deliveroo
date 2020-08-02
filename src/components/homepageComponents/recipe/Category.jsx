@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Category = ({ category }) => {
   return (
@@ -9,9 +10,9 @@ const Category = ({ category }) => {
         className="category__img"
       />
       <h1 className="category__title">
-        <a href={"/home/" + category.title}>
+        <Link to={"/home/" + category.title}>
           <span>{category.title}</span>
-        </a>
+        </Link>
       </h1>
     </figure>
   );
