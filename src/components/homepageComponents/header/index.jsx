@@ -16,13 +16,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-let Header = ({ getLikedProducts, fetchProduct, searchProduct }) => {
+let Header = ({
+  getLikedProducts,
+  fetchProduct,
+  searchProduct,
+  clearSearchResults,
+}) => {
   const { category } = useParams();
   const location = useLocation();
   console.log("the curr location is the following :", location);
   return (
     <header className="header">
-      <Logo logo={logo} />
+      <Logo logo={logo} clearSearchResults={clearSearchResults} />
       {category && <Search searchProduct={searchProduct} />}
       {category && (
         <Likes

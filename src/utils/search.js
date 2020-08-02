@@ -43,12 +43,14 @@ const search = (dispatch) => {
     retry(2)
   );
 
-  resultSets.subscribe(
+  const subscription = resultSets.subscribe(
     (response) => {
       dispatch(receiveSearchProducts(response));
     },
     (error) => dispatch(fetchSearchProductsFailure(error))
   );
+
+  return subscription;
 };
 
 export default search;

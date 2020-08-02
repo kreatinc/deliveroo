@@ -1,13 +1,12 @@
-import React, { useRef, useEffect } from "react";
-import icons from "assets/img/icons.svg";
-import Button from "components/Button";
+import React, { useEffect } from "react";
 import search from "utils/search";
 import { connect } from "react-redux";
 
-let Search = ({ searchProduct, dispatch }) => {
+let Search = ({ dispatch }) => {
   const inputEl = React.createRef();
   useEffect(() => {
-    search(dispatch);
+    const subscription = search(dispatch);
+    return () => subscription.unsubscribe();
   }, []);
   return (
     <form className="search">
