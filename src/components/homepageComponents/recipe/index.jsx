@@ -2,59 +2,60 @@ import React, { useEffect } from "react";
 import Figure from "./Figure";
 import Details from "./Details";
 import Ingredients from "./Ingredients";
-import {
-  getVisibleProduct,
-  getIsProductLiked,
-  getProductIngredients,
-  getLikes,
-  getProductComments,
-  getCategories,
-  getSearchResults,
-  getIsSearching,
-} from "reducers";
+import * as selectors from "reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./Comments.jsx";
-import { fetchCategories } from "actions";
 import Category from "./Category";
-import { getIsFetching } from "reducers/createList";
+import * as actions from "actions";
 import icons from "assets/img/icons.svg";
 import List from "../results/List";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    product: getVisibleProduct(state, ownProps.location.hash.replace("#", "")),
-    isLiked: getIsProductLiked(state, ownProps.location.hash.replace("#", "")),
-    likes: getLikes(state, ownProps.location.hash.replace("#", "")),
-    comments: getProductComments(
+    product: selectors.getVisibleProduct(
       state,
       ownProps.location.hash.replace("#", "")
     ),
-    searchResults: getSearchResults(state),
-    isSearching: getIsSearching(state),
-    isFetching: getIsFetching(state, ownProps.match.params.category),
-    ingredients: getProductIngredients(
+    isLiked: selectors.getIsProductLiked(
       state,
       ownProps.location.hash.replace("#", "")
     ),
-    categories: getCategories(state),
+    likes: selectors.getLikes(state, ownProps.location.hash.replace("#", "")),
+    comments: selectors.getProductComments(
+      state,
+      ownProps.location.hash.replace("#", "")
+    ),
+    searchResults: selectors.getSearchResults(state),
+    isSearching: selectors.getIsSearching(state),
+    isFetching: selectors.getIsFetching(state, ownProps.match.params.category),
+    ingredients: selectors.getProductIngredients(
+      state,
+      ownProps.location.hash.replace("#", "")
+    ),
+    categories: selectors.getCategories(state),
   };
 };
 
 let Product = ({
   product,
-  dispatch,
   isLiked,
-  ingredients,
   likes,
+  ingredients,
   comments,
   categories,
   match,
+  dispatch,
   isSearching,
   searchResults,
+  fetchCategories,
+  addToShoppingList,
+  fetchProduct,
+  removeIngredient,
+  addToLikeList,
 }) => {
   useEffect(() => {
-    dispatch(fetchCategories());
+    fetchCategories();
   }, []);
 
   if (isSearching)
@@ -84,14 +85,16 @@ let Product = ({
         <Figure product={product} />
         <Details
           product={product}
-          dispatch={dispatch}
+          addToLikeList={addToLikeList}
           isLiked={isLiked}
           likes={likes}
         />
         <Ingredients
           ingredients={ingredients}
           product={product}
-          dispatch={dispatch}
+          addToShoppingList={addToShoppingList}
+          fetchProduct={fetchProduct}
+          removeIngredient={removeIngredient}
         />
         <Comments comments={comments} />
       </div>
@@ -107,6 +110,6 @@ let Product = ({
   );
 };
 
-Product = withRouter(connect(mapStateToProps, null)(Product));
+Product = withRouter(connect(mapStateToProps, actions)(Product));
 
 export default Product;

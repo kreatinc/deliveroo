@@ -1,12 +1,11 @@
 import React from "react";
 import icons from "../../../assets/img/icons.svg";
-import { removeIngredient } from "../../../actions";
-const Ingredient = ({ ingredient, dispatch, product }) => {
+const Ingredient = ({ ingredient, removeIngredient, product }) => {
   return (
     <li className="recipe__item">
       <button
         className="btn-tiny"
-        onClick={() => dispatch(removeIngredient(ingredient, product.id))}
+        onClick={() => removeIngredient(ingredient, product.id)}
       >
         <svg className="recipe__icon">
           <use href={icons + "#icon-circle-with-cross"}></use>

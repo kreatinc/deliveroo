@@ -1,8 +1,13 @@
 import React from "react";
 import Ingredient from "./Ingredient";
 import icons from "../../../assets/img/icons.svg";
-import { addToShoppingList, fetchProduct } from "../../../actions";
-const Ingredients = ({ ingredients, product, likes, dispatch }) => {
+const Ingredients = ({
+  ingredients,
+  product,
+  addToShoppingList,
+  fetchProduct,
+  removeIngredient,
+}) => {
   if (ingredients) {
     return (
       <div className="recipe__ingredients">
@@ -10,7 +15,7 @@ const Ingredients = ({ ingredients, product, likes, dispatch }) => {
           {ingredients.map((ingredient, i) => (
             <Ingredient
               ingredient={ingredient}
-              dispatch={dispatch}
+              removeIngredient={removeIngredient}
               product={product}
               key={i}
             />
@@ -20,8 +25,8 @@ const Ingredients = ({ ingredients, product, likes, dispatch }) => {
         <button
           className="btn-small recipe__btn"
           onClick={() => {
-            dispatch(addToShoppingList(product));
-            dispatch(fetchProduct(product.id));
+            addToShoppingList(product);
+            fetchProduct(product.id);
           }}
         >
           <svg className="search__icon">
