@@ -13,6 +13,9 @@ const Item = ({ product, isActive, dispatch }) => {
         }
         to={product.category.title + "#" + product.id}
         onClick={() => {
+          /*
+            - if there is a dispatch function it means we have search results
+          */
           if (dispatch) {
             dispatch(clearSearchResults());
           }
