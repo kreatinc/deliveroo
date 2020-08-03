@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchProduct } from "actions";
+import { fetchProduct } from "store/actions";
 import { useParams } from "react-router-dom";
 
 const Like = ({ product }) => {

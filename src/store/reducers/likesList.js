@@ -1,4 +1,7 @@
-import { getLikedProducts, addToLikeList } from "../utils/localStorageHelpers";
+import {
+  getLikedProducts,
+  addToLikeList,
+} from "../../utils/localStorageHelpers";
 
 const LikesList = (state = {}, action) => {
   switch (action.type) {

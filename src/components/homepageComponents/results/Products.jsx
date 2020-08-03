@@ -5,9 +5,9 @@ import {
   getIsFetching,
   getErrorMessage,
   getSearchResults,
-} from "reducers";
+} from "store/reducers";
 import { connect } from "react-redux";
-import * as actions from "../../../actions";
+import * as actions from "../../../store/actions";
 import { withRouter } from "react-router-dom";
 import icons from "assets/img/icons.svg";
 

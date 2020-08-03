@@ -1,4 +1,4 @@
-import convertStringToArray from "../utils/convertStringToArray";
+import convertStringToArray from "../../utils/convertStringToArray";
 const byId = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_PRODUCTS_SUCCESS":

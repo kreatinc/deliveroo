@@ -5,8 +5,8 @@ import Likes from "./Likes";
 import Logo from "./Logo";
 
 import { connect } from "react-redux";
-import { getLikedProducts } from "reducers";
-import * as actions from "../../../actions";
+import { getLikedProducts } from "store/reducers";
+import * as actions from "../../../store/actions";
 import { useParams, useLocation } from "react-router-dom";
 import Button from "components/Button";
 

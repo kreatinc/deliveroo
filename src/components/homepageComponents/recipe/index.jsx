@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import Figure from "./Figure";
 import Details from "./Details";
 import Ingredients from "./Ingredients";
-import * as selectors from "reducers";
+import * as selectors from "store/reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./Comments.jsx";
 import Category from "./Category";
-import * as actions from "actions";
+import * as actions from "store/actions";
 import icons from "assets/img/icons.svg";
 import List from "../results/List";
 

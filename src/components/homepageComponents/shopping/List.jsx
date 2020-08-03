@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Product from "./Product";
-import { getShoppingList } from "../../../reducers";
-import * as actions from "../../../actions";
+import { getShoppingList } from "../../../store/reducers";
+import * as actions from "../../../store/actions";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {

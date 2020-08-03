@@ -12,7 +12,7 @@ import {
   receiveSearchProducts,
   fetchSearchProductsFailure,
   fetchSearchProductsRequest,
-} from "actions";
+} from "store/actions";
 
 const search = (dispatch) => {
   const searchField = document.getElementById("search__field");

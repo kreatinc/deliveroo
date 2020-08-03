@@ -1,6 +1,6 @@
-import * as ProductServices from "./services/productServices";
+import * as ProductServices from "../services/productServices";
 import { normalize } from "normalizr";
-import { arrayOfProducts, product } from "./utils/schema";
+import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
