@@ -1,6 +1,7 @@
 import React from "react";
 import routes from "./router";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "react-bulma-components/lib";
 
 function App() {
   return (
