@@ -1,8 +1,7 @@
 import React from "react";
-import { clearSearchResults } from "actions";
 import { Link } from "react-router-dom";
 
-const Item = ({ product, isActive, dispatch }) => {
+const Item = ({ product, isActive, clearSearchResults }) => {
   return (
     <li>
       <Link
@@ -14,10 +13,10 @@ const Item = ({ product, isActive, dispatch }) => {
         to={product.category.title + "#" + product.id}
         onClick={() => {
           /*
-            - if there is a dispatch function it means we have search results
+            - if there is a clearSearchResults function it means we have search results
           */
-          if (dispatch) {
-            dispatch(clearSearchResults());
+          if (clearSearchResults) {
+            clearSearchResults();
           }
         }}
       >

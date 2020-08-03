@@ -4,6 +4,7 @@ import { getPaginationData, getSearchResults } from "reducers";
 import { connect } from "react-redux";
 import * as actions from "actions";
 import { useParams } from "react-router-dom";
+import PaginationButton from "./PaginationButton";
 
 const mapStateToProps = (state) => {
   return {
@@ -19,31 +20,20 @@ let Pagination = ({ pagination, fetchProducts, searchResults }) => {
   return (
     <div className="results__pages">
       {!searchResults && category && firstPage && (
-        <button
-          className="btn-inline results__btn--prev"
-          onClick={() => {
-            fetchProducts(pagination.prevLink, category);
-          }}
-        >
-          <svg className="search__icon">
-            <use href={icons + "#icon-triangle-left"}></use>
-          </svg>
-          <span>Page {pagination.currentPage - 1 || 1}</span>
-        </button>
+        <PaginationButton
+          isPrevious={true}
+          icons={icons}
+          pageNumber={pagination.currentPage - 1 || 1}
+          clickHandler={() => fetchProducts(pagination.prevLink, category)}
+        />
       )}
       {!searchResults && category && lastPage && (
-        <button
-          className="btn-inline results__btn--next"
-          onClick={() => {
-            console.log("the page right is :", pagination.next);
-            fetchProducts(pagination.nextLink, category);
-          }}
-        >
-          <span>Page {pagination.currentPage + 1 || 1}</span>
-          <svg className="search__icon">
-            <use href={icons + "#icon-triangle-right"}></use>
-          </svg>
-        </button>
+        <PaginationButton
+          isPrevious={false}
+          icons={icons}
+          pageNumber={pagination.currentPage + 1 || 1}
+          clickHandler={() => fetchProducts(pagination.nextLink, category)}
+        />
       )}
     </div>
   );

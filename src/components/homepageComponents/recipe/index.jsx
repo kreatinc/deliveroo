@@ -45,7 +45,6 @@ let Product = ({
   comments,
   categories,
   match,
-  dispatch,
   isSearching,
   searchResults,
   fetchCategories,
@@ -53,6 +52,7 @@ let Product = ({
   fetchProduct,
   removeIngredient,
   addToLikeList,
+  clearSearchResults,
 }) => {
   useEffect(() => {
     fetchCategories();
@@ -68,7 +68,12 @@ let Product = ({
     );
 
   if (searchResults) {
-    return <List dispatch={dispatch} products={searchResults}></List>;
+    return (
+      <List
+        clearSearchResults={clearSearchResults}
+        products={searchResults}
+      ></List>
+    );
   }
 
   if (match.params.category && product === undefined) {
