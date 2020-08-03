@@ -3,7 +3,7 @@ import { getLikedProducts, addToLikeList } from "../utils/localStorageHelpers";
 const LikesList = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TO_LIKE_LIST":
-      return addToLikeList(action.item);
+      return addToLikeList(action.product);
     case "GET_LIKE_LIST":
       return getLikedProducts();
     case "GET_LIKE_LIST_FAILURE":

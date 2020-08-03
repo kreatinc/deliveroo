@@ -1,15 +1,14 @@
 import React from "react";
 import icons from "../../../assets/img/icons.svg";
-import { removeItemFromShoppingList } from "actions";
 
-const Item = ({ item, itemId, dispatch }) => {
+const Product = ({ clickHandler, product }) => {
   return (
     <li className="shopping__item">
-      <p className="shopping__description">{item.title}</p>
+      <p className="shopping__description">{product.title}</p>
       <button
         className="shopping__delete btn-tiny"
         onClick={() => {
-          dispatch(removeItemFromShoppingList(itemId));
+          clickHandler();
         }}
       >
         <svg>
@@ -20,4 +19,4 @@ const Item = ({ item, itemId, dispatch }) => {
   );
 };
 
-export default Item;
+export default Product;

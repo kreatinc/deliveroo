@@ -1,16 +1,16 @@
 import React from "react";
-import Item from "./Item";
+import Product from "./Product";
 const List = ({ products, location, clearSearchResults }) => {
   const currentProductId = location?.hash.replace("#", "") ?? 1;
   return (
     <ul className="results__list">
       {products.map((product) => {
         return (
-          <Item
+          <Product
             product={product}
             isActive={+currentProductId === product.id}
             key={product.id}
-            dispatch={clearSearchResults}
+            clearSearchResults={clearSearchResults}
           />
         );
       })}

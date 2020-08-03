@@ -125,14 +125,14 @@ const receiveSearchProducts = (response) => {
   };
 };
 
-const addToShoppingList = (item) => {
+const addToShoppingList = (product) => {
   return {
     type: "ADD_LIST_ITEM",
-    item,
+    product,
   };
 };
 
-const getShoppingList = () => {
+const getShoppingListRequest = () => {
   return {
     type: "GET_LIST_ITEMS_REQUEST",
   };
@@ -144,10 +144,10 @@ const getLikedProducts = () => (dispatch) => {
   };
 };
 
-const addToLikeList = (item) => (dispatch) => {
+const addToLikeList = (product) => (dispatch) => {
   return {
     type: "ADD_TO_LIKE_LIST",
-    item,
+    product,
   };
 };
 
@@ -182,7 +182,7 @@ export {
   fetchProductsFailure as fetchRecipesFailure,
   fetchProductsRequest as fetchRecipesRequest,
   addToShoppingList,
-  getShoppingList,
+  getShoppingListRequest,
   removeItemFromShoppingList,
   getLikedProducts,
   addToLikeList,

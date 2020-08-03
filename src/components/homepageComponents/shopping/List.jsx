@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Item from "./Item";
+import Product from "./Product";
 import { getShoppingList } from "../../../reducers";
 import * as actions from "../../../actions";
 import { connect } from "react-redux";
@@ -10,25 +10,28 @@ const mapStateToProps = (state) => {
   };
 };
 
-let List = ({ shoppingList, dispatch }) => {
+let List = ({
+  shoppingList,
+  getShoppingListRequest,
+  removeItemFromShoppingList,
+}) => {
   useEffect(() => {
-    dispatch(actions.getShoppingList());
+    getShoppingListRequest();
   }, []);
   return (
     <ul className="shopping__list">
       {shoppingList &&
-        shoppingList.map((item) => (
-          <Item
-            item={item.details}
-            itemId={item.key}
-            key={item.key}
-            dispatch={dispatch}
+        shoppingList.map((product) => (
+          <Product
+            product={product.details}
+            key={product.key}
+            clickHandler={() => removeItemFromShoppingList(product.key)}
           />
         ))}
     </ul>
   );
 };
 
-List = connect(mapStateToProps, null)(List);
+List = connect(mapStateToProps, actions)(List);
 
 export default List;

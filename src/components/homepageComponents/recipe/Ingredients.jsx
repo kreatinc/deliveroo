@@ -25,6 +25,7 @@ const Ingredients = ({
         <button
           className="btn-small recipe__btn"
           onClick={() => {
+            console.log("the product is : ", product);
             addToShoppingList(product);
             fetchProduct(product.id);
           }}
