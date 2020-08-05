@@ -1,4 +1,5 @@
-import * as ProductServices from "../services/productServices";
+import * as ProductServices from "services/productServices";
+import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
@@ -176,6 +177,25 @@ const searchProduct = () => (dispatch) => {
   return search(dispatch);
 };
 
+const login = (credentials) => (dispatch) => {
+  dispatch(userLoginRequest());
+  return userServices.userLogin(
+    credentials,
+    (response) => dispatch(userLoginSuccess(response)),
+    (error) => dispatch(userLoginfailure())
+  );
+};
+
+const userLoginSuccess = () => ({
+  type: "USER_LOGIN_SUCCESS",
+});
+const userLoginRequest = () => ({
+  type: "USER_LOGIN_REQUEST",
+});
+const userLoginfailure = () => ({
+  type: "USER_LOGIN_FAILURE",
+});
+
 export {
   fetchProducts,
   receiveProducts as receiveRecipes,
@@ -196,4 +216,5 @@ export {
   fetchSearchProductsRequest,
   clearSearchResults,
   searchProduct,
+  login,
 };

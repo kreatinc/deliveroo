@@ -5,7 +5,10 @@ import Button from "@material-ui/core/Button";
 import { Grid, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import ErrorsContainer from "./ErrorsContainer";
-const LoginForm = ({ classes }) => {
+import { connect } from "react-redux";
+import * as actions from "../store/actions";
+
+let LoginForm = ({ classes, login }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -13,7 +16,7 @@ const LoginForm = ({ classes }) => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      login(values);
     },
   });
   return (
@@ -70,6 +73,8 @@ const LoginForm = ({ classes }) => {
     </>
   );
 };
+
+LoginForm = connect(null, actions)(LoginForm);
 
 export default LoginForm;
 

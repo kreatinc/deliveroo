@@ -1,5 +1,27 @@
 import { v4 } from "uuid";
 
+const setUser = ({ email, name, token }) => {
+  try {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email,
+        name,
+      })
+    );
+  } catch {
+    console.log("there was an error while trying to save the logged user");
+  }
+};
+
+const removeUser = () => {
+  try {
+    localStorage.removeItem("user");
+  } catch (error) {
+    console.log("there was a problem while trying to remove the logged user");
+  }
+};
+
 const getShoppingList = () => {
   try {
     const res = JSON.parse(localStorage.getItem("shoppingList"));
@@ -59,4 +81,6 @@ export {
   removeItemFromShoppingList,
   getLikedProducts,
   addToLikeList,
+  setUser,
+  removeUser,
 };
