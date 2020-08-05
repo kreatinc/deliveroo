@@ -44,3 +44,14 @@ code {
 .categories-list {
   margin-top: 2%;
 }
+
+.errors__container {
+  color: red;
+  text-align: left;
+  margin-top: 5%;
+  font-size: 15px;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: cornsilk;
+  padding: 10px 10px;
+}
