@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 
 const Logo = ({ logo, clearSearchResults }) => {
   return (
-    <Link to="/home" onClick={() => clearSearchResults()}>
+    <Link
+      to="/home"
+      onClick={() => {
+        if (clearSearchResults) clearSearchResults();
+      }}
+    >
       <img src={logo} alt="Logo" className="header__logo" />
     </Link>
   );
