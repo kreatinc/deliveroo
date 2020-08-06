@@ -3,12 +3,13 @@ import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Grid, Box } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ErrorsContainer from "./ErrorsContainer";
 import { connect } from "react-redux";
 import * as actions from "../store/actions";
 
 let LoginForm = ({ classes, login }) => {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,7 +17,7 @@ let LoginForm = ({ classes, login }) => {
     },
     validate,
     onSubmit: (values) => {
-      login(values);
+      login(values, history);
     },
   });
   return (

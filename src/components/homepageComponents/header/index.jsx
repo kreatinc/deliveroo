@@ -7,7 +7,7 @@ import Logo from "./Logo";
 import { connect } from "react-redux";
 import { getLikedProducts } from "store/reducers";
 import * as actions from "../../../store/actions";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import Button from "components/Button";
 
 const mapStateToProps = (state) => {
@@ -21,9 +21,11 @@ let Header = ({
   fetchProduct,
   searchProduct,
   clearSearchResults,
+  logout,
 }) => {
   const { category } = useParams();
   const location = useLocation();
+  const history = useHistory();
   return (
     <header className="header">
       <Logo logo={logo} clearSearchResults={clearSearchResults} />
@@ -39,8 +41,8 @@ let Header = ({
         <Button>Login</Button>
       ) : (
         <Button
-          onClick={() => {
-            // TO-DO : logout logic
+          handleClick={() => {
+            logout(history);
           }}
         >
           Logout

@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-
+//what does link mean 🤦🏻‍♂️
 const fetchProducts = (link, category) => {
   console.log("the link is :", link);
   console.log("the category is :", category);

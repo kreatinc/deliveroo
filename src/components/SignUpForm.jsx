@@ -1,20 +1,24 @@
 import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
+import * as actions from "store/actions";
 import ErrorsContainer from "./ErrorsContainer";
+import SignUp from "views/Register";
+import { connect } from "react-redux";
 
-const SignUpForm = ({ classes }) => {
+let SignUpForm = ({ classes, register }) => {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       firstName: "",
-      lastName: "",
+      phone: "",
       email: "",
       password: "",
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      register(values, history);
     },
   });
   return (
@@ -43,12 +47,12 @@ const SignUpForm = ({ classes }) => {
               variant="outlined"
               required
               fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lname"
+              id="phone"
+              label="Phone Number"
+              name="phone"
+              autoComplete="pnumber"
               onChange={formik.handleChange}
-              value={formik.values.lastName}
+              value={formik.values.phone}
             />
           </Grid>
           <Grid item xs={12}>
@@ -101,6 +105,8 @@ const SignUpForm = ({ classes }) => {
   );
 };
 
+SignUpForm = connect(null, actions)(SignUpForm);
+
 export default SignUpForm;
 const validate = (values) => {
   const errors = {};
@@ -110,10 +116,12 @@ const validate = (values) => {
     errors.firstName = "15 characters or less";
   }
 
-  if (!values.lastName) {
-    errors.lastName = "Required";
-  } else if (values.lastName.length > 20) {
-    errors.lastName = "characters or less";
+  if (!values.phone) {
+    errors.phone = "Required";
+  } else if (values.phone.length > 20) {
+    errors.phone = "too long";
+  } else if (isNaN(values.phone)) {
+    errors.phone = "not a number";
   }
 
   if (!values.email) {

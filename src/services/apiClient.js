@@ -1,29 +1,11 @@
 import axios from "axios";
-import NProgress from "nprogress";
-
-NProgress.configure({ showSpinner: false });
 
 const BASE_URL = "http://127.0.0.1:8000/api/";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
-  timeout: 2000,
-  headers: { "Content-Type": "application/json" },
+  timeout: 5000,
+  headers: { "Content-Type": "Application/json" },
 });
-
-apiClient.interceptors.request.use((config) => {
-  NProgress.start();
-  return config;
-});
-
-apiClient.interceptors.response.use(
-  (response) => {
-    NProgress.done();
-    return response;
-  },
-  (error) => {
-    NProgress.done();
-  }
-);
 
 export default apiClient;

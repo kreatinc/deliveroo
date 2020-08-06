@@ -8,6 +8,7 @@ import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
 import categoriesList, * as fromCategoriesList from "./categoriesList";
 import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
+import user from "./user";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   categoriesList,
   pagination,
   searchResultsList,
+  user,
 });
 
 export default rootReducer;

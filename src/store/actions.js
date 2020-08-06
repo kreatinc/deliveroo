@@ -3,6 +3,7 @@ import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
+import history from "utils/history";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
@@ -177,30 +178,62 @@ const searchProduct = () => (dispatch) => {
   return search(dispatch);
 };
 
-const login = (credentials) => (dispatch) => {
+const login = (credentials, history) => (dispatch) => {
   dispatch(userLoginRequest());
-  return userServices.userLogin(
-    credentials,
-    (response) => dispatch(userLoginSuccess(response)),
-    (error) => dispatch(userLoginfailure())
+  return userServices.userLogin(credentials).then(
+    (response) => {
+      dispatch(receiveUser(response));
+      history.push("/home");
+    },
+    (error) => dispatch(userLoginfailure(error))
   );
 };
 
-const userLoginSuccess = () => ({
+const receiveUser = (response) => ({
   type: "USER_LOGIN_SUCCESS",
+  response: response.data,
 });
 const userLoginRequest = () => ({
   type: "USER_LOGIN_REQUEST",
 });
-const userLoginfailure = () => ({
+const userLoginfailure = (error) => ({
   type: "USER_LOGIN_FAILURE",
+  message: error.message,
 });
+
+const register = (credentials) => (dispatch) => {
+  dispatch(userRegisterRequest());
+  return userServices.userRegister(credentials).then(
+    (response) => {
+      dispatch(userRegisterSuccess(response));
+    },
+    (error) => dispatch(userRegisterfailure(error))
+  );
+};
+
+const userRegisterSuccess = (response) => ({
+  type: "USER_REGISTER_SUCCESS",
+  response,
+});
+const userRegisterRequest = () => ({
+  type: "USER_REGISTER_REQUEST",
+});
+const userRegisterfailure = (error) => ({
+  type: "USER_REGISTER_FAILURE",
+  message: error.message,
+});
+
+const logout = () => {
+  return {
+    type: "LOGOUT",
+  };
+};
 
 export {
   fetchProducts,
   receiveProducts as receiveRecipes,
-  fetchProductsFailure as fetchRecipesFailure,
-  fetchProductsRequest as fetchRecipesRequest,
+  fetchProductsFailure,
+  fetchProductsRequest,
   addToShoppingList,
   getShoppingListRequest,
   removeItemFromShoppingList,
@@ -217,4 +250,6 @@ export {
   clearSearchResults,
   searchProduct,
   login,
+  register,
+  logout,
 };
