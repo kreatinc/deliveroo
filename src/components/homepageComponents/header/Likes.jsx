@@ -3,6 +3,7 @@ import icons from "../../../assets/img/icons.svg";
 import Like from "./Like";
 
 const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
+  // const authenticated = useAuthenticated();
   useEffect(() => {
     getLikedProducts();
   }, []);

@@ -27,4 +27,18 @@ const searchProduct = (productName) => {
   return apiClient.get(`/products?title=${productName}`);
 };
 
-export { fetchProducts, fetchProduct, fetchCategories, searchProduct };
+const likeProduct = (productId) => {
+  return apiClient.post(`clients/${productId}/like`);
+};
+const unlikeProduct = (productId) => {
+  return apiClient.post(`clients/${productId}/unlike`);
+};
+
+export {
+  fetchProducts,
+  fetchProduct,
+  fetchCategories,
+  searchProduct,
+  likeProduct,
+  unlikeProduct,
+};

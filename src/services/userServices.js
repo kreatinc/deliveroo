@@ -11,4 +11,12 @@ const userRegister = ({ firstName, phone, email, password }) => {
   );
 };
 
-export { userLogin, userRegister };
+const userLogout = () => {
+  return apiClient.post("clients/logout");
+};
+
+const getLikedProducts = () => {
+  return apiClient.get("clients/profile");
+};
+
+export { userLogin, userRegister, userLogout, getLikedProducts };

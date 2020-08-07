@@ -3,7 +3,7 @@ import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
-import history from "utils/history";
+import { setToken } from "services/apiClient";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
@@ -141,17 +141,39 @@ const getShoppingListRequest = () => {
 };
 
 const getLikedProducts = () => (dispatch) => {
-  return {
-    type: "GET_LIKE_LIST",
-  };
+  dispatch(getLikedProductsRequest());
+  return userServices.getLikedProducts().then(
+    (response) => {
+      console.log("the liked products are : ", response);
+      dispatch(getLikedProductsSuccess(response));
+    },
+    (error) => dispatch(getLikedProductsFailure(error))
+  );
+};
+const getLikedProductsRequest = () => ({
+  type: "GET_LIKE_LIST_REQUEST",
+});
+
+const getLikedProductsSuccess = (response) => ({
+  type: "GET_LIKE_LIST_SUCCESS",
+  response,
+});
+const getLikedProductsFailure = (error) => ({
+  type: "GET_LIKE_LIST_FAILURE",
+  message: error.message,
+});
+
+const addToLikeList = (productId) => (dispatch) => {
+  return ProductServices.likeProduct(productId).then(
+    (response) => dispatch(addToLikeListSuccess(response)),
+    (error) => console.log("there was an error while liking the product")
+  );
 };
 
-const addToLikeList = (product) => (dispatch) => {
-  return {
-    type: "ADD_TO_LIKE_LIST",
-    product,
-  };
-};
+const addToLikeListSuccess = (response) => ({
+  type: "ADD_TO_LIKE_LIST",
+  response,
+});
 
 const removeItemFromShoppingList = (id) => {
   return {
@@ -223,11 +245,31 @@ const userRegisterfailure = (error) => ({
   message: error.message,
 });
 
-const logout = () => {
-  return {
-    type: "LOGOUT",
-  };
+const logout = (history) => (dispatch) => {
+  userLogoutRequest();
+  return userServices.userLogout().then(
+    (response) => {
+      dispatch(userLogoutSuccess(response));
+      history.push("/");
+    },
+    (error) => {
+      dispatch(userLogoutfailure(error));
+      history.push("/");
+    }
+  );
 };
+
+const userLogoutSuccess = (response) => ({
+  type: "USER_LOGOUT_SUCCESS",
+  response,
+});
+const userLogoutRequest = () => ({
+  type: "USER_LOGOUT_REQUEST",
+});
+const userLogoutfailure = (error) => ({
+  type: "USER_LOGOUT_FAILURE",
+  message: error.message,
+});
 
 export {
   fetchProducts,
@@ -252,4 +294,7 @@ export {
   login,
   register,
   logout,
+  userLogoutSuccess,
+  userLogoutRequest,
+  userLogoutfailure,
 };

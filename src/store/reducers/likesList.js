@@ -1,14 +1,11 @@
-import {
-  getLikedProducts,
-  addToLikeList,
-} from "../../utils/localStorageHelpers";
-
 const LikesList = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TO_LIKE_LIST":
-      return addToLikeList(action.product);
-    case "GET_LIKE_LIST":
-      return getLikedProducts();
+      return { ...state };
+    case "GET_LIKE_LIST_SUCCESS":
+      console.log("the likes list is :", action);
+    case "GET_LIKE_LIST_REQUEST":
+      console.log("requesting");
     case "GET_LIKE_LIST_FAILURE":
       return state;
     default:

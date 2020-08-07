@@ -9,6 +9,7 @@ import { getLikedProducts } from "store/reducers";
 import * as actions from "../../../store/actions";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import Button from "components/Button";
+import { useAuthenticated } from "customHooks";
 
 const mapStateToProps = (state) => {
   return {
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
 
 let Header = ({
   getLikedProducts,
+  likedProducts,
   fetchProduct,
   searchProduct,
   clearSearchResults,
@@ -26,6 +28,7 @@ let Header = ({
   const { category } = useParams();
   const location = useLocation();
   const history = useHistory();
+  const authenticated = useAuthenticated();
   return (
     <header className="header">
       <Logo logo={logo} clearSearchResults={clearSearchResults} />
@@ -33,13 +36,13 @@ let Header = ({
       {category && (
         <Likes
           getLikedProducts={getLikedProducts}
+          likedProducts={likedProducts}
           fetchProduct={fetchProduct}
         />
       )}
 
-      {location.pathname === "/" ? (
-        <Button>Login</Button>
-      ) : (
+      {location.pathname === "/" && <Button>Login</Button>}
+      {authenticated && (
         <Button
           handleClick={() => {
             logout(history);
