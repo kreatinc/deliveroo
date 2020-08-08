@@ -1,12 +1,23 @@
 import axios from "axios";
+import { getUser } from "utils/localStorageHelpers";
 
 const BASE_URL = "http://127.0.0.1:8000/api/";
+const token = getUser()?.token ?? "";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
-  headers: { "Content-Type": "Application/json" },
+  headers: { Accept: "application/json", "Content-Type": "application/json" },
 });
+
+apiClient.interceptors.request.use((config) => {
+  if (token !== undefined) {
+    console.log("the token is :", token);
+    config.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -20,8 +31,3 @@ apiClient.interceptors.response.use(
 );
 
 export default apiClient;
-
-export const setToken = (token) => {
-  apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return;
-};

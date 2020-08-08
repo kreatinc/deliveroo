@@ -1,13 +1,9 @@
 import { setUser, getUser, removeUser } from "utils/localStorageHelpers";
-import { setToken } from "services/apiClient";
 
-const initialValue = getUser();
-const user = (state = initialValue || {}, action) => {
+const user = (state = getUser() || {}, action) => {
   switch (action.type) {
     case "USER_LOGIN_SUCCESS":
-      const res = setUser(action.response);
-      setToken(action.response.token);
-      return res;
+      return setUser(action.response);
     case "USER_LOGIN_FAILURE":
       console.log("the error message is : ", action.message);
     case "USER_LOGOUT_SUCCESS":
@@ -20,12 +16,6 @@ const user = (state = initialValue || {}, action) => {
       return state;
   }
 };
-
-const userLogout = (state = {}, action) => {
-  switch (action.type) {
-  }
-};
-
 // case "USER_LOGIN_REQUEST":
 // case "USER_REGISTER_SUCCESS":
 //   console.log("the login response is :", action.response);

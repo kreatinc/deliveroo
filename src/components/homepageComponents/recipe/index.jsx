@@ -109,7 +109,7 @@ let Product = ({
   return (
     <div className="category">
       {categories.map((category) => (
-        <Category category={category} />
+        <Category category={category} key={category.id} />
       ))}
     </div>
   );
