@@ -3,7 +3,6 @@ import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
-import { setToken } from "services/apiClient";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
@@ -134,9 +133,9 @@ const addToShoppingList = (product) => {
   };
 };
 
-const getShoppingListRequest = () => {
+const getShoppingList = () => {
   return {
-    type: "GET_LIST_ITEMS_REQUEST",
+    type: "GET_LIST_ITEMS",
   };
 };
 
@@ -170,16 +169,28 @@ const addToLikeList = (productId) => (dispatch) => {
     (error) => console.log("there was an error while liking the product")
   );
 };
+const removeFromLikeList = (productId) => (dispatch) => {
+  return ProductServices.unlikeProduct(productId).then(
+    (response) => dispatch(removeFromLikeListSuccess(response)),
+    (error) => console.log("there was an error while liking the product")
+  );
+};
 
 const addToLikeListSuccess = (response) => ({
   type: "ADD_TO_LIKE_LIST",
-  response,
+  response: normalize(response.data.data, product),
 });
 
-const removeItemFromShoppingList = (id) => {
+//TODO: this logic is not permanent , should be changed depending on the shape of the server response
+const removeFromLikeListSuccess = (response) => ({
+  type: "REMOVE_FROM_LIKE_LIST",
+  response: normalize(response.data.data, product),
+});
+
+const removeFromShoppingList = (productId) => {
   return {
     type: "REMOVE_LIST_ITEM",
-    id,
+    id: productId,
   };
 };
 
@@ -278,8 +289,8 @@ export {
   fetchProductsFailure,
   fetchProductsRequest,
   addToShoppingList,
-  getShoppingListRequest,
-  removeItemFromShoppingList,
+  getShoppingList,
+  removeFromShoppingList as removeItemFromShoppingList,
   getLikedProducts,
   addToLikeList,
   removeIngredient,
@@ -298,4 +309,5 @@ export {
   userLogoutSuccess,
   userLogoutRequest,
   userLogoutfailure,
+  removeFromLikeList,
 };

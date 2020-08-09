@@ -1,7 +1,11 @@
 const LikesList = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TO_LIKE_LIST":
-      return state;
+    // TODO: add to like list logic
+    case "REMOVE_FROM_LIKE_LIST":
+      return state.filter(
+        (product) => product.id !== action.response.product.id
+      );
     case "GET_LIKE_LIST_SUCCESS":
       return action.response;
     case "GET_LIKE_LIST_REQUEST":

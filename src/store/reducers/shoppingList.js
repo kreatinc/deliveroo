@@ -6,7 +6,7 @@ import {
 
 const shoppingList = (state = {}, action) => {
   switch (action.type) {
-    case "GET_LIST_ITEMS_REQUEST":
+    case "GET_LIST_ITEMS":
       return getShoppingList();
     case "GET_LIST_ITEM_FAILURE":
       return state;

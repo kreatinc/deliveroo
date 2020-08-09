@@ -33,7 +33,7 @@ let Header = ({
     <header className="header">
       <Logo logo={logo} clearSearchResults={clearSearchResults} />
       {category && <Search searchProduct={searchProduct} />}
-      {category && (
+      {authenticated && category && (
         <Likes
           getLikedProducts={getLikedProducts}
           likedProducts={likedProducts}

@@ -1,22 +1,9 @@
 import React, { useEffect } from "react";
 import Product from "./Product";
-import { getShoppingList } from "../../../store/reducers";
-import * as actions from "../../../store/actions";
-import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
-  return {
-    shoppingList: getShoppingList(state),
-  };
-};
-
-let List = ({
-  shoppingList,
-  getShoppingListRequest,
-  removeItemFromShoppingList,
-}) => {
+let List = ({ shoppingList, getShoppingList, removeItemFromShoppingList }) => {
   useEffect(() => {
-    getShoppingListRequest();
+    getShoppingList();
   }, []);
   return (
     <ul className="shopping__list">
@@ -31,7 +18,5 @@ let List = ({
     </ul>
   );
 };
-
-List = connect(mapStateToProps, actions)(List);
 
 export default List;

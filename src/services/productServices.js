@@ -30,6 +30,7 @@ const searchProduct = (productName) => {
 const likeProduct = (productId) => {
   return apiClient.post(`clients/${productId}/like`);
 };
+
 const unlikeProduct = (productId) => {
   return apiClient.post(`clients/${productId}/unlike`);
 };

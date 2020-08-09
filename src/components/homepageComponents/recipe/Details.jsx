@@ -15,7 +15,7 @@ const RecipeDetails = ({ product, addToLikeList, isLiked, likes }) => {
       <RecipeInfo likes={likes} />
       <LikeButton
         clickHandler={() => {
-          addToLikeList(product.id);
+          addToLikeList(product.id, isLiked);
         }}
         isLiked={isLiked}
       ></LikeButton>
