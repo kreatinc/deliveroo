@@ -304,6 +304,7 @@ export {
   clearSearchResults,
   searchProduct,
   login,
+  receiveUser,
   register,
   logout,
   userLogoutSuccess,

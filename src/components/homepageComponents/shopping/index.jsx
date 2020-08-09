@@ -23,7 +23,9 @@ let Shopping = ({
         getShoppingList={getShoppingList}
         removeItemFromShoppingList={removeItemFromShoppingList}
       />
-      {shoppingList.length !== 0 && <Button>Confirm order</Button>}
+      {shoppingList && shoppingList.length !== 0 && (
+        <Button>Confirm order</Button>
+      )}
     </div>
   );
 };

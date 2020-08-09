@@ -23,6 +23,7 @@ let Header = ({
   fetchProduct,
   searchProduct,
   clearSearchResults,
+  receiveUser,
   logout,
 }) => {
   const { category } = useParams();
@@ -38,6 +39,7 @@ let Header = ({
           getLikedProducts={getLikedProducts}
           likedProducts={likedProducts}
           fetchProduct={fetchProduct}
+          receiveUser={receiveUser}
         />
       )}
 
