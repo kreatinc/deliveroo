@@ -3,11 +3,12 @@ const LikesList = (state = {}, action) => {
     case "ADD_TO_LIKE_LIST":
       return state;
     case "GET_LIKE_LIST_SUCCESS":
-      console.log("the likes list is :", action);
+      return action.response;
     case "GET_LIKE_LIST_REQUEST":
       console.log("requesting");
     case "GET_LIKE_LIST_FAILURE":
       return state;
+
     default:
       return state;
   }

@@ -144,7 +144,6 @@ const getLikedProducts = () => (dispatch) => {
   dispatch(getLikedProductsRequest());
   return userServices.getLikedProducts().then(
     (response) => {
-      console.log("the liked products are : ", response);
       dispatch(getLikedProductsSuccess(response));
     },
     (error) => dispatch(getLikedProductsFailure(error))
@@ -154,10 +153,12 @@ const getLikedProductsRequest = () => ({
   type: "GET_LIKE_LIST_REQUEST",
 });
 
-const getLikedProductsSuccess = (response) => ({
-  type: "GET_LIKE_LIST_SUCCESS",
-  response,
-});
+const getLikedProductsSuccess = (response) => {
+  return {
+    type: "GET_LIKE_LIST_SUCCESS",
+    response: response.data.data.likes,
+  };
+};
 const getLikedProductsFailure = (error) => ({
   type: "GET_LIKE_LIST_FAILURE",
   message: error.message,

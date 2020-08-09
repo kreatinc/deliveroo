@@ -18,11 +18,11 @@ const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
       <div className="likes__panel">
         <ul className="likes__list">
           {likedProducts &&
-            likedProducts.map((item) => (
+            likedProducts.map((product) => (
               <Like
-                item={item.details}
+                product={product.details}
                 fetchProduct={fetchProduct}
-                key={item.details.id}
+                key={product.details.id}
               />
             ))}
         </ul>

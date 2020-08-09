@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 const Like = ({ product }) => {
   const { category } = useParams();
-  console.log("the category is the foo-llowing : ", category);
   return (
     <li>
       <a
@@ -21,7 +20,9 @@ const Like = ({ product }) => {
         </figure>
         <div className="likes__data">
           <h4 className="likes__name">{product.title}</h4>
-          <p className="likes__author">{product.company.title}</p>
+          <p className="likes__author">
+            {product?.company?.title ?? "Anonymous"}
+          </p>
         </div>
       </a>
     </li>
