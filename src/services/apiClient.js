@@ -2,7 +2,6 @@ import axios from "axios";
 import { getUser } from "utils/localStorageHelpers";
 
 const BASE_URL = "http://127.0.0.1:8000/api/";
-const token = getUser()?.token ?? "";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -11,9 +10,9 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  if (token !== undefined) {
-    console.log("the token is :", token);
-    config.headers.common["Authorization"] = `Bearer ${token}`;
+  const token = getUser()?.token ?? "";
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 });
