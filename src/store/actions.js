@@ -285,12 +285,12 @@ const userLogoutfailure = (error) => ({
 
 export {
   fetchProducts,
-  receiveProducts as receiveRecipes,
+  receiveProducts,
   fetchProductsFailure,
   fetchProductsRequest,
   addToShoppingList,
   getShoppingList,
-  removeFromShoppingList as removeItemFromShoppingList,
+  removeFromShoppingList,
   getLikedProducts,
   addToLikeList,
   removeIngredient,

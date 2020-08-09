@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import routes from "router";
 
 export const useAuthenticated = () => {
   const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setAuthenticated(true);
-      // history.push("/home");
+      if (
+        ["/", "/login", "/register", "/welcome"].includes(location.pathname)
+      ) {
+        history.push("/home");
+      }
     }
   }, []);
   return authenticated;
