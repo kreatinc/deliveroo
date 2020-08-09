@@ -1,11 +1,11 @@
+import { product } from "utils/schema";
+
 const LikesList = (state = {}, action) => {
   switch (action.type) {
     case "ADD_TO_LIKE_LIST":
-    // TODO: add to like list logic
+      return { ...state, [action.response.id]: action.response };
     case "REMOVE_FROM_LIKE_LIST":
-      return state.filter(
-        (product) => product.id !== action.response.product.id
-      );
+      return state.filter((product) => product.id !== action.response.id);
     case "GET_LIKE_LIST_SUCCESS":
       return action.response;
     case "GET_LIKE_LIST_REQUEST":
@@ -28,5 +28,9 @@ export const getLikedListItems = (state) => {
 };
 
 export const isProductLiked = (state, id) => {
-  if (state) return state[id] !== undefined ? true : false;
+  console.log("the id type is : ", typeof id);
+  const likes = Array.from(state).filter((product) => {
+    return product.id === +id;
+  });
+  return likes.length > 0 ? true : false;
 };

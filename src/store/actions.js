@@ -176,16 +176,22 @@ const removeFromLikeList = (productId) => (dispatch) => {
   );
 };
 
-const addToLikeListSuccess = (response) => ({
-  type: "ADD_TO_LIKE_LIST",
-  response: normalize(response.data.data, product),
-});
+const addToLikeListSuccess = (response) => {
+  console.log("liking:", response);
+  return {
+    type: "ADD_TO_LIKE_LIST",
+    response: response.data.data,
+  };
+};
 
 //TODO: this logic is not permanent , should be changed depending on the shape of the server response
-const removeFromLikeListSuccess = (response) => ({
-  type: "REMOVE_FROM_LIKE_LIST",
-  response: normalize(response.data.data, product),
-});
+const removeFromLikeListSuccess = (response) => {
+  console.log("unliking:", response);
+  return {
+    type: "REMOVE_FROM_LIKE_LIST",
+    response: response.data.data,
+  };
+};
 
 const removeFromShoppingList = (productId) => {
   return {

@@ -2,7 +2,13 @@ import React from "react";
 import icons from "../../../assets/img/icons.svg";
 import LikeButton from "./LikeButton";
 import RecipeInfo from "./RecipeInfo";
-const RecipeDetails = ({ product, addToLikeList, isLiked, likes }) => {
+const RecipeDetails = ({
+  product,
+  addToLikeList,
+  removeFromLikeList,
+  isLiked,
+  likes,
+}) => {
   return (
     <div className="recipe__details">
       <div className="recipe__info">
@@ -15,7 +21,9 @@ const RecipeDetails = ({ product, addToLikeList, isLiked, likes }) => {
       <RecipeInfo likes={likes} />
       <LikeButton
         clickHandler={() => {
-          addToLikeList(product.id, isLiked);
+          isLiked
+            ? removeFromLikeList(product.id, isLiked)
+            : addToLikeList(product.id, isLiked);
         }}
         isLiked={isLiked}
       ></LikeButton>

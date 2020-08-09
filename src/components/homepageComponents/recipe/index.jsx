@@ -52,6 +52,7 @@ let Product = ({
   fetchProduct,
   removeIngredient,
   addToLikeList,
+  removeFromLikeList,
   clearSearchResults,
 }) => {
   useEffect(() => {
@@ -91,6 +92,7 @@ let Product = ({
         <Details
           product={product}
           addToLikeList={addToLikeList}
+          removeFromLikeList={removeFromLikeList}
           isLiked={isLiked}
           likes={likes}
         />
