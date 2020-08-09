@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 const Like = ({ product }) => {
   if (product) console.log("the product is :", product);
-  const { category } = useParams();
+
   return (
     <li>
       <Link
