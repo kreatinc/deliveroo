@@ -3,11 +3,12 @@ import { product } from "utils/schema";
 const comments = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_PRODUCTS_SUCCESS":
-      const res = retrieveComments(state, action);
-      return res;
+      return retrieveComments(state, action);
     case "ADD_COMMENT":
-      console.log(action.response);
-      return { ...state, [action.productId]: [action.response] };
+      return {
+        ...state,
+        [action.productId]: [...state[action.productId], action.response],
+      };
 
     case "REMOVE_COMMENT":
     case "EDIT_COMMENT":
