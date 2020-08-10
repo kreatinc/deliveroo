@@ -11,6 +11,7 @@ const comments = (state = {}, action) => {
       };
 
     case "REMOVE_COMMENT":
+      return state.filter((productId) => productId !== action.productId);
     case "EDIT_COMMENT":
     default:
       return state;

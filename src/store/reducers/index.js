@@ -8,7 +8,7 @@ import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
 import categoriesList, * as fromCategoriesList from "./categoriesList";
 import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
-import user from "./user";
+import user, * as fromUser from "./user";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -123,4 +123,8 @@ export const getIsSearching = (state) => {
   return fromSearchResultsList.getIsSearching(
     state.searchResultsList.isSearching
   );
+};
+
+export const getCurrentUser = (state) => {
+  return fromUser.getUserId(state.user);
 };

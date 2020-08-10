@@ -7,6 +7,7 @@ const user = (state = {}, action) => {
       apiClient.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${action.response.token}`;
+      console.log("the login response is :", action.response);
       return setUser(action.response);
     case "USER_LOGIN_FAILURE":
       console.log("the error message is : ", action.message);
@@ -28,3 +29,7 @@ const user = (state = {}, action) => {
 // case "USER_REGISTER_REQUEST":
 
 export default user;
+
+export const getUserId = (state) => {
+  return state.id;
+};

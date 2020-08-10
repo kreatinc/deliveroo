@@ -8,13 +8,14 @@ const getUser = () => {
   }
   localStorage.getItem("user");
 };
-const setUser = ({ email, name, token }) => {
+const setUser = ({ email, name, id, token }) => {
   try {
     localStorage.setItem(
       "user",
       JSON.stringify({
         email,
         name,
+        id,
         token,
       })
     );

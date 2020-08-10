@@ -36,6 +36,7 @@ const mapStateToProps = (state, ownProps) => {
       ownProps.location.hash.replace("#", "")
     ),
     categories: selectors.getCategories(state),
+    currentUserId: selectors.getCurrentUser(state),
   };
 };
 
@@ -57,6 +58,7 @@ let Product = ({
   removeFromLikeList,
   clearSearchResults,
   addComment,
+  currentUserId,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
@@ -108,7 +110,7 @@ let Product = ({
           fetchProduct={fetchProduct}
           removeIngredient={removeIngredient}
         />
-        <Comments comments={comments} />
+        <Comments comments={comments} currentUserId={currentUserId} />
         {isAuthenticated && (
           <CommentSection addComment={addComment} product={product} />
         )}
