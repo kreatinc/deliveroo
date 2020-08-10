@@ -10,18 +10,14 @@ const mapStateToProps = (state) => {
     shoppingList: getShoppingList(state),
   };
 };
-let Shopping = ({
-  shoppingList,
-  getShoppingList,
-  removeItemFromShoppingList,
-}) => {
+let Shopping = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>
       <List
         shoppingList={shoppingList}
         getShoppingList={getShoppingList}
-        removeItemFromShoppingList={removeItemFromShoppingList}
+        removeFromShoppingList={removeFromShoppingList}
       />
       {shoppingList && shoppingList.length !== 0 && (
         <Button>Confirm order</Button>

@@ -1,7 +1,7 @@
 import {
   getShoppingList,
   addToShoppingList,
-  removeItemFromShoppingList,
+  removeProductFromShoppingList,
 } from "utils/localStorageHelpers";
 
 const shoppingList = (state = {}, action) => {
@@ -13,7 +13,7 @@ const shoppingList = (state = {}, action) => {
     case "ADD_LIST_ITEM":
       return addToShoppingList(action.product);
     case "REMOVE_LIST_ITEM":
-      return removeItemFromShoppingList(action.id);
+      return removeProductFromShoppingList(action.id);
     default:
       return state;
   }

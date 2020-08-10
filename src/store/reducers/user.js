@@ -1,7 +1,7 @@
 import { setUser, getUser, removeUser } from "utils/localStorageHelpers";
 import apiClient from "services/apiClient";
 
-const user = (state = getUser() || {}, action) => {
+const user = (state = {}, action) => {
   switch (action.type) {
     case "USER_LOGIN_SUCCESS":
       apiClient.defaults.headers.common[

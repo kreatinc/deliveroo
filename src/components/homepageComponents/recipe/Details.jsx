@@ -8,6 +8,7 @@ const RecipeDetails = ({
   removeFromLikeList,
   isLiked,
   likes,
+  fetchProduct,
 }) => {
   return (
     <div className="recipe__details">
@@ -21,9 +22,12 @@ const RecipeDetails = ({
       <RecipeInfo likes={likes} />
       <LikeButton
         clickHandler={() => {
-          isLiked
-            ? removeFromLikeList(product.id, isLiked)
-            : addToLikeList(product.id, isLiked);
+          if (!isLiked) {
+            addToLikeList(product.id, isLiked);
+          } else {
+            removeFromLikeList(product.id, isLiked);
+          }
+          fetchProduct(product.id);
         }}
         isLiked={isLiked}
       ></LikeButton>

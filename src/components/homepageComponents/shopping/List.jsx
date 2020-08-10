@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Product from "./Product";
 
-let List = ({ shoppingList, getShoppingList, removeItemFromShoppingList }) => {
+let List = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
   useEffect(() => {
     getShoppingList();
   }, []);
@@ -12,7 +12,7 @@ let List = ({ shoppingList, getShoppingList, removeItemFromShoppingList }) => {
           <Product
             product={product.details}
             key={product.key}
-            clickHandler={() => removeItemFromShoppingList(product.key)}
+            clickHandler={() => removeFromShoppingList(product.key)}
           />
         ))}
     </ul>

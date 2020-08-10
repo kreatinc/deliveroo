@@ -94,6 +94,7 @@ let Product = ({
           addToLikeList={addToLikeList}
           removeFromLikeList={removeFromLikeList}
           isLiked={isLiked}
+          fetchProduct={fetchProduct}
           likes={likes}
         />
         <Ingredients

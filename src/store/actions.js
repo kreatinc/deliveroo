@@ -143,6 +143,7 @@ const getLikedProducts = () => (dispatch) => {
   dispatch(getLikedProductsRequest());
   return userServices.getLikedProducts().then(
     (response) => {
+      console.log("the like products response :", response);
       dispatch(getLikedProductsSuccess(response));
     },
     (error) => dispatch(getLikedProductsFailure(error))
@@ -184,7 +185,6 @@ const addToLikeListSuccess = (response) => {
   };
 };
 
-//TODO: this logic is not permanent , should be changed depending on the shape of the server response
 const removeFromLikeListSuccess = (response) => {
   console.log("unliking:", response);
   return {

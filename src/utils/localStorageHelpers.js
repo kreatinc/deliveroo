@@ -42,7 +42,7 @@ const getShoppingList = () => {
   }
 };
 
-const removeItemFromShoppingList = (id) => {
+const removeProductFromShoppingList = (id) => {
   console.log("the id of the product is ", id);
   try {
     const shoppingList = getShoppingList();
@@ -89,7 +89,7 @@ const addToLikeList = (item) => {
 export {
   getShoppingList,
   addToShoppingList,
-  removeItemFromShoppingList,
+  removeProductFromShoppingList,
   getLikedProducts,
   addToLikeList,
   setUser,
