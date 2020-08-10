@@ -304,6 +304,24 @@ const receiveComment = (response, productId) => ({
   productId,
 });
 
+const removeComment = (commentId, productId) => (dispatch) => {
+  console.log("the comment to delete is : ", commentId);
+  return userServices
+    .removeComment(commentId)
+    .then((response) => {
+      dispatch(removeCommentSuccess(response, productId, commentId));
+    })
+    .catch((error) =>
+      console.log("there was an error while removing the comment")
+    );
+};
+
+const removeCommentSuccess = (response, productId, commentId) => ({
+  type: "REMOVE_COMMENT",
+  productId,
+  commentId,
+});
+
 export {
   fetchProducts,
   receiveProducts,
@@ -333,4 +351,5 @@ export {
   userLogoutfailure,
   removeFromLikeList,
   addComment,
+  removeComment,
 };

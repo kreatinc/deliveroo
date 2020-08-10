@@ -25,5 +25,15 @@ const addComment = (comment, productId) => {
     JSON.stringify({ comment, product_id: productId })
   );
 };
+const removeComment = (productId) => {
+  return apiClient.delete(`clients/comments/${productId}`);
+};
 
-export { userLogin, userRegister, userLogout, getLikedProducts, addComment };
+export {
+  userLogin,
+  userRegister,
+  userLogout,
+  getLikedProducts,
+  addComment,
+  removeComment,
+};

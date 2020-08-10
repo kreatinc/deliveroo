@@ -1,15 +1,17 @@
 import React from "react";
 import Comment from "./Comment";
 
-const Comments = ({ comments, currentUserId }) => {
+const Comments = ({ comments, currentUserId, product, removeComment }) => {
   return (
     <ul className="results__list">
       {comments &&
-        comments.map((comment) => (
+        comments.map((comment, i) => (
           <Comment
             comment={comment}
+            product={product}
+            removeComment={removeComment}
             currentUserId={currentUserId}
-            key={comment.id}
+            key={i}
           />
         ))}
     </ul>

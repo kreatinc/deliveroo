@@ -59,6 +59,7 @@ let Product = ({
   clearSearchResults,
   addComment,
   currentUserId,
+  removeComment,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
@@ -110,7 +111,12 @@ let Product = ({
           fetchProduct={fetchProduct}
           removeIngredient={removeIngredient}
         />
-        <Comments comments={comments} currentUserId={currentUserId} />
+        <Comments
+          comments={comments}
+          currentUserId={currentUserId}
+          product={product}
+          removeComment={removeComment}
+        />
         {isAuthenticated && (
           <CommentSection addComment={addComment} product={product} />
         )}

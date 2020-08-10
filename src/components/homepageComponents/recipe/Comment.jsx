@@ -1,7 +1,6 @@
 import React from "react";
-import icons from "assets/img/icons.svg";
-import Button from "components/Button";
-const Comment = ({ comment, currentUserId }) => {
+
+const Comment = ({ comment, currentUserId, product, removeComment }) => {
   return (
     <>
       <li>
@@ -20,6 +19,7 @@ const Comment = ({ comment, currentUserId }) => {
           className="btn-options"
           onClick={() => {
             window.confirm("are you sure you want to delete this comment ?");
+            removeComment(comment.id, product.id);
           }}
         >
           {" "}
