@@ -2,6 +2,7 @@ import React from "react";
 import icons from "../../../assets/img/icons.svg";
 import LikeButton from "./LikeButton";
 import RecipeInfo from "./RecipeInfo";
+
 const RecipeDetails = ({
   product,
   addToLikeList,
