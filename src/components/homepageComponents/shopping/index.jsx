@@ -4,6 +4,7 @@ import Button from "components/Button";
 import { getShoppingList } from "../../../store/reducers";
 import * as actions from "../../../store/actions";
 import { connect } from "react-redux";
+import icons from "assets/img/icons.svg";
 
 const mapStateToProps = (state) => {
   return {
@@ -20,7 +21,7 @@ let Shopping = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
         removeFromShoppingList={removeFromShoppingList}
       />
       {shoppingList && shoppingList.length !== 0 && (
-        <Button>Confirm order</Button>
+        <Button icon={icons + "#icon-check"}>Confirm order</Button>
       )}
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 
-const Button = ({ handleClick, icons, children }) => {
+const Button = ({ handleClick, icon, children }) => {
   return (
     <button className="btn search__btn" onClick={handleClick}>
-      {icons && (
+      {icon && (
         <svg className="search__icon">
-          <use href={icons + "#icon-magnifying-glass"}></use>
+          <use href={icon}></use>
         </svg>
       )}
       <span>{children}</span>
