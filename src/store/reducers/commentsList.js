@@ -3,8 +3,14 @@ import { product } from "utils/schema";
 const comments = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_PRODUCTS_SUCCESS":
-      return retrieveComments(state, action);
+      const res = retrieveComments(state, action);
+      return res;
+    case "ADD_COMMENT":
+      console.log(action.response);
+      return { ...state, [action.productId]: [action.response] };
 
+    case "REMOVE_COMMENT":
+    case "EDIT_COMMENT":
     default:
       return state;
   }

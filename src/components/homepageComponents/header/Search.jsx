@@ -8,7 +8,10 @@ const Search = ({ searchProduct }) => {
   }, []);
   return (
     <form className="search">
-      <TextField ref={inputEl} />
+      <TextField
+        placeholder="Search over 1,000,000 products..."
+        ref={inputEl}
+      />
     </form>
   );
 };

@@ -10,6 +10,8 @@ import Category from "./Category";
 import * as actions from "store/actions";
 import icons from "assets/img/icons.svg";
 import List from "../results/List";
+import { useAuthenticated } from "customHooks";
+import CommentSection from "./CommentSection";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -54,7 +56,9 @@ let Product = ({
   addToLikeList,
   removeFromLikeList,
   clearSearchResults,
+  addComment,
 }) => {
+  const isAuthenticated = useAuthenticated();
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -105,6 +109,9 @@ let Product = ({
           removeIngredient={removeIngredient}
         />
         <Comments comments={comments} />
+        {isAuthenticated && (
+          <CommentSection addComment={addComment} product={product} />
+        )}
       </div>
     );
   }

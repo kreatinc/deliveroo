@@ -19,4 +19,11 @@ const getLikedProducts = () => {
   return apiClient.get("clients/profile");
 };
 
-export { userLogin, userRegister, userLogout, getLikedProducts };
+const addComment = (comment, productId) => {
+  return apiClient.post(
+    `clients/comments/${productId}`,
+    JSON.stringify({ comment, product_id: productId })
+  );
+};
+
+export { userLogin, userRegister, userLogout, getLikedProducts, addComment };

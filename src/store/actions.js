@@ -289,6 +289,21 @@ const userLogoutfailure = (error) => ({
   message: error.message,
 });
 
+const addComment = (comment, productId) => (dispatch) => {
+  return userServices
+    .addComment(comment, productId)
+    .then((response) => {
+      dispatch(receiveComment(response, productId));
+    })
+    .catch((error) => console.log("there was an error while adding a comment"));
+};
+
+const receiveComment = (response, productId) => ({
+  type: "ADD_COMMENT",
+  response: response.data.data,
+  productId,
+});
+
 export {
   fetchProducts,
   receiveProducts,
@@ -317,4 +332,5 @@ export {
   userLogoutRequest,
   userLogoutfailure,
   removeFromLikeList,
+  addComment,
 };
