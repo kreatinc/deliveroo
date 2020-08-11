@@ -1,6 +1,14 @@
 import React from "react";
+import { inputRef } from "./CommentSection";
 
-const Comment = ({ comment, currentUserId, product, removeComment }) => {
+const Comment = ({
+  comment,
+  currentUserId,
+  product,
+  removeComment,
+  setIsEditing,
+  setCommentId,
+}) => {
   return (
     <>
       <li>
@@ -18,8 +26,10 @@ const Comment = ({ comment, currentUserId, product, removeComment }) => {
         <button
           className="btn-options"
           onClick={() => {
-            window.confirm("are you sure you want to delete this comment ?");
-            removeComment(comment.id, product.id);
+            const confirm = window.confirm(
+              "are you sure you want to delete this comment ?"
+            );
+            if (confirm) removeComment(comment.id, product.id);
           }}
         >
           {" "}
@@ -27,7 +37,14 @@ const Comment = ({ comment, currentUserId, product, removeComment }) => {
         </button>
       )}
       {comment.client_id === currentUserId && (
-        <button className="btn-options" onClick={() => {}}>
+        <button
+          className="btn-options"
+          onClick={() => {
+            inputRef.current.value = comment.comment;
+            setIsEditing(true);
+            setCommentId(comment.id);
+          }}
+        >
           {" "}
           Edit
         </button>

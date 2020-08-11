@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Figure from "./Figure";
 import Details from "./Details";
 import Ingredients from "./Ingredients";
@@ -60,11 +60,15 @@ let Product = ({
   addComment,
   currentUserId,
   removeComment,
+  editComment,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [commentId, setCommentId] = useState(null);
 
   if (isSearching)
     return (
@@ -116,9 +120,18 @@ let Product = ({
           currentUserId={currentUserId}
           product={product}
           removeComment={removeComment}
+          setIsEditing={(val) => setIsEditing(val)}
+          setCommentId={(val) => setCommentId(val)}
         />
         {isAuthenticated && (
-          <CommentSection addComment={addComment} product={product} />
+          <CommentSection
+            addComment={addComment}
+            editComment={editComment}
+            product={product}
+            isEditing={isEditing}
+            commentId={commentId}
+            setIsEditing={(val) => setIsEditing(val)}
+          />
         )}
       </div>
     );

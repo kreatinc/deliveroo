@@ -1,16 +1,28 @@
 import React from "react";
 import TextField from "../header/TextField";
 import Button from "components/Button";
-
-const CommentSection = ({ addComment, product }) => {
-  const inputEl = React.createRef();
+const inputRef = React.createRef();
+const CommentSection = ({
+  addComment,
+  editComment,
+  product,
+  isEditing,
+  commentId,
+  setIsEditing,
+}) => {
   return (
     <form className="comment" onSubmit={(e) => e.preventDefault()}>
-      <TextField placeholder="Do you like this product ?" ref={inputEl} />
+      <TextField placeholder="Do you like this product ?" ref={inputRef} />
       <Button
         handleClick={() => {
-          addComment(inputEl.current.value, product.id);
-          inputEl.current.value = "";
+          console.log("is editing : ", isEditing);
+          if (isEditing) {
+            editComment(inputRef.current.value, product.id, commentId);
+            setIsEditing(false);
+          } else {
+            addComment(inputRef.current.value, product.id);
+          }
+          inputRef.current.value = "";
         }}
       >
         Add comment
@@ -20,3 +32,4 @@ const CommentSection = ({ addComment, product }) => {
 };
 
 export default CommentSection;
+export { inputRef };

@@ -305,7 +305,6 @@ const receiveComment = (response, productId) => ({
 });
 
 const removeComment = (commentId, productId) => (dispatch) => {
-  console.log("the comment to delete is : ", commentId);
   return userServices
     .removeComment(commentId)
     .then((response) => {
@@ -318,6 +317,24 @@ const removeComment = (commentId, productId) => (dispatch) => {
 
 const removeCommentSuccess = (response, productId, commentId) => ({
   type: "REMOVE_COMMENT",
+  productId,
+  commentId,
+});
+
+const editComment = (comment, productId, commentId) => (dispatch) => {
+  return userServices
+    .editComment(comment, commentId)
+    .then((response) => {
+      dispatch(receiveEditedComment(response, productId, commentId));
+    })
+    .catch((error) =>
+      console.log("there was an error while editing a comment")
+    );
+};
+
+const receiveEditedComment = (response, productId, commentId) => ({
+  type: "EDIT_COMMENT",
+  response: response.data.data,
   productId,
   commentId,
 });
@@ -352,4 +369,5 @@ export {
   removeFromLikeList,
   addComment,
   removeComment,
+  editComment,
 };

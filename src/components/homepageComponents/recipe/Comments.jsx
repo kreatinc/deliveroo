@@ -1,7 +1,14 @@
 import React from "react";
 import Comment from "./Comment";
 
-const Comments = ({ comments, currentUserId, product, removeComment }) => {
+const Comments = ({
+  comments,
+  currentUserId,
+  product,
+  removeComment,
+  setIsEditing,
+  setCommentId,
+}) => {
   return (
     <ul className="results__list">
       {comments &&
@@ -11,6 +18,8 @@ const Comments = ({ comments, currentUserId, product, removeComment }) => {
             product={product}
             removeComment={removeComment}
             currentUserId={currentUserId}
+            setIsEditing={setIsEditing}
+            setCommentId={setCommentId}
             key={i}
           />
         ))}

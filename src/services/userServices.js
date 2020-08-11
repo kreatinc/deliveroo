@@ -25,8 +25,15 @@ const addComment = (comment, productId) => {
     JSON.stringify({ comment, product_id: productId })
   );
 };
-const removeComment = (productId) => {
-  return apiClient.delete(`clients/comments/${productId}`);
+const removeComment = (commentId) => {
+  return apiClient.delete(`clients/comments/${commentId}`);
+};
+
+const editComment = (comment, commentId) => {
+  return apiClient.patch(
+    `clients/comments/${commentId}`,
+    JSON.stringify({ comment, product_id: commentId })
+  );
 };
 
 export {
@@ -36,4 +43,5 @@ export {
   getLikedProducts,
   addComment,
   removeComment,
+  editComment,
 };

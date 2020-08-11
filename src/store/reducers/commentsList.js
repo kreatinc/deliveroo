@@ -22,6 +22,17 @@ const comments = (state = {}, action) => {
       return nextState;
 
     case "EDIT_COMMENT":
+      const productWithNewComments = state[action.productId].map((comment) => {
+        if (comment.id === action.commentId) {
+          comment = action.response;
+        }
+        return comment;
+      });
+
+      return {
+        ...state,
+        [action.productId]: productWithNewComments,
+      };
     default:
       return state;
   }
