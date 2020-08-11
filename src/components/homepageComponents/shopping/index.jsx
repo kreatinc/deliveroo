@@ -11,7 +11,12 @@ const mapStateToProps = (state) => {
     shoppingList: getShoppingList(state),
   };
 };
-let Shopping = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
+let Shopping = ({
+  shoppingList,
+  getShoppingList,
+  removeFromShoppingList,
+  addCommand,
+}) => {
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>
@@ -21,7 +26,15 @@ let Shopping = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
         removeFromShoppingList={removeFromShoppingList}
       />
       {shoppingList && shoppingList.length !== 0 && (
-        <Button icon={icons + "#icon-check"}>Confirm order</Button>
+        <Button
+          icon={icons + "#icon-check"}
+          handleClick={() => {
+            console.log(shoppingList);
+            addCommand(shoppingList);
+          }}
+        >
+          Confirm order
+        </Button>
       )}
     </div>
   );

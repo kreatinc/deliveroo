@@ -3,6 +3,8 @@ import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
+import { v4 } from "uuid";
+import convertStringToArray from "utils/convertStringToArray";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
@@ -339,6 +341,55 @@ const receiveEditedComment = (response, productId, commentId) => ({
   commentId,
 });
 
+const addCommand = (shoppingList) => (dispatch) => {
+  let i = 1;
+  const quantities = {};
+  const description = {};
+  const price = {};
+
+  shoppingList
+    .sort((product1, product2) => {
+      return parseFloat(product1.details.id) - parseFloat(product2.details.id);
+    })
+    .map((product) => ({
+      product_id: product.details.id,
+      recipe: product.details.recipe,
+      price: product.details.price,
+    }))
+    .reduce((acc, curr) => {
+      if (curr.product_id === acc.product_id) {
+        quantities[curr.product_id] = ++i;
+        description[curr.product_id] = [
+          ...(description[curr.product_id] || []),
+          convertStringToArray(curr.recipe),
+        ];
+        price[curr.product_id] = curr.price;
+      } else {
+        i = 1;
+        quantities[curr.product_id] = 1;
+        description[curr.product_id] = convertStringToArray(curr.recipe);
+        price[curr.product_id] = curr.price;
+      }
+      return curr;
+    });
+
+  const command = {
+    quantity: quantities,
+    description,
+    price,
+  };
+
+  console.log("the command is  :", command);
+  // command["group_command_id"] = v4();
+  // return ProductServices.sendCommand(command)
+  //   .then((response) => dispatch(receiveCommand(response)))
+  //   .catch((error) => console.log("there was an error while adding a command"));
+};
+
+const receiveCommand = () => ({
+  type: "ADD_COMMAND_SUCCESS",
+});
+
 export {
   fetchProducts,
   receiveProducts,
@@ -370,4 +421,5 @@ export {
   addComment,
   removeComment,
   editComment,
+  addCommand,
 };

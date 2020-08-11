@@ -32,6 +32,10 @@ const unlikeProduct = (productId) => {
   return apiClient.post(`clients/${productId}/unlike`);
 };
 
+const sendCommand = (command) => {
+  return apiClient.post(`clients/command`, JSON.stringify(command));
+};
+
 export {
   fetchProducts,
   fetchProduct,
@@ -39,4 +43,5 @@ export {
   searchProduct,
   likeProduct,
   unlikeProduct,
+  sendCommand,
 };
