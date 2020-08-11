@@ -279,7 +279,7 @@ const logout = (history) => (dispatch) => {
 
 const userLogoutSuccess = (response) => ({
   type: "USER_LOGOUT_SUCCESS",
-  response,
+  response: response.data,
 });
 const userLogoutRequest = () => ({
   type: "USER_LOGOUT_REQUEST",

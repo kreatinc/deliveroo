@@ -1,4 +1,8 @@
-import { setUser, getUser, removeUser } from "utils/localStorageHelpers";
+import {
+  setUser,
+  removeUser,
+  removeShoppingList,
+} from "utils/localStorageHelpers";
 import apiClient from "services/apiClient";
 
 const user = (state = {}, action) => {
@@ -7,14 +11,12 @@ const user = (state = {}, action) => {
       apiClient.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${action.response.token}`;
-      console.log("the login response is :", action.response);
       return setUser(action.response);
     case "USER_LOGIN_FAILURE":
-      console.log("the error message is : ", action.message);
     case "USER_LOGOUT_SUCCESS":
+      removeShoppingList();
       return removeUser();
     case "USER_LOGOUT_REQUEST":
-      console.log("requesting");
     case "USER_LOGOUT_FAILURE":
       return removeUser();
     default:
@@ -23,9 +25,7 @@ const user = (state = {}, action) => {
 };
 // case "USER_LOGIN_REQUEST":
 // case "USER_REGISTER_SUCCESS":
-//   console.log("the login response is :", action.response);
 // case "USER_REGISTER_FAILURE":
-//   console.log("the error message is : ", action.message);
 // case "USER_REGISTER_REQUEST":
 
 export default user;

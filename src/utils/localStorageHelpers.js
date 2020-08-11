@@ -67,6 +67,14 @@ const addToShoppingList = (product) => {
   }
 };
 
+const removeShoppingList = () => {
+  try {
+    localStorage.removeItem("shoppingList");
+  } catch (error) {
+    console.log("there was an error while removing the shopping list");
+  }
+};
+
 const getLikedProducts = () => {
   try {
     const res = JSON.parse(localStorage.getItem("likesList"));
@@ -96,4 +104,5 @@ export {
   setUser,
   removeUser,
   getUser,
+  removeShoppingList,
 };
