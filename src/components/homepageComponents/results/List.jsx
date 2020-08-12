@@ -5,14 +5,17 @@ const List = ({ products, location, clearSearchResults }) => {
   return (
     <ul className="results__list">
       {products.map((product) => {
-        return (
-          <Product
-            product={product}
-            isActive={+currentProductId === product.id}
-            key={product.id}
-            clearSearchResults={clearSearchResults}
-          />
-        );
+        if (product.quantity > 0) {
+          return (
+            <Product
+              product={product}
+              isActive={+currentProductId === product.id}
+              key={product.id}
+              clearSearchResults={clearSearchResults}
+            />
+          );
+        }
+        return null;
       })}
     </ul>
   );

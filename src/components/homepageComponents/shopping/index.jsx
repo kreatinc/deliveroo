@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "./List";
 import Button from "components/Button";
 import { getShoppingList } from "../../../store/reducers";
@@ -17,20 +17,24 @@ let Shopping = ({
   removeFromShoppingList,
   addCommand,
 }) => {
+  //this state is to verify if there is an error in the unit number of the product
+  const [errors, setErrors] = useState(false);
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>
       <List
         shoppingList={shoppingList}
         getShoppingList={getShoppingList}
+        setErrors={(val) => setErrors(val)}
         removeFromShoppingList={removeFromShoppingList}
       />
       {shoppingList && shoppingList.length !== 0 && (
         <Button
           icon={icons + "#icon-check"}
           handleClick={() => {
-            console.log(shoppingList);
-            addCommand(shoppingList);
+            if (!errors) {
+              addCommand(shoppingList);
+            }
           }}
         >
           Confirm order

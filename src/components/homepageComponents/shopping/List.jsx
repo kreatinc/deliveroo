@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import Product from "./Product";
 
-let List = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
+let List = ({
+  shoppingList,
+  getShoppingList,
+  removeFromShoppingList,
+  setErrors,
+}) => {
   useEffect(() => {
     getShoppingList();
   }, []);
@@ -11,6 +16,7 @@ let List = ({ shoppingList, getShoppingList, removeFromShoppingList }) => {
         shoppingList.map((product) => (
           <Product
             product={product.details}
+            setErrors={setErrors}
             key={product.key}
             clickHandler={() => removeFromShoppingList(product.key)}
           />
