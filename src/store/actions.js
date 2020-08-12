@@ -127,10 +127,11 @@ const receiveSearchProducts = (response) => {
   };
 };
 
-const addToShoppingList = (product) => {
+const addToShoppingList = (product, quantity) => {
   return {
     type: "ADD_LIST_ITEM",
     product,
+    quantity,
   };
 };
 
@@ -341,6 +342,7 @@ const receiveEditedComment = (response, productId, commentId) => ({
 });
 
 const addCommand = (shoppingList) => (dispatch) => {
+  console.log(shoppingList);
   const command = retrieveCommandFromShoppingList(shoppingList);
 
   console.log("the command is  :", command);

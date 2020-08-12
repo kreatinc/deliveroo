@@ -635,10 +635,12 @@ html {
   position: relative;
 }
 .shopping__count {
+  margin-bottom: 10px;
   flex: 0 0 7.5rem;
   padding: 0.4rem 0.5rem;
-  border: 1px solid #f2efee;
-  border-radius: 3px;
+  border-style: solid;
+  border-color: crimson;
+  border-radius: 20px;
   margin-right: 2rem;
   cursor: pointer;
   display: flex;

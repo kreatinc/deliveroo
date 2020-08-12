@@ -55,11 +55,17 @@ const removeProductFromShoppingList = (id) => {
   }
 };
 
-const addToShoppingList = (product) => {
+const addToShoppingList = (product, quantity) => {
   const id = v4();
   try {
     const products = getShoppingList();
-    const newShoppingList = { ...products, [id]: product };
+    const newShoppingList = {
+      ...products,
+      [id]: {
+        ...product,
+        quantity,
+      },
+    };
     localStorage.setItem("shoppingList", JSON.stringify(newShoppingList));
     return getShoppingList();
   } catch (error) {

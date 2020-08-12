@@ -18,23 +18,19 @@ let Shopping = ({
   addCommand,
 }) => {
   //this state is to verify if there is an error in the unit number of the product
-  const [errors, setErrors] = useState(false);
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>
       <List
         shoppingList={shoppingList}
         getShoppingList={getShoppingList}
-        setErrors={(val) => setErrors(val)}
         removeFromShoppingList={removeFromShoppingList}
       />
       {shoppingList && shoppingList.length !== 0 && (
         <Button
           icon={icons + "#icon-check"}
           handleClick={() => {
-            if (!errors) {
-              addCommand(shoppingList);
-            }
+            addCommand(shoppingList);
           }}
         >
           Confirm order

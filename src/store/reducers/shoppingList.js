@@ -11,7 +11,7 @@ const shoppingList = (state = {}, action) => {
     case "GET_LIST_ITEM_FAILURE":
       return state;
     case "ADD_LIST_ITEM":
-      return addToShoppingList(action.product);
+      return addToShoppingList(action.product, action.quantity);
     case "REMOVE_LIST_ITEM":
       return removeProductFromShoppingList(action.id);
     default:
