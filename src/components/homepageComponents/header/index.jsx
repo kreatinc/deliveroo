@@ -43,6 +43,8 @@ let Header = ({
         />
       )}
 
+      {authenticated && <Button> My commands</Button>}
+
       {location.pathname === "/" && <Button>Login</Button>}
       {authenticated && (
         <Button
