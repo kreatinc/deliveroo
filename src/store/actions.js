@@ -341,15 +341,12 @@ const receiveEditedComment = (response, productId, commentId) => ({
   commentId,
 });
 
-const addCommand = (shoppingList) => (dispatch) => {
-  console.log(shoppingList);
-  const command = retrieveCommandFromShoppingList(shoppingList);
-
-  console.log("the command is  :", command);
-  // command["group_command_id"] = v4();
-  // return ProductServices.sendCommand(command)
-  //   .then((response) => dispatch(receiveCommand(response)))
-  //   .catch((error) => console.log("there was an error while adding a command"));
+const addCommand = (shoppingList, address) => (dispatch) => {
+  const command = retrieveCommandFromShoppingList(shoppingList, address);
+  console.log("the command is : ", command);
+  return ProductServices.sendCommand(command)
+    .then((response) => dispatch(receiveCommand(response)))
+    .catch((error) => console.log("there was an error while adding a command"));
 };
 
 const receiveCommand = () => ({

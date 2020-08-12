@@ -30,7 +30,8 @@ let Shopping = ({
         <Button
           icon={icons + "#icon-check"}
           handleClick={() => {
-            addCommand(shoppingList);
+            const address = prompt("Please enter your address");
+            addCommand(shoppingList, address);
           }}
         >
           Confirm order

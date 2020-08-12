@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Ingredient from "./Ingredient";
 import icons from "../../../assets/img/icons.svg";
 import { useFormik } from "formik";
@@ -12,7 +12,6 @@ const Ingredients = ({
   fetchProduct,
   removeIngredient,
 }) => {
-  const [errors, setErrors] = useState(false);
   maxQuantity = product.quantity;
   const formik = useFormik({
     initialValues: {

@@ -33,7 +33,7 @@ const unlikeProduct = (productId) => {
 };
 
 const sendCommand = (command) => {
-  return apiClient.post(`clients/command`, JSON.stringify(command));
+  return apiClient.post(`clients/commands`, JSON.stringify(command));
 };
 
 export {

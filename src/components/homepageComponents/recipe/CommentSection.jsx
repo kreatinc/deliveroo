@@ -15,7 +15,6 @@ const CommentSection = ({
       <TextField placeholder="Do you like this product ?" ref={inputRef} />
       <Button
         handleClick={() => {
-          console.log("is editing : ", isEditing);
           if (isEditing) {
             editComment(inputRef.current.value, product.id, commentId);
             setIsEditing(false);
