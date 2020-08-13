@@ -27,6 +27,7 @@ let Products = ({
   fetchProducts,
   match,
   location,
+  clearCommands,
   searchResults,
 }) => {
   useEffect(() => {
@@ -45,7 +46,14 @@ let Products = ({
   if (errorMessage) return <p>there was an error while fetching</p>;
   if (!match.params.category)
     return <h2 className="heading-2">Please select a category</h2>;
-  if (!searchResults) return <List products={products} location={location} />;
+  if (!searchResults)
+    return (
+      <List
+        products={products}
+        location={location}
+        clearCommands={clearCommands}
+      />
+    );
   return <h2 className="heading-2">Please select a product</h2>;
 };
 

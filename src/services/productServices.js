@@ -33,7 +33,19 @@ const unlikeProduct = (productId) => {
 };
 
 const sendCommand = (command) => {
-  return apiClient.post(`clients/commands`, JSON.stringify(command));
+  console.log({ command: command });
+  const req = JSON.stringify({
+    command: command,
+  });
+  return apiClient.post(`clients/commands`, req);
+};
+
+const getCommands = () => {
+  return apiClient.get("clients/commands");
+};
+
+const getCommand = (commandGroupId) => {
+  return apiClient.get(`client/commands/${commandGroupId}`);
 };
 
 export {
@@ -44,4 +56,6 @@ export {
   likeProduct,
   unlikeProduct,
   sendCommand,
+  getCommands,
+  getCommand,
 };

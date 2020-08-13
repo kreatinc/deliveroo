@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Item = ({ product, isActive, clearSearchResults }) => {
+const Item = ({ product, isActive, clearSearchResults, clearCommands }) => {
   return (
     <li>
       <Link
@@ -17,6 +17,9 @@ const Item = ({ product, isActive, clearSearchResults }) => {
           */
           if (clearSearchResults) {
             clearSearchResults();
+          }
+          if (clearCommands) {
+            clearCommands();
           }
         }}
       >

@@ -343,17 +343,30 @@ const receiveEditedComment = (response, productId, commentId) => ({
 
 const addCommand = (shoppingList, address) => (dispatch) => {
   const command = retrieveCommandFromShoppingList(shoppingList, address);
-  console.log("the command is : ", command);
   return ProductServices.sendCommand(command)
     .then((response) => dispatch(receiveCommand(response)))
     .catch((error) => console.log("there was an error while adding a command"));
 };
+
+const getCommands = () => (dispatch) => {
+  dispatch({ type: "FETCH_COMMANDS_REQUEST" });
+  return ProductServices.getCommands().then((response) => {
+    console.log("the response is : ", response);
+    dispatch({ type: "FETCH_COMMANDS_SUCCESS", response: response.data.data });
+  });
+};
+
+const clearCommands = () => ({
+  type: "CLEAR_COMMANDS_LIST",
+});
 
 const receiveCommand = () => ({
   type: "ADD_COMMAND_SUCCESS",
 });
 
 export {
+  clearCommands,
+  getCommands,
   fetchProducts,
   receiveProducts,
   fetchProductsFailure,

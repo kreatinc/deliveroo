@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "./Product";
-const List = ({ products, location, clearSearchResults }) => {
+const List = ({ products, location, clearSearchResults, clearCommands }) => {
   const currentProductId = location?.hash.replace("#", "") ?? 1;
   return (
     <ul className="results__list">
@@ -12,6 +12,7 @@ const List = ({ products, location, clearSearchResults }) => {
               isActive={+currentProductId === product.id}
               key={product.id}
               clearSearchResults={clearSearchResults}
+              clearCommands={clearCommands}
             />
           );
         }

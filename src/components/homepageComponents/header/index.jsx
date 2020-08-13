@@ -24,6 +24,8 @@ let Header = ({
   searchProduct,
   clearSearchResults,
   receiveUser,
+  getCommands,
+  clearCommands,
   logout,
 }) => {
   const { category } = useParams();
@@ -32,7 +34,11 @@ let Header = ({
   const authenticated = useAuthenticated();
   return (
     <header className="header">
-      <Logo logo={logo} clearSearchResults={clearSearchResults} />
+      <Logo
+        logo={logo}
+        clearSearchResults={clearSearchResults}
+        clearCommands={clearCommands}
+      />
       {category && <Search searchProduct={searchProduct} />}
       {authenticated && category && (
         <Likes
@@ -43,7 +49,19 @@ let Header = ({
         />
       )}
 
-      {authenticated && <Button> My commands</Button>}
+      {authenticated && category && (
+        <Button
+          handleClick={() => {
+            getCommands();
+            if (clearSearchResults) {
+              clearSearchResults();
+            }
+          }}
+        >
+          {" "}
+          My commands
+        </Button>
+      )}
 
       {location.pathname === "/" && <Button>Login</Button>}
       {authenticated && (

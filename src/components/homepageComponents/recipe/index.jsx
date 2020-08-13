@@ -29,8 +29,10 @@ const mapStateToProps = (state, ownProps) => {
       ownProps.location.hash.replace("#", "")
     ),
     searchResults: selectors.getSearchResults(state),
+    commands: selectors.getCommands(state),
     isSearching: selectors.getIsSearching(state),
     isFetching: selectors.getIsFetching(state, ownProps.match.params.category),
+    isFetchingCommands: selectors.getIsFetchingCommands(state),
     ingredients: selectors.getProductIngredients(
       state,
       ownProps.location.hash.replace("#", "")
@@ -61,6 +63,8 @@ let Product = ({
   currentUserId,
   removeComment,
   editComment,
+  isFetchingCommands,
+  commands,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
@@ -79,12 +83,32 @@ let Product = ({
       </div>
     );
 
+  if (isFetchingCommands) {
+    return (
+      <div className="load">
+        <svg>
+          <use href={icons + "#icon-cw"}></use>
+        </svg>
+      </div>
+    );
+  }
+
   if (searchResults) {
     return (
       <List
         clearSearchResults={clearSearchResults}
         products={searchResults}
       ></List>
+    );
+  }
+
+  if (commands.length > 0) {
+    return (
+      <ul>
+        {commands.map((command) => (
+          <li>{command.command_group_id}</li>
+        ))}
+      </ul>
     );
   }
 
