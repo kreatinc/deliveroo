@@ -3,7 +3,7 @@ import * as userServices from "services/userServices";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
-import { retrieveCommandFromShoppingList } from "utils/retrieveCommand";
+import { retrieveCommandFromShoppingList } from "utils";
 
 const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
@@ -222,13 +222,13 @@ const searchProduct = () => (dispatch) => {
 
 const login = (credentials, history) => (dispatch) => {
   dispatch(userLoginRequest());
-  return userServices.userLogin(credentials).then(
-    (response) => {
+  return userServices
+    .userLogin(credentials)
+    .then((response) => {
       dispatch(receiveUser(response));
       history.push("/home");
-    },
-    (error) => dispatch(userLoginfailure(error))
-  );
+    })
+    .catch((error) => `there was an error while loggin in ${error}`);
 };
 
 const receiveUser = (response) => ({
@@ -344,14 +344,15 @@ const receiveEditedComment = (response, productId, commentId) => ({
 const addCommand = (shoppingList, address) => (dispatch) => {
   const command = retrieveCommandFromShoppingList(shoppingList, address);
   return ProductServices.sendCommand(command)
-    .then((response) => dispatch(receiveCommand(response)))
+    .then((response) => {
+      dispatch(receiveCommand(response));
+    })
     .catch((error) => console.log("there was an error while adding a command"));
 };
 
 const getCommands = () => (dispatch) => {
   dispatch({ type: "FETCH_COMMANDS_REQUEST" });
   return ProductServices.getCommands().then((response) => {
-    console.log("the response is : ", response);
     dispatch({ type: "FETCH_COMMANDS_SUCCESS", response: response.data.data });
   });
 };
@@ -360,8 +361,9 @@ const clearCommands = () => ({
   type: "CLEAR_COMMANDS_LIST",
 });
 
-const receiveCommand = () => ({
+const receiveCommand = (response) => ({
   type: "ADD_COMMAND_SUCCESS",
+  response: response.data.data,
 });
 
 export {

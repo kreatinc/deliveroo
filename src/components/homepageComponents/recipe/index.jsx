@@ -12,6 +12,7 @@ import icons from "assets/img/icons.svg";
 import List from "../results/List";
 import { useAuthenticated } from "customHooks";
 import CommentSection from "./CommentSection";
+import CommandsList from "../shopping/CommandsList";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -103,13 +104,7 @@ let Product = ({
   }
 
   if (commands.length > 0) {
-    return (
-      <ul>
-        {commands.map((command) => (
-          <li>{command.command_group_id}</li>
-        ))}
-      </ul>
-    );
+    return <CommandsList commands={commands} />;
   }
 
   if (match.params.category && product === undefined) {

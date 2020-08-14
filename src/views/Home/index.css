@@ -366,10 +366,33 @@ html {
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
+.results__command-id {
+  font-size: 2rem;
+  color: #4a75ec;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
 
 .results__time {
   font-size: 1.3rem;
   color: #467e9e;
+  /* text-transform: uppercase; */
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  padding-top: 5px;
+}
+.results__state {
+  font-size: 1.3rem;
+  color: #f48982;
+  /* text-transform: uppercase; */
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  padding-top: 5px;
+}
+.results__address {
+  font-size: 1.3rem;
+  color: brown;
   /* text-transform: uppercase; */
   font-weight: 600;
   margin-bottom: 0.3rem;

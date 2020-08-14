@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import List from "./List";
 import Button from "components/Button";
 import { getShoppingList } from "../../../store/reducers";
@@ -17,7 +17,6 @@ let Shopping = ({
   removeFromShoppingList,
   addCommand,
 }) => {
-  //this state is to verify if there is an error in the unit number of the product
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>

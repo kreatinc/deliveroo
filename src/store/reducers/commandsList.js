@@ -5,7 +5,7 @@ const commands = (state = [], action) => {
     case "FETCH_COMMANDS_SUCCESS":
       return action.response;
     case "ADD_COMMAND_SUCCESS":
-      return state;
+      return action.response;
     case "CLEAR_COMMANDS_LIST":
       return [];
     default:
