@@ -4,11 +4,10 @@ import { groupItemsById } from "utils";
 
 const CommandsList = ({ commands }) => {
   const commandsGroupedById = groupItemsById(commands);
-  console.log("commandsGroupedById", commandsGroupedById);
   return (
     <ul className="results__list">
       {commandsGroupedById.map((command, i) => {
-        if (command.quantity > 0) {
+        if (command.quantitySum > 0) {
           return (
             <Command
               product={command.product}

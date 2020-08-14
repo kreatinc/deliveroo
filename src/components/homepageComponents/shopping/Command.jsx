@@ -21,24 +21,25 @@ const Command = ({
               Command id :{commandGroupId}
             </h4>
           }
-          <p className="results__author">Author :{author.name}</p>
+          <p className="results__author">Author : {author.name}</p>
           {product.map((product, i) => (
             <React.Fragment key={i}>
               <br />
-              <p className="results__author">Product :{product.title}</p>
+              <p className="results__author">Product : {product.title}</p>
               <p className="results__author">
                 Recipe :
                 {convertStringToArray(product.recipe).map((ingredient, i) =>
                   i === 0 ? `${ingredient}` : `,${ingredient}`
                 )}
               </p>
-              <p className="results__author">Description :{description[i]}</p>
+              <p className="results__author">Description : {description[i]}</p>
+              <p className="results__author">Quantity : {quantity[i]}</p>
               <br />
             </React.Fragment>
           ))}
-          <p className="results__state">Delivery state :{deliveryState}</p>
-          <p className="results__address">Delivery address :{address}</p>
-          <span className="results__time">Created at :{createdAt}</span>
+          <p className="results__state">Delivery state : {deliveryState}</p>
+          <p className="results__address">Delivery address : {address}</p>
+          <span className="results__time">Created at : {createdAt}</span>
         </div>
       </li>
       <br />

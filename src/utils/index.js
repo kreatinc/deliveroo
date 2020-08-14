@@ -26,7 +26,8 @@ export const groupItemsById = (commands) => {
         address: _.get(_.find(v, "address"), "address"),
         product: _.map(v, "product"),
         delivery_state: _.map(v, "delivery_state"),
-        quantity: _.map(v, "quantity").reduce((acc, curr) => acc + curr),
+        quantity: _.map(v, "quantity"),
+        quantitySum: _.map(v, "quantity").reduce((acc, curr) => acc + curr),
         price: _.map(v, "price").reduce((acc, curr) => acc + curr),
         description: _.map(v, "description"),
       };
