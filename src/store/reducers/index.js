@@ -35,10 +35,6 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-/* later we'll add a new reducer named 'productsByFilter' by which we will filter the products by the category
-and we'll create a list for each category
-*/
-
 export const getVisibleProducts = (state, category) => {
   if (category !== undefined) {
     const ids = fromCreateList.getProductsIds(state.idsByCategory[category]);
@@ -72,11 +68,15 @@ export const getShoppingList = (state) => {
 };
 
 export const getLikedProducts = (state) => {
-  return fromLikesList.getLikedListItems(state.likesList);
+  return fromLikesList.getLikedListItems(state.likesList.likes);
 };
 
 export const getIsProductLiked = (state, id) => {
-  return fromLikesList.isProductLiked(state.likesList, id);
+  return fromLikesList.getIsProductLiked(state.likesList.likes, id);
+};
+
+export const getIsFetchingLike = (state) => {
+  return fromLikesList.getIsFetchingLike(state.likesList.isFetching);
 };
 
 export const getProductIngredients = (state, id) => {

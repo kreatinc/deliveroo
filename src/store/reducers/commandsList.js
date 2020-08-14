@@ -19,7 +19,6 @@ const isFetching = (state = false, action) => {
     case "FETCH_COMMANDS_REQUEST":
       return true;
     case "FETCH_COMMANDS_SUCCESS":
-      return false;
     case "FETCH_COMMANDS_FAILURE":
       return false;
     default:

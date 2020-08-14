@@ -1,6 +1,6 @@
-import { product } from "utils/schema";
+import { combineReducers } from "@reduxjs/toolkit";
 
-const LikesList = (state = [], action) => {
+const likes = (state = [], action) => {
   switch (action.type) {
     case "ADD_TO_LIKE_LIST":
       return [...state, action.response];
@@ -18,7 +18,19 @@ const LikesList = (state = [], action) => {
   }
 };
 
-export default LikesList;
+const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case "LIKE_REQUEST":
+      return true;
+    case "LIKE_SUCCESS":
+    case "LIKE_FAILURE":
+      return false;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ isFetching, likes });
 
 export const getLikedListItems = (state) => {
   if (state) {
@@ -27,11 +39,11 @@ export const getLikedListItems = (state) => {
   }
 };
 
-export const isProductLiked = (state, id) => {
+export const getIsProductLiked = (state, id) => {
   const likes = Array.from(state).filter((product) => {
     return product.id === +id;
   });
-  const res = likes.length > 0 ? true : false;
-  console.log("the button is Liked value :", res);
-  return res;
+  return likes.length > 0 ? true : false;
 };
+
+export const getIsFetchingLike = (state) => state;

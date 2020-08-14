@@ -9,8 +9,7 @@ const RecipeInfo = ({ likes }) => {
       </svg>
       <span className="recipe__info-data recipe__info-data--people">4</span>
       <span className="recipe__info-text"> servings</span>
-
-      <LikesInfo likes={likes} />
+      {<LikesInfo likes={likes} />}
     </div>
   );
 };

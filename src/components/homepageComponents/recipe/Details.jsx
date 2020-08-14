@@ -10,6 +10,7 @@ const RecipeDetails = ({
   isLiked,
   likes,
   fetchProduct,
+  isFetching,
 }) => {
   return (
     <div className="recipe__details">
@@ -21,17 +22,19 @@ const RecipeDetails = ({
         <span className="recipe__info-text"> minutes</span>
       </div>
       <RecipeInfo likes={likes} />
-      <LikeButton
-        clickHandler={() => {
-          if (!isLiked) {
-            addToLikeList(product.id, isLiked);
-          } else {
-            removeFromLikeList(product.id, isLiked);
-          }
-          fetchProduct(product.id);
-        }}
-        isLiked={isLiked}
-      ></LikeButton>
+      {
+        <LikeButton
+          clickHandler={() => {
+            if (!isLiked) {
+              addToLikeList(product.id, isLiked);
+            } else {
+              removeFromLikeList(product.id, isLiked);
+            }
+            fetchProduct(product.id);
+          }}
+          isLiked={isLiked}
+        ></LikeButton>
+      }
     </div>
   );
 };

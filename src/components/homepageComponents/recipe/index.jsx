@@ -40,6 +40,7 @@ const mapStateToProps = (state, ownProps) => {
     ),
     categories: selectors.getCategories(state),
     currentUserId: selectors.getCurrentUser(state),
+    isFetchingLike: selectors.getIsFetchingLike(state),
   };
 };
 
@@ -66,6 +67,7 @@ let Product = ({
   editComment,
   isFetchingCommands,
   commands,
+  isFetchingLike,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
@@ -121,6 +123,7 @@ let Product = ({
         <Figure product={product} />
         <Details
           product={product}
+          isFetching={isFetchingLike}
           addToLikeList={addToLikeList}
           removeFromLikeList={removeFromLikeList}
           isLiked={isLiked}

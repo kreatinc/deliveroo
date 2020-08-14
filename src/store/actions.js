@@ -167,14 +167,25 @@ const getLikedProductsFailure = (error) => ({
 });
 
 const addToLikeList = (productId) => (dispatch) => {
+  dispatch({ type: "LIKE_REQUEST" });
   return ProductServices.likeProduct(productId).then(
-    (response) => dispatch(addToLikeListSuccess(response)),
-    (error) => console.log("there was an error while liking the product")
+    (response) => {
+      dispatch(addToLikeListSuccess(response));
+      dispatch({ type: "LIKE_SUCCESS" });
+    },
+    (error) => {
+      dispatch({ type: "LIKE_FAILURE" });
+      console.log("there was an error while liking the product");
+    }
   );
 };
 const removeFromLikeList = (productId) => (dispatch) => {
+  dispatch({ type: "LIKE_REQUEST" });
   return ProductServices.unlikeProduct(productId).then(
-    (response) => dispatch(removeFromLikeListSuccess(response)),
+    (response) => {
+      dispatch(removeFromLikeListSuccess(response));
+      dispatch({ type: "LIKE_SUCCESS" });
+    },
     (error) => console.log("there was an error while liking the product")
   );
 };
