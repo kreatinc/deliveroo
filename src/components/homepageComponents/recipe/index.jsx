@@ -13,6 +13,7 @@ import List from "../results/List";
 import { useAuthenticated } from "customHooks";
 import CommentSection from "./CommentSection";
 import CommandsList from "../shopping/CommandsList";
+import { getUser } from "utils/localStorageHelpers";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -67,11 +68,16 @@ let Product = ({
   editComment,
   isFetchingCommands,
   commands,
+  receiveUser,
   isFetchingLike,
 }) => {
   const isAuthenticated = useAuthenticated();
   useEffect(() => {
-    fetchCategories();
+    if (!isAuthenticated) {
+      const user = getUser();
+      receiveUser({ data: user });
+      fetchCategories();
+    }
   }, []);
 
   const [isEditing, setIsEditing] = useState(false);

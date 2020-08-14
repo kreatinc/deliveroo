@@ -1,8 +1,4 @@
-import {
-  setUser,
-  removeUser,
-  removeShoppingList,
-} from "utils/localStorageHelpers";
+import { setUser, removeUser } from "utils/localStorageHelpers";
 import apiClient from "services/apiClient";
 
 const user = (state = {}, action) => {

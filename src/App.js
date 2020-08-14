@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import routes from "./router";
 import {
   BrowserRouter as Router,
@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 import "react-bulma-components/lib";
 import history from "utils/history";
+import { useAuthenticated } from "customHooks";
+import { getUser } from "utils/localStorageHelpers";
+import { receiveUser } from "store/actions";
 
 function App() {
   return (
