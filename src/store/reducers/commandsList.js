@@ -1,4 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import { removeShoppingList } from "utils/localStorageHelpers";
 
 const commands = (state = [], action) => {
   switch (action.type) {

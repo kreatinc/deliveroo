@@ -270,6 +270,7 @@ const logout = (history) => (dispatch) => {
   return userServices.userLogout().then(
     (response) => {
       dispatch(userLogoutSuccess(response));
+      dispatch({ type: "CLEAR_SHOOPING_LIST" });
       history.push("/");
     },
     (error) => {
@@ -346,6 +347,7 @@ const addCommand = (shoppingList, address) => (dispatch) => {
   return ProductServices.sendCommand(command)
     .then((response) => {
       dispatch(receiveCommand(response));
+      dispatch({ type: "CLEAR_SHOOPING_LIST" });
     })
     .catch((error) => console.log("there was an error while adding a command"));
 };

@@ -14,7 +14,6 @@ const user = (state = {}, action) => {
       return setUser(action.response);
     case "USER_LOGIN_FAILURE":
     case "USER_LOGOUT_SUCCESS":
-      removeShoppingList();
       return removeUser();
     case "USER_LOGOUT_REQUEST":
     case "USER_LOGOUT_FAILURE":

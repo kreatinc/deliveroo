@@ -76,6 +76,7 @@ const addToShoppingList = (product, quantity) => {
 const removeShoppingList = () => {
   try {
     localStorage.removeItem("shoppingList");
+    return {};
   } catch (error) {
     console.log("there was an error while removing the shopping list");
   }
