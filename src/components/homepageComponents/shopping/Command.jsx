@@ -34,10 +34,13 @@ const Command = ({
               </p>
               <p className="results__author">Description : {description[i]}</p>
               <p className="results__author">Quantity : {quantity[i]}</p>
+              <p className="results__state">
+                Delivery state : {deliveryState[i]}
+              </p>
               <br />
             </React.Fragment>
           ))}
-          <p className="results__state">Delivery state : {deliveryState}</p>
+
           <p className="results__address">Delivery address : {address}</p>
           <span className="results__time">Created at : {createdAt}</span>
         </div>

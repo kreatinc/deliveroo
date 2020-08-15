@@ -1,12 +1,17 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { removeShoppingList } from "utils/localStorageHelpers";
 
 const commands = (state = [], action) => {
   switch (action.type) {
     case "FETCH_COMMANDS_SUCCESS":
       return action.response;
     case "ADD_COMMAND_SUCCESS":
-      return action.response;
+      return [
+        {
+          // NOTE: there will always be only one item inside the array in this case
+          ...action.response[0],
+          delivery_state: "waiting",
+        },
+      ];
     case "CLEAR_COMMANDS_LIST":
       return [];
     default:
