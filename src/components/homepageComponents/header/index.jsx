@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../../assets/img/logo.png";
 import Search from "./Search";
-import Likes from "./Likes";
+import Likes from "./LikesList";
 import Logo from "./Logo";
 
 import { connect } from "react-redux";
@@ -10,6 +10,8 @@ import * as actions from "../../../store/actions";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import Button from "components/Button";
 import { useAuthenticated } from "customHooks";
+import { Avatar } from "rsuite";
+import UserModal from "components/UserInformationModal";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,7 +34,7 @@ let Header = ({
   const { category } = useParams();
   const location = useLocation();
   const history = useHistory();
-  const authenticated = useAuthenticated();
+  const isAuthenticated = useAuthenticated();
   return (
     <header className="header">
       <Logo
@@ -41,7 +43,7 @@ let Header = ({
         clearCommands={clearCommands}
       />
       {category && <Search searchProduct={searchProduct} />}
-      {authenticated && category && (
+      {isAuthenticated && category && (
         <Likes
           getLikedProducts={getLikedProducts}
           likedProducts={likedProducts}
@@ -49,8 +51,8 @@ let Header = ({
           receiveUser={receiveUser}
         />
       )}
-
-      {authenticated && category && (
+      {isAuthenticated && <UserModal />}
+      {isAuthenticated && category && (
         <Button
           handleClick={() => {
             getCommands();
@@ -63,9 +65,8 @@ let Header = ({
           My commands
         </Button>
       )}
-
       {location.pathname === "/" && <Button>Login</Button>}
-      {authenticated && (
+      {isAuthenticated && (
         <Button
           handleClick={() => {
             logout(history);

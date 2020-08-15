@@ -25,6 +25,6 @@ const user = (state = {}, action) => {
 
 export default user;
 
-export const getUserId = (state) => {
-  return state.id;
+export const getUser = (state) => {
+  return state;
 };

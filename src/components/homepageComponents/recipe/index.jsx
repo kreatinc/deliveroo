@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Figure from "./Figure";
 import Details from "./Details";
-import Ingredients from "./Ingredients";
+import Ingredients from "./IngredientsList";
 import * as selectors from "store/reducers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Comments from "./Comments.jsx";
+import Comments from "./CommentsList.jsx";
 import Category from "./Category";
 import * as actions from "store/actions";
 import icons from "assets/img/icons.svg";
@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => {
       ownProps.location.hash.replace("#", "")
     ),
     categories: selectors.getCategories(state),
-    currentUserId: selectors.getCurrentUser(state),
+    currentUser: selectors.getCurrentUser(state),
     isFetchingLike: selectors.getIsFetchingLike(state),
   };
 };
@@ -63,7 +63,7 @@ let Product = ({
   removeFromLikeList,
   clearSearchResults,
   addComment,
-  currentUserId,
+  currentUser,
   removeComment,
   editComment,
   isFetchingCommands,
@@ -145,7 +145,7 @@ let Product = ({
         />
         <Comments
           comments={comments}
-          currentUserId={currentUserId}
+          currentUserId={currentUser.id}
           product={product}
           removeComment={removeComment}
           setIsEditing={(val) => setIsEditing(val)}

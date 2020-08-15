@@ -128,7 +128,7 @@ export const getIsSearching = (state) => {
 };
 
 export const getCurrentUser = (state) => {
-  return fromUser.getUserId(state.user);
+  return fromUser.getUser(state.user);
 };
 
 export const getCommands = (state) => {
