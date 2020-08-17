@@ -283,6 +283,7 @@ const logout = (history) => (dispatch) => {
       dispatch(userLogoutSuccess(response));
       dispatch({ type: "CLEAR_SHOOPING_LIST" });
       history.push("/");
+      window.location.reload();
     },
     (error) => {
       dispatch(userLogoutfailure(error));
