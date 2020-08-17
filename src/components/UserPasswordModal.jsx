@@ -13,7 +13,7 @@ import {
 } from "rsuite";
 import ErrorsContainer from "./ErrorsContainer";
 
-let UserPasswordForm = ({ updatePassword }) => {
+let UserPasswordForm = ({ updatePassword, closeModal }) => {
   const formik = useFormik({
     initialValues: {
       old_password: "",
@@ -27,7 +27,8 @@ let UserPasswordForm = ({ updatePassword }) => {
       );
 
       if (isSure) {
-        updatePassword(values.old_password, values.password);
+        updatePassword(values.old_password, values.password, values.confirm);
+        closeModal();
       }
     },
   });
@@ -116,7 +117,7 @@ const UserPasswordModal = () => {
           <Modal.Title>Edit Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UserPasswordForm />
+          <UserPasswordForm closeModal={() => setShow(false)} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setShow(false)} appearance="subtle">

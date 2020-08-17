@@ -8,17 +8,26 @@ const getUser = () => {
   }
   localStorage.getItem("user");
 };
-const setUser = ({ email, name, id, token }) => {
+const setUser = ({ email, name, phone, address, id, token }) => {
   try {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        email,
-        name,
-        id,
-        token,
-      })
-    );
+    const user = getUser();
+
+    if (user) {
+      const editedUser = { ...user, email, name, phone, address };
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    } else {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          email,
+          name,
+          phone,
+          address,
+          id,
+          token,
+        })
+      );
+    }
     return getUser();
   } catch {
     console.log("there was an error while trying to save the logged user");

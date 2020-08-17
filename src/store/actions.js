@@ -254,13 +254,22 @@ const userLoginfailure = (error) => ({
   message: error.message,
 });
 
-const updatePassword = (oldPassword, newPassword) => (dispatch) => {
+const updatePassword = (oldPassword, newPassword, confirmation) => (
+  dispatch
+) => {
   return userServices
-    .updatePassword(oldPassword, newPassword)
+    .updatePassword(oldPassword, newPassword, confirmation)
     .then((response) => console.log("password changed successfuly"))
     .catch((error) =>
       console.log("there was an error while changing the password")
     );
+};
+
+const updateUserInformation = (informations) => (dispatch) => {
+  return userServices
+    .updateUserInformation(informations)
+    .then((response) => dispatch(receiveUser(response.data)))
+    .catch((error) => console.log("there was an error while updating profile"));
 };
 
 const register = (credentials) => (dispatch) => {
@@ -424,4 +433,5 @@ export {
   editComment,
   addCommand,
   updatePassword,
+  updateUserInformation,
 };

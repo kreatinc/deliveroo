@@ -36,16 +36,21 @@ const editComment = (comment, commentId) => {
   );
 };
 
-const updatePassword = (oldPassword, newPassword) => {
+const updatePassword = (oldPassword, newPassword, confirmation) => {
+  console.log("confirmation", confirmation);
   return apiClient.patch(
     "/clients/password",
-    JSON.stringify({ old_password: oldPassword, new_password: newPassword })
+    JSON.stringify({
+      old_password: oldPassword,
+      new_password: newPassword,
+      new_password_confirmation: confirmation,
+    })
   );
 };
 
-// const updateUserInformation = () => {
-//   return apiClient.patch("clients/profile",JSON.stringify())
-// }
+const updateUserInformation = (informations) => {
+  return apiClient.patch("clients/profile", JSON.stringify(informations));
+};
 
 export {
   userLogin,
@@ -56,4 +61,5 @@ export {
   removeComment,
   editComment,
   updatePassword,
+  updateUserInformation,
 };

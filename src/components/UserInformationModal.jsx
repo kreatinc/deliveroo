@@ -21,11 +21,17 @@ const mapStateToProps = (state) => ({
   currentUser: selectors.getCurrentUser(state),
 });
 
-let UserInformationForm = ({ currentUser }) => {
+let UserInformationForm = ({
+  currentUser,
+  updateUserInformation,
+  closeModal,
+}) => {
   const formik = useFormik({
     initialValues: {
       firstName: currentUser.name,
       email: currentUser.email,
+      phone: currentUser.phone,
+      address: currentUser.address,
     },
     validate,
     onSubmit: (values) => {
@@ -34,7 +40,13 @@ let UserInformationForm = ({ currentUser }) => {
       );
 
       if (isSure) {
-        alert("yes");
+        updateUserInformation({
+          name: values.firstName,
+          email: values.email,
+          phone: values.phone,
+          address: values.address,
+        });
+        closeModal();
       }
     },
   });
@@ -64,6 +76,38 @@ let UserInformationForm = ({ currentUser }) => {
               autoFocus
               onChange={formik.handleChange}
               value={formik.values.firstName}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="phone"
+              label="Phone number"
+              name="phone"
+              autoComplete="phone"
+              autoFocus
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="address"
+              label="Address"
+              name="address"
+              autoComplete="address"
+              autoFocus
+              onChange={formik.handleChange}
+              value={formik.values.address}
             />
           </FormGroup>
 
@@ -117,7 +161,7 @@ const UserModal = () => {
           <Modal.Title>User informations</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UserInformationForm />
+          <UserInformationForm closeModal={() => setShow(false)} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setShow(false)} appearance="subtle">

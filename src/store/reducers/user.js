@@ -4,10 +4,11 @@ import apiClient from "services/apiClient";
 const user = (state = {}, action) => {
   switch (action.type) {
     case "USER_LOGIN_SUCCESS":
+      const res = { ...state, ...setUser(action.response) };
       apiClient.defaults.headers.common[
         "Authorization"
-      ] = `Bearer ${action.response.token}`;
-      return setUser(action.response);
+      ] = `Bearer ${res.token}`;
+      return res;
     case "USER_LOGIN_FAILURE":
     case "USER_LOGOUT_SUCCESS":
       return removeUser();
