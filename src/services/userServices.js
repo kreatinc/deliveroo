@@ -36,6 +36,17 @@ const editComment = (comment, commentId) => {
   );
 };
 
+const updatePassword = (oldPassword, newPassword) => {
+  return apiClient.patch(
+    "/clients/password",
+    JSON.stringify({ old_password: oldPassword, new_password: newPassword })
+  );
+};
+
+// const updateUserInformation = () => {
+//   return apiClient.patch("clients/profile",JSON.stringify())
+// }
+
 export {
   userLogin,
   userRegister,
@@ -44,4 +55,5 @@ export {
   addComment,
   removeComment,
   editComment,
+  updatePassword,
 };

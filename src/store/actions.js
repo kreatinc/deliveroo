@@ -254,6 +254,15 @@ const userLoginfailure = (error) => ({
   message: error.message,
 });
 
+const updatePassword = (oldPassword, newPassword) => (dispatch) => {
+  return userServices
+    .updatePassword(oldPassword, newPassword)
+    .then((response) => console.log("password changed successfuly"))
+    .catch((error) =>
+      console.log("there was an error while changing the password")
+    );
+};
+
 const register = (credentials) => (dispatch) => {
   dispatch(userRegisterRequest());
   return userServices.userRegister(credentials).then(
@@ -414,4 +423,5 @@ export {
   removeComment,
   editComment,
   addCommand,
+  updatePassword,
 };
