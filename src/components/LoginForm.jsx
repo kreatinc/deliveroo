@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { Button } from "rsuite";
 import { Grid, Box } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import ErrorsContainer from "./ErrorsContainer";
@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import * as actions from "../store/actions";
 
 let LoginForm = ({ classes, login }) => {
+  const [spinning, setSpinning] = useState(false);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -17,6 +18,7 @@ let LoginForm = ({ classes, login }) => {
     },
     validate,
     onSubmit: (values) => {
+      setSpinning(true);
       login(values, history);
     },
   });
@@ -53,16 +55,13 @@ let LoginForm = ({ classes, login }) => {
           value={formik.values.password}
         />
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          Sign In
-        </Button>
-        <Grid container>
+        {spinning && <Button type="submit" loading />}
+        {!spinning && (
+          <Button type="submit" variant="contained" appearance="primary">
+            Sign in
+          </Button>
+        )}
+        <Grid container style={{ marginTop: "5%" }}>
           <Grid item>
             <Link to="/register" variant="body2">
               {"Don't have an account? Sign Up"}

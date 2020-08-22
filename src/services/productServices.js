@@ -3,7 +3,6 @@ import apiClient from "./apiClient";
 const fetchProducts = (link, category) => {
   if (link !== null) {
     const res = link.replace("http://localhost:8000/api", "");
-    console.log("the res is the following :", res);
     return apiClient.get(res);
   }
   if (category) {
@@ -33,7 +32,6 @@ const unlikeProduct = (productId) => {
 };
 
 const sendCommand = (command) => {
-  console.log({ command: command });
   const req = JSON.stringify({
     command: command,
   });

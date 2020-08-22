@@ -217,7 +217,6 @@ const removeFromLikeList = (productId) => (dispatch) => {
 };
 
 const addToLikeListSuccess = (response) => {
-  console.log("liking:", response);
   return {
     type: "ADD_TO_LIKE_LIST",
     response: response.data.data,
@@ -225,7 +224,6 @@ const addToLikeListSuccess = (response) => {
 };
 
 const removeFromLikeListSuccess = (response) => {
-  console.log("unliking:", response);
   return {
     type: "REMOVE_FROM_LIKE_LIST",
     response: response.data.data,
@@ -266,7 +264,9 @@ const login = (credentials, history) => (dispatch) => {
       history.push("/home");
       dispatch(addNotification("You're logged in"));
     })
-    .catch((error) => dispatch(addNotification(error)));
+    .catch((error) =>
+      dispatch(addNotification("There was an error while logging in"))
+    );
 };
 
 const receiveUser = (response) => ({

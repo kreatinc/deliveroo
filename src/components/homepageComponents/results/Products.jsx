@@ -31,9 +31,7 @@ let Products = ({
   searchResults,
 }) => {
   useEffect(() => {
-    fetchProducts(null, match.params.category).then(() =>
-      console.log("done !")
-    );
+    fetchProducts(null, match.params.category);
   }, [match.params.category, fetchProducts]);
   if (isFetching)
     return (

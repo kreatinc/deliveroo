@@ -9,7 +9,6 @@ const likes = (state = [], action) => {
     case "GET_LIKE_LIST_SUCCESS":
       return action.response;
     case "GET_LIKE_LIST_REQUEST":
-      console.log("requesting");
     case "GET_LIKE_LIST_FAILURE":
       return state;
 

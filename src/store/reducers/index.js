@@ -110,11 +110,10 @@ export const getCategories = (state) => {
 };
 
 export const getSearchResults = (state) => {
-  console.log(state.searchResultsList.searchResults);
   const ids = fromSearchResultsList.getResultsIds(
     state.searchResultsList.searchResults
   );
-  console.log("the ids are the following :", ids);
+
   if (ids) {
     return ids.map((id) =>
       fromSearchResultsList.getResult(state.searchResultsList.searchResults, id)
@@ -134,7 +133,6 @@ export const getCurrentUser = (state) => {
 };
 
 export const getCommands = (state) => {
-  console.log("the state is : ", state);
   return fromCommandsList.getCommands(state.commandsList.commands);
 };
 

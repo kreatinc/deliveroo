@@ -37,7 +37,6 @@ const editComment = (comment, commentId) => {
 };
 
 const updatePassword = (oldPassword, newPassword, confirmation) => {
-  console.log("confirmation", confirmation);
   return apiClient.patch(
     "/clients/password",
     JSON.stringify({

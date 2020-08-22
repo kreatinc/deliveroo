@@ -47,8 +47,9 @@ let Header = ({
     if (notifications) {
       notifications.map((notification) => {
         Notification.info({
-          title: "Notify",
-          duration: 2000,
+          title: "Notification",
+          placement: "bottomStart",
+          duration: 3000,
           description: notification,
         });
       });
