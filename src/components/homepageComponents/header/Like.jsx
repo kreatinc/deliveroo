@@ -2,12 +2,13 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-const Like = ({ product }) => {
+const Like = ({ product, clearCommands }) => {
   return (
     <li>
       <Link
         className="likes__link"
         to={"/home/" + product.category.title + "#" + product.id}
+        onClick={() => clearCommands()}
       >
         <figure className="likes__fig">
           <img src={product.image} alt={product.description} />

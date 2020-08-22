@@ -9,20 +9,30 @@ const fetchProducts = (paginationLink = null, category = "others") => (
   dispatch
 ) => {
   dispatch(fetchProductsRequest(category));
-  return ProductServices.fetchProducts(paginationLink, category).then(
-    (response) => {
+  return ProductServices.fetchProducts(paginationLink, category)
+    .then((response) => {
       dispatch(receiveProducts(response, category));
-    },
-    (error) => dispatch(fetchProductsFailure(error, category))
-  );
+      dispatch(addNotification("Products fetched successfuly"));
+    })
+    .catch((error) => {
+      dispatch(fetchProductsFailure(error, category));
+      dispatch(
+        addNotification("There was an error while fetching the products")
+      );
+    });
 };
 
 const fetchCategories = () => (dispatch) => {
-  return ProductServices.fetchCategories().then((response) =>
-    dispatch(receiveCategories(response), (error) =>
-      console.log("there an error while fetching the categories")
-    )
-  );
+  return ProductServices.fetchCategories()
+    .then((response) => {
+      dispatch(receiveCategories(response));
+      dispatch(addNotification("Categories fetched successfuly"));
+    })
+    .catch((error) =>
+      dispatch(
+        addNotification("There was an error while fetching the categories")
+      )
+    );
 };
 
 const receiveCategories = (response) => {
@@ -34,11 +44,15 @@ const receiveCategories = (response) => {
 
 const fetchProduct = (productId) => (dispatch) => {
   dispatch(fetchProductRequest());
-  return ProductServices.fetchProduct(productId).then((response) =>
-    dispatch(receiveProduct(response), (error) =>
-      dispatch(fetchProductFailure(error))
-    )
-  );
+  return ProductServices.fetchProduct(productId)
+    .then((response) => {
+      dispatch(receiveProduct(response));
+      dispatch(addNotification("Product fetched successfuly"));
+    })
+    .catch((error) => {
+      dispatch(fetchProductFailure(error));
+      addNotification("There was an error while fetching the product");
+    });
 };
 
 // const receiveProductLikes = (response) => {};
@@ -57,6 +71,11 @@ const receiveProduct = (response) => {
     response: normalize(response.data.data, product),
   };
 };
+
+const addNotification = (notification) => ({
+  type: "ADD_NOTIFICATION",
+  notification,
+});
 
 // const fetchProductCommentsFailure = (error) => {
 //   return {
@@ -143,13 +162,18 @@ const getShoppingList = () => {
 
 const getLikedProducts = () => (dispatch) => {
   dispatch(getLikedProductsRequest());
-  return userServices.getLikedProducts().then(
-    (response) => {
-      console.log("the like products response :", response);
+  return userServices
+    .getLikedProducts()
+    .then((response) => {
       dispatch(getLikedProductsSuccess(response));
-    },
-    (error) => dispatch(getLikedProductsFailure(error))
-  );
+      dispatch(addNotification("Liked products fetched successfuly"));
+    })
+    .catch((error) => {
+      dispatch(getLikedProductsFailure(error));
+      dispatch(
+        addNotification("There was an error while fetching the liked products")
+      );
+    });
 };
 const getLikedProductsRequest = () => ({
   type: "GET_LIKE_LIST_REQUEST",
@@ -168,26 +192,28 @@ const getLikedProductsFailure = (error) => ({
 
 const addToLikeList = (productId) => (dispatch) => {
   dispatch({ type: "LIKE_REQUEST" });
-  return ProductServices.likeProduct(productId).then(
-    (response) => {
+  return ProductServices.likeProduct(productId)
+    .then((response) => {
       dispatch(addToLikeListSuccess(response));
       dispatch({ type: "LIKE_SUCCESS" });
-    },
-    (error) => {
+      dispatch(addNotification("Product liked successfuly"));
+    })
+    .catch((error) => {
       dispatch({ type: "LIKE_FAILURE" });
-      console.log("there was an error while liking the product");
-    }
-  );
+      dispatch(addNotification("There was an error while liking the product"));
+    });
 };
 const removeFromLikeList = (productId) => (dispatch) => {
   dispatch({ type: "LIKE_REQUEST" });
-  return ProductServices.unlikeProduct(productId).then(
-    (response) => {
+  return ProductServices.unlikeProduct(productId)
+    .then((response) => {
       dispatch(removeFromLikeListSuccess(response));
       dispatch({ type: "LIKE_SUCCESS" });
-    },
-    (error) => console.log("there was an error while liking the product")
-  );
+      dispatch(addNotification("Product disliked successfuly"));
+    })
+    .catch((error) =>
+      dispatch(addNotification("There was an error while liking the product"))
+    );
 };
 
 const addToLikeListSuccess = (response) => {
@@ -238,8 +264,9 @@ const login = (credentials, history) => (dispatch) => {
     .then((response) => {
       dispatch(receiveUser(response));
       history.push("/home");
+      dispatch(addNotification("You're logged in"));
     })
-    .catch((error) => `there was an error while loggin in ${error}`);
+    .catch((error) => dispatch(addNotification(error)));
 };
 
 const receiveUser = (response) => ({
@@ -259,27 +286,42 @@ const updatePassword = (oldPassword, newPassword, confirmation) => (
 ) => {
   return userServices
     .updatePassword(oldPassword, newPassword, confirmation)
-    .then((response) => console.log("password changed successfuly"))
-    .catch((error) =>
-      console.log("there was an error while changing the password")
-    );
+    .then((response) => {
+      dispatch(addNotification("Password updated successfuly"));
+    })
+    .catch((error) => {
+      dispatch(
+        addNotification("There was an error while changing the password")
+      );
+    });
 };
 
 const updateUserInformation = (informations) => (dispatch) => {
   return userServices
     .updateUserInformation(informations)
-    .then((response) => dispatch(receiveUser(response.data)))
-    .catch((error) => console.log("there was an error while updating profile"));
+    .then((response) => {
+      dispatch(receiveUser(response.data));
+      dispatch(addNotification("Informations updated successfuly"));
+    })
+    .catch((error) => {
+      dispatch(addNotification("There was an error while updating profile"));
+    });
 };
 
 const register = (credentials) => (dispatch) => {
   dispatch(userRegisterRequest());
-  return userServices.userRegister(credentials).then(
-    (response) => {
+  return userServices
+    .userRegister(credentials)
+    .then((response) => {
       dispatch(userRegisterSuccess(response));
-    },
-    (error) => dispatch(userRegisterfailure(error))
-  );
+      dispatch(addNotification("Your account has been created"));
+    })
+    .catch((error) => {
+      dispatch(userRegisterfailure(error));
+      dispatch(
+        addNotification("There was an error while creating your account")
+      );
+    });
 };
 
 const userRegisterSuccess = (response) => ({
@@ -296,18 +338,20 @@ const userRegisterfailure = (error) => ({
 
 const logout = (history) => (dispatch) => {
   userLogoutRequest();
-  return userServices.userLogout().then(
-    (response) => {
+  return userServices
+    .userLogout()
+    .then((response) => {
       dispatch(userLogoutSuccess(response));
       dispatch({ type: "CLEAR_SHOOPING_LIST" });
       history.push("/");
+      dispatch(addNotification("You're logged out"));
       window.location.reload();
-    },
-    (error) => {
+    })
+    .catch((error) => {
+      dispatch(addNotification("There was an error while logging out"));
       dispatch(userLogoutfailure(error));
       history.push("/");
-    }
-  );
+    });
 };
 
 const userLogoutSuccess = (response) => ({
@@ -327,8 +371,11 @@ const addComment = (comment, productId) => (dispatch) => {
     .addComment(comment, productId)
     .then((response) => {
       dispatch(receiveComment(response, productId));
+      dispatch(addNotification("Comment added successfuly"));
     })
-    .catch((error) => console.log("there was an error while adding a comment"));
+    .catch((error) => {
+      dispatch(addNotification("There was an error while adding the comment"));
+    });
 };
 
 const receiveComment = (response, productId) => ({
@@ -342,9 +389,10 @@ const removeComment = (commentId, productId) => (dispatch) => {
     .removeComment(commentId)
     .then((response) => {
       dispatch(removeCommentSuccess(response, productId, commentId));
+      dispatch(addNotification("Comment removed successfuly"));
     })
     .catch((error) =>
-      console.log("there was an error while removing the comment")
+      dispatch(addNotification("There was an error while removing the comment"))
     );
 };
 
@@ -359,9 +407,10 @@ const editComment = (comment, productId, commentId) => (dispatch) => {
     .editComment(comment, commentId)
     .then((response) => {
       dispatch(receiveEditedComment(response, productId, commentId));
+      dispatch(addNotification("Comment edited successfuly"));
     })
     .catch((error) =>
-      console.log("there was an error while editing a comment")
+      dispatch(addNotification("There was an error while editing the comment"))
     );
 };
 
@@ -378,15 +427,29 @@ const addCommand = (shoppingList, address) => (dispatch) => {
     .then((response) => {
       dispatch(receiveCommand(response));
       dispatch({ type: "CLEAR_SHOOPING_LIST" });
+      dispatch(addNotification("Command added successfuly"));
     })
-    .catch((error) => console.log("there was an error while adding a command"));
+    .catch((error) => {
+      dispatch(addNotification("There was an error while adding a command"));
+    });
 };
 
 const getCommands = () => (dispatch) => {
   dispatch({ type: "FETCH_COMMANDS_REQUEST" });
-  return ProductServices.getCommands().then((response) => {
-    dispatch({ type: "FETCH_COMMANDS_SUCCESS", response: response.data.data });
-  });
+  return ProductServices.getCommands()
+    .then((response) => {
+      dispatch({
+        type: "FETCH_COMMANDS_SUCCESS",
+        response: response.data.data,
+      });
+      dispatch(addNotification("Commands fetched successfuly"));
+    })
+    .catch(() => {
+      dispatch({ type: "FETCH_COMMANDS_FAILURE" });
+      dispatch(
+        addNotification("There was an error while fetching the commands")
+      );
+    });
 };
 
 const clearCommands = () => ({

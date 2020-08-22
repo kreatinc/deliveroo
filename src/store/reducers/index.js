@@ -10,6 +10,7 @@ import categoriesList, * as fromCategoriesList from "./categoriesList";
 import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
 import user, * as fromUser from "./user";
 import commandsList, * as fromCommandsList from "./commandsList";
+import notifications, * as fromNotifications from "./notifications";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   categoriesList,
   pagination,
   searchResultsList,
+  notifications,
   user,
 });
 
@@ -138,4 +140,8 @@ export const getCommands = (state) => {
 
 export const getIsFetchingCommands = (state) => {
   return fromCommandsList.getIsFetchingCommands(state.commandsList.isFetching);
+};
+
+export const getNotifications = (state) => {
+  return fromNotifications.getNotifications(state.notifications);
 };

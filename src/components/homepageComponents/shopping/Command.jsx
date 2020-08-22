@@ -26,6 +26,13 @@ const Command = ({
             <React.Fragment key={i}>
               <br />
               <p className="results__author">Product : {product.title}</p>
+              <figure className="category__fig">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="category__img"
+                />
+              </figure>
               <p className="results__author">
                 Recipe :
                 {convertStringToArray(product.recipe).map((ingredient, i) =>

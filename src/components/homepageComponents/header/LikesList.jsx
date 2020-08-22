@@ -10,6 +10,7 @@ const Likes = ({
   receiveUser,
   getLikedProducts,
   fetchProduct,
+  clearCommands,
 }) => {
   const authenticated = useAuthenticated();
   useEffect(() => {
@@ -35,6 +36,7 @@ const Likes = ({
                 product={product.details}
                 fetchProduct={fetchProduct}
                 key={product.details.id}
+                clearCommands={clearCommands}
               />
             ))}
         </ul>
