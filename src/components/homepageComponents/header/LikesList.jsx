@@ -16,7 +16,7 @@ const Likes = ({
   useEffect(() => {
     if (!authenticated) {
       const user = getUser();
-      if (user) {
+      if (user.email) {
         receiveUser({ data: user });
         getLikedProducts();
       }
