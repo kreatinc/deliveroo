@@ -1,19 +1,22 @@
 import {
   getShoppingList,
   addToShoppingList,
-  removeItemFromShoppingList,
+  removeProductFromShoppingList,
+  removeShoppingList,
 } from "utils/localStorageHelpers";
 
 const shoppingList = (state = {}, action) => {
   switch (action.type) {
-    case "GET_LIST_ITEMS_REQUEST":
+    case "GET_LIST_ITEMS":
       return getShoppingList();
     case "GET_LIST_ITEM_FAILURE":
       return state;
     case "ADD_LIST_ITEM":
-      return addToShoppingList(action.product);
+      return addToShoppingList(action.product, action.quantity);
     case "REMOVE_LIST_ITEM":
-      return removeItemFromShoppingList(action.id);
+      return removeProductFromShoppingList(action.id);
+    case "CLEAR_SHOOPING_LIST":
+      return removeShoppingList();
     default:
       return state;
   }

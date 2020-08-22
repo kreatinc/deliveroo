@@ -1,12 +1,8 @@
 import apiClient from "./apiClient";
-
+//what does link mean 🤦🏻‍♂️
 const fetchProducts = (link, category) => {
-  console.log("the link is :", link);
-  console.log("the category is :", category);
-  console.log("the link is :", link);
   if (link !== null) {
     const res = link.replace("http://localhost:8000/api", "");
-    console.log("the res is the following :", res);
     return apiClient.get(res);
   }
   if (category) {
@@ -27,4 +23,37 @@ const searchProduct = (productName) => {
   return apiClient.get(`/products?title=${productName}`);
 };
 
-export { fetchProducts, fetchProduct, fetchCategories, searchProduct };
+const likeProduct = (productId) => {
+  return apiClient.post(`clients/${productId}/like`);
+};
+
+const unlikeProduct = (productId) => {
+  return apiClient.post(`clients/${productId}/unlike`);
+};
+
+const sendCommand = (command) => {
+  const req = JSON.stringify({
+    command: command,
+  });
+  return apiClient.post(`clients/commands`, req);
+};
+
+const getCommands = () => {
+  return apiClient.get("clients/commands");
+};
+
+const getCommand = (commandGroupId) => {
+  return apiClient.get(`client/commands/${commandGroupId}`);
+};
+
+export {
+  fetchProducts,
+  fetchProduct,
+  fetchCategories,
+  searchProduct,
+  likeProduct,
+  unlikeProduct,
+  sendCommand,
+  getCommands,
+  getCommand,
+};

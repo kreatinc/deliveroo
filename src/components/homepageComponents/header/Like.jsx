@@ -1,20 +1,14 @@
 import React from "react";
-import { fetchProduct } from "store/actions";
-import { useParams } from "react-router-dom";
 
-const Like = ({ product }) => {
-  const { category } = useParams();
-  console.log("the category is the foo-llowing : ", category);
+import { Link } from "react-router-dom";
+
+const Like = ({ product, clearCommands }) => {
   return (
     <li>
-      <a
+      <Link
         className="likes__link"
-        href={
-          category !== undefined
-            ? "#" + product.id
-            : "/home/" + product.category.title + "#" + product.id
-        }
-        onClick={() => fetchProduct(product.id)}
+        to={"/home/" + product.category.title + "#" + product.id}
+        onClick={() => clearCommands()}
       >
         <figure className="likes__fig">
           <img src={product.image} alt={product.description} />
@@ -23,7 +17,7 @@ const Like = ({ product }) => {
           <h4 className="likes__name">{product.title}</h4>
           <p className="likes__author">{product.company.title}</p>
         </div>
-      </a>
+      </Link>
     </li>
   );
 };

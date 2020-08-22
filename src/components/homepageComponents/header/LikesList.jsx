@@ -1,10 +1,26 @@
 import React, { useEffect } from "react";
 import icons from "../../../assets/img/icons.svg";
 import Like from "./Like";
+import { useAuthenticated } from "customHooks";
 
-const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
+import { getUser } from "utils/localStorageHelpers";
+
+const Likes = ({
+  likedProducts,
+  receiveUser,
+  getLikedProducts,
+  fetchProduct,
+  clearCommands,
+}) => {
+  const authenticated = useAuthenticated();
   useEffect(() => {
-    getLikedProducts();
+    if (!authenticated) {
+      const user = getUser();
+      if (user.email) {
+        receiveUser({ data: user });
+        getLikedProducts();
+      }
+    }
   }, []);
 
   return (
@@ -17,11 +33,12 @@ const Likes = ({ likedProducts, getLikedProducts, fetchProduct }) => {
       <div className="likes__panel">
         <ul className="likes__list">
           {likedProducts &&
-            likedProducts.map((item) => (
+            likedProducts.map((product) => (
               <Like
-                item={item.details}
+                product={product.details}
                 fetchProduct={fetchProduct}
-                key={item.details.id}
+                key={product.details.id}
+                clearCommands={clearCommands}
               />
             ))}
         </ul>

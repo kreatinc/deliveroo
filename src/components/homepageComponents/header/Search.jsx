@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import TextField from "./TextField";
 const Search = ({ searchProduct }) => {
   const inputEl = React.createRef();
   useEffect(() => {
@@ -8,12 +8,9 @@ const Search = ({ searchProduct }) => {
   }, []);
   return (
     <form className="search">
-      <input
-        ref={inputEl}
-        type="text"
-        className="search__field"
-        id="search__field"
+      <TextField
         placeholder="Search over 1,000,000 products..."
+        ref={inputEl}
       />
     </form>
   );

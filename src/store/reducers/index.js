@@ -8,6 +8,9 @@ import convertStringToArray from "utils/convertStringToArray";
 import pagination, * as fromPagination from "./pagination";
 import categoriesList, * as fromCategoriesList from "./categoriesList";
 import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
+import user, * as fromUser from "./user";
+import commandsList, * as fromCommandsList from "./commandsList";
+import notifications, * as fromNotifications from "./notifications";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -24,16 +27,15 @@ const rootReducer = combineReducers({
   shoppingList,
   likesList,
   commentsList,
+  commandsList,
   categoriesList,
   pagination,
   searchResultsList,
+  notifications,
+  user,
 });
 
 export default rootReducer;
-
-/* later we'll add a new reducer named 'productsByFilter' by which we will filter the products by the category
-and we'll create a list for each category
-*/
 
 export const getVisibleProducts = (state, category) => {
   if (category !== undefined) {
@@ -68,11 +70,15 @@ export const getShoppingList = (state) => {
 };
 
 export const getLikedProducts = (state) => {
-  return fromLikesList.getLikedListItems(state.likesList);
+  return fromLikesList.getLikedListItems(state.likesList.likes);
 };
 
 export const getIsProductLiked = (state, id) => {
-  return fromLikesList.isProductLiked(state.likesList, id);
+  return fromLikesList.getIsProductLiked(state.likesList.likes, id);
+};
+
+export const getIsFetchingLike = (state) => {
+  return fromLikesList.getIsFetchingLike(state.likesList.isFetching);
 };
 
 export const getProductIngredients = (state, id) => {
@@ -104,11 +110,10 @@ export const getCategories = (state) => {
 };
 
 export const getSearchResults = (state) => {
-  console.log(state.searchResultsList.searchResults);
   const ids = fromSearchResultsList.getResultsIds(
     state.searchResultsList.searchResults
   );
-  console.log("the ids are the following :", ids);
+
   if (ids) {
     return ids.map((id) =>
       fromSearchResultsList.getResult(state.searchResultsList.searchResults, id)
@@ -121,4 +126,20 @@ export const getIsSearching = (state) => {
   return fromSearchResultsList.getIsSearching(
     state.searchResultsList.isSearching
   );
+};
+
+export const getCurrentUser = (state) => {
+  return fromUser.getUser(state.user);
+};
+
+export const getCommands = (state) => {
+  return fromCommandsList.getCommands(state.commandsList.commands);
+};
+
+export const getIsFetchingCommands = (state) => {
+  return fromCommandsList.getIsFetchingCommands(state.commandsList.isFetching);
+};
+
+export const getNotifications = (state) => {
+  return fromNotifications.getNotifications(state.notifications);
 };

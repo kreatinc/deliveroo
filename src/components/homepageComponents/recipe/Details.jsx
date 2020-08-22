@@ -2,7 +2,16 @@ import React from "react";
 import icons from "../../../assets/img/icons.svg";
 import LikeButton from "./LikeButton";
 import RecipeInfo from "./RecipeInfo";
-const RecipeDetails = ({ product, addToLikeList, isLiked, likes }) => {
+
+const RecipeDetails = ({
+  product,
+  addToLikeList,
+  removeFromLikeList,
+  isLiked,
+  likes,
+  fetchProduct,
+  isFetching,
+}) => {
   return (
     <div className="recipe__details">
       <div className="recipe__info">
@@ -13,12 +22,19 @@ const RecipeDetails = ({ product, addToLikeList, isLiked, likes }) => {
         <span className="recipe__info-text"> minutes</span>
       </div>
       <RecipeInfo likes={likes} />
-      <LikeButton
-        clickHandler={() => {
-          addToLikeList(product);
-        }}
-        isLiked={isLiked}
-      ></LikeButton>
+      {
+        <LikeButton
+          clickHandler={() => {
+            if (!isLiked) {
+              addToLikeList(product.id, isLiked);
+            } else {
+              removeFromLikeList(product.id, isLiked);
+            }
+            fetchProduct(product.id);
+          }}
+          isLiked={isLiked}
+        ></LikeButton>
+      }
     </div>
   );
 };
