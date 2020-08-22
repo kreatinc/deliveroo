@@ -16,8 +16,10 @@ const Likes = ({
   useEffect(() => {
     if (!authenticated) {
       const user = getUser();
-      receiveUser({ data: user });
-      getLikedProducts();
+      if (user) {
+        receiveUser({ data: user });
+        getLikedProducts();
+      }
     }
   }, []);
 

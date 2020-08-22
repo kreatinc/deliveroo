@@ -11,10 +11,9 @@ const user = (state = {}, action) => {
       return res;
     case "USER_LOGIN_FAILURE":
     case "USER_LOGOUT_SUCCESS":
-      return removeUser();
-    case "USER_LOGOUT_REQUEST":
-    case "USER_LOGOUT_FAILURE":
-      return removeUser();
+      removeUser();
+      window.location.reload();
+      break;
     default:
       return state;
   }

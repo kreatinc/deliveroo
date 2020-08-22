@@ -75,8 +75,10 @@ let Product = ({
   useEffect(() => {
     if (!isAuthenticated) {
       const user = getUser();
-      receiveUser({ data: user });
-      fetchCategories();
+      if (user) {
+        receiveUser({ data: user });
+        fetchCategories();
+      }
     }
   }, []);
 

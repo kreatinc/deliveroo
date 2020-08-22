@@ -5,6 +5,7 @@ import { getShoppingList } from "../../../store/reducers";
 import * as actions from "../../../store/actions";
 import { connect } from "react-redux";
 import icons from "assets/img/icons.svg";
+import { useAuthenticated } from "customHooks";
 
 const mapStateToProps = (state) => {
   return {
@@ -17,6 +18,7 @@ let Shopping = ({
   removeFromShoppingList,
   addCommand,
 }) => {
+  const isAuthenticated = useAuthenticated();
   return (
     <div className="shopping">
       <h2 className="heading-2">My Shopping List</h2>
@@ -25,7 +27,7 @@ let Shopping = ({
         getShoppingList={getShoppingList}
         removeFromShoppingList={removeFromShoppingList}
       />
-      {shoppingList && shoppingList.length !== 0 && (
+      {isAuthenticated && shoppingList && shoppingList.length !== 0 && (
         <Button
           icon={icons + "#icon-check"}
           handleClick={() => {
