@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import LoginForm from "components/LoginForm";
 import { useAuthenticated } from "customHooks";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { getNotifications } from "store/reducers/";
+import { Notification } from "rsuite";
 
 function Copyright() {
   return (
@@ -60,7 +63,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+const mapStateToProps = (state) => {
+  return {
+    notifications: getNotifications(state),
+  };
+};
+
+let SignInSide = ({ notifications }) => {
+  useEffect(() => {
+    if (notifications) {
+      notifications.map((notification) => {
+        Notification.info({
+          title: "Notification",
+          placement: "bottomStart",
+          duration: 3000,
+          description: notification,
+        });
+      });
+    }
+  }, [notifications]);
   const classes = useStyles();
   const isAuthenticated = useAuthenticated();
   if (!isAuthenticated) {
@@ -82,4 +103,9 @@ export default function SignInSide() {
       </Grid>
     );
   }
-}
+  return null;
+};
+
+SignInSide = connect(mapStateToProps)(SignInSide);
+
+export default SignInSide;

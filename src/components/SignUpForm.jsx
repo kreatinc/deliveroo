@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, TextField } from "@material-ui/core";
 import { Button } from "rsuite";
 import { Link, useHistory } from "react-router-dom";
@@ -7,8 +7,16 @@ import * as actions from "store/actions";
 import ErrorsContainer from "./ErrorsContainer";
 import SignUp from "views/Register";
 import { connect } from "react-redux";
+import { getNotifications } from "store/reducers";
+import { Notification } from "rsuite";
 
-let SignUpForm = ({ classes, register }) => {
+const mapStateToProps = (state) => {
+  return {
+    notifications: getNotifications(state),
+  };
+};
+
+let SignUpForm = ({ classes, register, notifications }) => {
   const [spinning, setSpinning] = useState(false);
   const history = useHistory();
   const formik = useFormik({
@@ -24,6 +32,18 @@ let SignUpForm = ({ classes, register }) => {
       register(values, history);
     },
   });
+  useEffect(() => {
+    if (notifications) {
+      notifications.map((notification) => {
+        Notification.info({
+          title: "Notification",
+          placement: "bottomStart",
+          duration: 3000,
+          description: notification,
+        });
+      });
+    }
+  }, [notifications]);
   return (
     <>
       {Object.keys(formik.errors).length !== 0 && (
@@ -87,16 +107,9 @@ let SignUpForm = ({ classes, register }) => {
           </Grid>
           <Grid item xs={12}></Grid>
         </Grid>
-        {spinning && (
-          <Button type="submit" variant="contained" appearance="primary">
-            Sign Up
-          </Button>
-        )}
-        {!spinning && (
-          <Button type="submit" variant="contained" appearance="primary">
-            Sign Up
-          </Button>
-        )}
+        <Button type="submit" variant="contained" appearance="primary">
+          Sign Up
+        </Button>
         <Grid container justify="flex-end">
           <Grid item>
             <Link to="/login" variant="body2">
@@ -109,7 +122,7 @@ let SignUpForm = ({ classes, register }) => {
   );
 };
 
-SignUpForm = connect(null, actions)(SignUpForm);
+SignUpForm = connect(mapStateToProps, actions)(SignUpForm);
 
 export default SignUpForm;
 const validate = (values) => {

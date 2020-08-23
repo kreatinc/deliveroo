@@ -54,13 +54,9 @@ let LoginForm = ({ classes, login }) => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-
-        {spinning && <Button type="submit" loading />}
-        {!spinning && (
-          <Button type="submit" variant="contained" appearance="primary">
-            Sign in
-          </Button>
-        )}
+        <Button type="submit" variant="contained" appearance="primary">
+          Sign in
+        </Button>
         <Grid container style={{ marginTop: "5%" }}>
           <Grid item>
             <Link to="/register" variant="body2">
