@@ -1,12 +1,16 @@
 import axios from "axios";
 import store from "../index";
 
-const BASE_URL = "https://deliver-me-api.herokuapp.com/api";
+const BASE_URL = "http://deliver-me-api.herokuapp.com/api";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
-  headers: { Accept: "application/json", "Content-Type": "application/json" },
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 apiClient.interceptors.response.use(
   (response) => response,
