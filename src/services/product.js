@@ -1,8 +1,8 @@
 import apiClient from "./apiClient";
 //what does link mean 🤦🏻‍♂️
-const fetchProducts = (link, category) => {
-  if (link !== null) {
-    const res = link.replace("http://localhost:8000/api", "");
+const fetchProducts = (paginationLink, category) => {
+  if (paginationLink !== null) {
+    const res = paginationLink.replace("http://localhost:8000/api", "");
     return apiClient.get(res);
   }
   if (category) {

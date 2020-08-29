@@ -1,5 +1,5 @@
-import * as ProductServices from "services/productServices";
-import * as userServices from "services/userServices";
+import * as ProductServices from "services/product";
+import * as userServices from "services/user";
 import { normalize } from "normalizr";
 import { arrayOfProducts, product } from "../utils/schema";
 import search from "utils/search";
