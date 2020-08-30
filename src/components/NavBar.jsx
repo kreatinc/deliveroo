@@ -3,7 +3,7 @@ import NavBar from "react-bulma-components/lib/components/navbar";
 import Container from "react-bulma-components/lib/components/container";
 import Columns from "react-bulma-components/lib/components/columns";
 import { Button } from "react-bulma-components/dist";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "./homepageComponents/header/Logo";
 import logo from "assets/img/logo.png";
 

@@ -22,7 +22,7 @@ const Comment = ({
           </div>
         </a>
       </li>
-      {comment.client_id === currentUserId && (
+      {currentUserId && comment.client_id === currentUserId && (
         <button
           className="btn-options"
           onClick={() => {
@@ -33,12 +33,12 @@ const Comment = ({
           }}
         >
           {" "}
-          Delete
+          Remove
         </button>
       )}
-      {comment.client_id === currentUserId && (
+      {currentUserId && comment.client_id === currentUserId && (
         <button
-          className="btn-options"
+          className="btn-options-edit"
           onClick={() => {
             inputRef.current.value = comment.comment;
             setIsEditing(true);

@@ -2,6 +2,7 @@ import React from "react";
 import { Dropdown, Nav, Navbar, Icon } from "rsuite";
 import Logo from "components/homepageComponents/header/Logo";
 import logo from "../../assets/img/logo.png";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -13,16 +14,18 @@ const NavBar = () => {
       </Navbar.Header>
       <Navbar.Body>
         <Nav>
-          <Nav.Item icon={<Icon icon="home" />}>Home</Nav.Item>
-          <Nav.Item>News</Nav.Item>
-          <Nav.Item>Products</Nav.Item>
-          <Nav.Item>Commands</Nav.Item>
-          <Nav.Item>Stock</Nav.Item>
-          <Dropdown title="About">
-            <Dropdown.Item>Company</Dropdown.Item>
-            <Dropdown.Item>Team</Dropdown.Item>
-            <Dropdown.Item>Contact</Dropdown.Item>
-          </Dropdown>
+          <Link to="/company">
+            <Nav.Item icon={<Icon icon="home" />}>Home</Nav.Item>
+          </Link>
+          <Link to="/company/products">
+            <Nav.Item>Products</Nav.Item>
+          </Link>
+          <Link to="/company/commands">
+            <Nav.Item>Commands</Nav.Item>
+          </Link>
+          <Link to="/company/stock">
+            <Nav.Item>Stock</Nav.Item>
+          </Link>
         </Nav>
         <Nav pullRight>
           <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>

@@ -17,7 +17,7 @@ function App() {
         <Switch>
           {routes.map((route, i) => (
             <Route exact path={route.path} key={i}>
-              <route.component></route.component>
+              <route.component />
             </Route>
           ))}
           <Redirect to="/home" />

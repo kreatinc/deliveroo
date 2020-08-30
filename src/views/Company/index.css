@@ -3,6 +3,12 @@
   display: inline-block;
 }
 
-.statistic__info {
-  /* float: left; */
+.company__card {
+  border-style: solid;
+  border-radius: 20px;
+  border-color: antiquewhite;
+}
+
+.statistic {
+  text-align: center;
 }
