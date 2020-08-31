@@ -22,7 +22,9 @@ const search = (dispatch) => {
     return Observable.create(function (observer) {
       dispatch(fetchSearchProductsRequest());
       apiClient
-        .get(`http://localhost:8000/api/products?title=${productName}`)
+        .get(
+          `https://deliver-me-api.herokuapp.com/api/products?title=${productName}`
+        )
         .then(
           (res) => {
             observer.next(res);
