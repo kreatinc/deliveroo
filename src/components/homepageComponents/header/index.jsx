@@ -10,7 +10,7 @@ import {
   getIsFetchingLike,
   getNotifications,
 } from "store/reducers";
-import * as actions from "../../../store/actions";
+import * as actions from "../../../store/actions/userActions";
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import Button from "components/Button";
 import { useAuthenticated } from "customHooks";

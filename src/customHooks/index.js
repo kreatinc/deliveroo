@@ -18,3 +18,19 @@ export const useAuthenticated = () => {
   }, []);
   return authenticated;
 };
+export const useAuthenticatedCompany = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+  useEffect(() => {
+    if (localStorage.getItem("company")) {
+      setAuthenticated(true);
+      if (
+        ["/", "/login", "/register", "/welcome"].includes(location.pathname)
+      ) {
+        history.push("/company");
+      }
+    }
+  }, []);
+  return authenticated;
+};

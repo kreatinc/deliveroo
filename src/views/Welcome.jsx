@@ -2,10 +2,13 @@ import React from "react";
 import NavBarComponent from "components/NavBar";
 import HomeProduct from "components/HomeProduct";
 import { Container, Columns } from "react-bulma-components/lib";
+import { Button } from "react-bulma-components/dist";
 import Card from "react-bulma-components/lib/components/card";
 import bannerImg from "../assets/img/bannerImg.png";
 import Review from "components/Review";
 import { useAuthenticated } from "customHooks";
+import { NavLink } from "react-router-dom";
+
 const Welcome = () => {
   const isAuthenticated = useAuthenticated();
   if (!isAuthenticated) {
@@ -30,6 +33,21 @@ const Welcome = () => {
                     alt="banner"
                     className="banner-logo"
                   ></img>
+                </Columns.Column>
+              </Columns>
+              <Columns>
+                <Columns.Column></Columns.Column>
+                <Columns.Column className="is-full">
+                  <Button className="btn is-large">
+                    <NavLink
+                      style={{
+                        color: "white",
+                      }}
+                      to="/company/login"
+                    >
+                      Company space &rarr;
+                    </NavLink>
+                  </Button>
                 </Columns.Column>
               </Columns>
             </Card>

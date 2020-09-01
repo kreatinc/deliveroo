@@ -1,7 +1,7 @@
 import * as ProductServices from "services/product";
 import * as userServices from "services/user";
 import { normalize } from "normalizr";
-import { arrayOfProducts, product } from "../utils/schema";
+import { arrayOfProducts, product } from "../../utils/schema";
 import search from "utils/search";
 import { retrieveCommandFromShoppingList } from "utils";
 
@@ -258,7 +258,7 @@ const searchProduct = () => (dispatch) => {
 const login = (credentials, history) => (dispatch) => {
   dispatch(userLoginRequest());
   return userServices
-    .userLogin(credentials)
+    .login(credentials)
     .then((response) => {
       dispatch(receiveUser(response));
       history.push("/home");
@@ -311,7 +311,7 @@ const updateUserInformation = (informations) => (dispatch) => {
 const register = (credentials) => (dispatch) => {
   dispatch(userRegisterRequest());
   return userServices
-    .userRegister(credentials)
+    .register(credentials)
     .then((response) => {
       dispatch(userRegisterSuccess(response));
       dispatch(addNotification("Your account has been created"));
@@ -337,9 +337,9 @@ const userRegisterfailure = (error) => ({
 });
 
 const logout = (history) => (dispatch) => {
-  userLogoutRequest();
+  dispatch(userLogoutRequest());
   return userServices
-    .userLogout()
+    .logout()
     .then((response) => {
       dispatch(userLogoutSuccess(response));
       dispatch({ type: "CLEAR_SHOOPING_LIST" });
@@ -497,4 +497,5 @@ export {
   addCommand,
   updatePassword,
   updateUserInformation,
+  addNotification,
 };

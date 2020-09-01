@@ -3,8 +3,8 @@ import { Grid, TextField } from "@material-ui/core";
 import { Button } from "rsuite";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
-import * as actions from "store/actions/userActions";
-import ErrorsContainer from "./ErrorsContainer";
+import * as actions from "store/actions/companyActions";
+import ErrorsContainer from "components/ErrorsContainer";
 import SignUp from "views/Register";
 import { connect } from "react-redux";
 import { getNotifications } from "store/reducers";
@@ -112,7 +112,7 @@ let SignUpForm = ({ classes, register, notifications }) => {
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link to="/login" variant="body2">
+            <Link to="/company/login" variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>

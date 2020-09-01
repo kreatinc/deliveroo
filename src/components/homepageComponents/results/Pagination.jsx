@@ -2,7 +2,7 @@ import React from "react";
 import icons from "assets/img/icons.svg";
 import { getPaginationData, getSearchResults } from "store/reducers";
 import { connect } from "react-redux";
-import * as actions from "store/actions";
+import * as actions from "store/actions/userActions";
 import { useParams } from "react-router-dom";
 import PaginationButton from "./PaginationButton";
 

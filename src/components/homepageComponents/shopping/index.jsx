@@ -2,7 +2,7 @@ import React from "react";
 import List from "./List";
 import Button from "components/Button";
 import { getShoppingList } from "../../../store/reducers";
-import * as actions from "../../../store/actions";
+import * as actions from "../../../store/actions/userActions";
 import { connect } from "react-redux";
 import icons from "assets/img/icons.svg";
 import { useAuthenticated } from "customHooks";

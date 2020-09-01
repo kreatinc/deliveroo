@@ -1,8 +1,7 @@
 import React from "react";
-import { Dropdown, Nav, Navbar, Icon } from "rsuite";
-import Logo from "components/homepageComponents/header/Logo";
-import logo from "../../assets/img/logo.png";
+import { Dropdown, Nav, Navbar, Icon, Button } from "rsuite";
 import { Link } from "react-router-dom";
+import CompanySettingsModal from "./settingsModal";
 
 const NavBar = () => {
   return (
@@ -28,7 +27,7 @@ const NavBar = () => {
           </Link>
         </Nav>
         <Nav pullRight>
-          <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+          <CompanySettingsModal />
         </Nav>
       </Navbar.Body>
     </Navbar>

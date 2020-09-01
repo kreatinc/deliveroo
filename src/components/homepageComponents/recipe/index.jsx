@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Comments from "./CommentsList.jsx";
 import Category from "./Category";
-import * as actions from "store/actions";
+import * as actions from "store/actions/userActions";
 import icons from "assets/img/icons.svg";
 import List from "../results/List";
 import { useAuthenticated } from "customHooks";

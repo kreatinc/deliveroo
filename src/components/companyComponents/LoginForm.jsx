@@ -6,7 +6,7 @@ import { Grid, Box } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import ErrorsContainer from "components/ErrorsContainer";
 import { connect } from "react-redux";
-import * as actions from "../store/actions/userActions";
+import * as actions from "store/actions/companyActions";
 
 let LoginForm = ({ classes, login }) => {
   const [spinning, setSpinning] = useState(false);
@@ -59,7 +59,7 @@ let LoginForm = ({ classes, login }) => {
         </Button>
         <Grid container style={{ marginTop: "5%" }}>
           <Grid item>
-            <Link to="/register" variant="body2">
+            <Link to="/company/register" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

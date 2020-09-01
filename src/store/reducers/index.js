@@ -11,6 +11,7 @@ import searchResultsList, * as fromSearchResultsList from "./searchResultsList";
 import user, * as fromUser from "./user";
 import commandsList, * as fromCommandsList from "./commandsList";
 import notifications, * as fromNotifications from "./notifications";
+import company, * as fromCompany from "./company";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   searchResultsList,
   notifications,
   user,
+  company,
 });
 
 export default rootReducer;

@@ -11,7 +11,7 @@ import {
 } from "rsuite";
 
 import * as selectors from "../store/reducers";
-import * as actions from "../store/actions";
+import * as actions from "../store/actions/userActions";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
 import UserPasswordModal from "./UserPasswordModal";

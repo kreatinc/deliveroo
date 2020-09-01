@@ -43,7 +43,7 @@ const getCommands = () => {
 };
 
 const getCommand = (commandGroupId) => {
-  return apiClient.get(`client/commands/${commandGroupId}`);
+  return apiClient.get(`clients/commands/${commandGroupId}`);
 };
 
 export {

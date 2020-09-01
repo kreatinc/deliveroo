@@ -1,17 +1,17 @@
 import apiClient from "services/apiClient";
 
-const userLogin = ({ email, password }) => {
+const login = ({ email, password }) => {
   return apiClient.post("clients/login", JSON.stringify({ email, password }));
 };
 
-const userRegister = ({ firstName, phone, email, password }) => {
+const register = ({ firstName, phone, email, password }) => {
   return apiClient.post(
     "clients/register",
     JSON.stringify({ firstName, phone, email, password })
   );
 };
 
-const userLogout = () => {
+const logout = () => {
   return apiClient.post("clients/logout");
 };
 
@@ -52,9 +52,9 @@ const updateUserInformation = (informations) => {
 };
 
 export {
-  userLogin,
-  userRegister,
-  userLogout,
+  login,
+  register,
+  logout,
   getLikedProducts,
   addComment,
   removeComment,

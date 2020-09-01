@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
 import { connect } from "react-redux";
-import * as actions from "store/actions/userActions";
-import {
-  ButtonToolbar,
-  ControlLabel,
-  FormGroup,
-  Form,
-  Button,
-  Modal,
-} from "rsuite";
-import ErrorsContainer from "./ErrorsContainer";
+import * as actions from "store/actions/companyActions";
+import { Icon } from "rsuite";
+import { ButtonToolbar, FormGroup, Form, Button, Modal } from "rsuite";
+import ErrorsContainer from "components/ErrorsContainer";
+import { useHistory } from "react-router-dom";
 
-let UserPasswordForm = ({ updatePassword, closeModal }) => {
+let SettingsForm = ({ updatePassword, closeModal, logout }) => {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       old_password: "",
@@ -44,54 +40,21 @@ let UserPasswordForm = ({ updatePassword, closeModal }) => {
         style={{ marginTop: "5%" }}
       >
         <FormGroup>
-          <ControlLabel></ControlLabel>
-
-          <TextField
-            autoComplete="password"
-            name="old_password"
-            variant="outlined"
-            fullWidth
-            required
-            id="old_password"
-            type="password"
-            label="Old password"
-            onChange={formik.handleChange}
-            value={formik.values.old_password}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextField
-            autoComplete="password"
-            name="password"
-            variant="outlined"
-            fullWidth
-            required
-            id="password"
-            type="password"
-            label="New password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            required
-            id="confirm"
-            label="Confirm password"
-            type="password"
-            name="confirm"
-            onChange={formik.handleChange}
-            value={formik.values.confirm}
-          />
-        </FormGroup>
-        <FormGroup>
           <ButtonToolbar>
             <Button appearance="primary" type="submit">
-              Submit
+              password edit modal
+            </Button>
+            <Button appearance="primary" type="submit">
+              company's info modal
+            </Button>
+            <Button
+              appearance="link"
+              onClick={() => {
+                logout(history);
+                closeModal();
+              }}
+            >
+              Logout
             </Button>
           </ButtonToolbar>
         </FormGroup>
@@ -100,15 +63,20 @@ let UserPasswordForm = ({ updatePassword, closeModal }) => {
   );
 };
 
-UserPasswordForm = connect(null, actions)(UserPasswordForm);
+SettingsForm = connect(null, actions)(SettingsForm);
 
-const UserPasswordModal = () => {
+const CompanySettingsModal = () => {
   const [show, setShow] = useState(false);
   return (
     <>
       <ButtonToolbar>
-        <Button appearance="link" onClick={() => setShow(true)}>
-          Change password
+        <Button
+          appearance="primary"
+          onClick={() => setShow(true)}
+          style={{ margin: "10px 10px" }}
+        >
+          <Icon icon="cog" spin style={{ paddingRight: "0px" }} />
+          settings
         </Button>
       </ButtonToolbar>
 
@@ -117,7 +85,7 @@ const UserPasswordModal = () => {
           <Modal.Title>Edit Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UserPasswordForm closeModal={() => setShow(false)} />
+          <SettingsForm closeModal={() => setShow(false)} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setShow(false)} appearance="subtle">
@@ -129,7 +97,7 @@ const UserPasswordModal = () => {
   );
 };
 
-export default UserPasswordModal;
+export default CompanySettingsModal;
 
 const validate = (values) => {
   const errors = {};

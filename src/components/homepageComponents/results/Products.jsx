@@ -7,7 +7,7 @@ import {
   getSearchResults,
 } from "store/reducers";
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions";
+import * as actions from "../../../store/actions/userActions";
 import { withRouter } from "react-router-dom";
 import icons from "assets/img/icons.svg";
 
