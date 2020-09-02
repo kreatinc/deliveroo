@@ -5,7 +5,7 @@ import NavBar from "./Navbar";
 import ReviewCard from "./ReviewCard";
 
 // nearly ended products in stock
-//
+// shopping list
 const Stock = () => {
   return (
     <>

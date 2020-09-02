@@ -6,10 +6,7 @@ const login = (credentials, history) => (dispatch) => {
   return companyServices
     .login(credentials)
     .then((response) => {
-      dispatch({
-        type: "COMPANY_LOGIN_SUCCESS",
-        response: response.data,
-      });
+      dispatch(receiveCompany(response));
       history.push("/company");
       dispatch(addNotification("You're logged in"));
     })
@@ -51,4 +48,9 @@ const logout = (history) => (dispatch) => {
     });
 };
 
-export { login, register, logout };
+const receiveCompany = (response) => ({
+  type: "COMPANY_LOGIN_SUCCESS",
+  response: response.data,
+});
+
+export { login, register, logout, receiveCompany };

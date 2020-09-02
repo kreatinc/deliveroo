@@ -59,7 +59,7 @@ const setCompany = ({ email, name, phone, address, token }) => {
 
     if (company) {
       const editedCompany = { ...company, email, name, phone, address };
-      localStorage.setItem("Company", JSON.stringify(editedCompany));
+      localStorage.setItem("company", JSON.stringify(editedCompany));
     } else {
       localStorage.setItem(
         "company",
@@ -174,4 +174,5 @@ export {
   removeShoppingList,
   removeCompany,
   setCompany,
+  getCompany,
 };

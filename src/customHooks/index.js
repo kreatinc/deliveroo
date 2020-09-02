@@ -24,12 +24,11 @@ export const useAuthenticatedCompany = () => {
   const location = useLocation();
   useEffect(() => {
     if (localStorage.getItem("company")) {
+      console.log("yes");
       setAuthenticated(true);
-      if (
-        ["/", "/login", "/register", "/welcome"].includes(location.pathname)
-      ) {
-        history.push("/company");
-      }
+      history.push("/company");
+    } else {
+      history.push("/company/login");
     }
   }, []);
   return authenticated;
