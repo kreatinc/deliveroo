@@ -1,5 +1,10 @@
 import * as companyServices from "services/company";
-import { addNotification } from "store/actions/userActions";
+import * as ProductServices from "services/product";
+import {
+  addNotification,
+  fetchProductsFailure,
+  receiveProducts,
+} from "store/actions/userActions";
 
 const login = (credentials, history) => (dispatch) => {
   dispatch({ type: "COMPANY_LOGIN_REQUEST" });
@@ -53,4 +58,37 @@ const receiveCompany = (response) => ({
   response: response.data,
 });
 
-export { login, register, logout, receiveCompany };
+const getProducts = () => (dispatch) => {
+  return companyServices
+    .getProducts()
+    .then((response) => {
+      dispatch(receiveProducts(response));
+      dispatch(addNotification("Products fetched successfuly"));
+    })
+    .catch((error) => {
+      dispatch(fetchProductsFailure(error));
+      dispatch(
+        addNotification("There was an error while fetching the products")
+      );
+    });
+};
+
+const getCommands = () => (dispatch) => {
+  dispatch({ type: "FETCH_COMMANDS_REQUEST" });
+  return ProductServices.getCommands()
+    .then((response) => {
+      dispatch({
+        type: "FETCH_COMMANDS_SUCCESS",
+        response: response.data.data,
+      });
+      // dispatch(addNotification("Commands fetched successfuly"));
+    })
+    .catch(() => {
+      dispatch({ type: "FETCH_COMMANDS_FAILURE" });
+      dispatch(
+        addNotification("There was an error while fetching the commands")
+      );
+    });
+};
+
+export { login, register, logout, receiveCompany, getProducts, getCommands };

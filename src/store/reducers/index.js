@@ -39,7 +39,7 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-export const getVisibleProducts = (state, category) => {
+export const getVisibleProducts = (state, category = "others") => {
   if (category !== undefined) {
     const ids = fromCreateList.getProductsIds(state.idsByCategory[category]);
     return ids.map((id) => fromById.getProduct(state.byId, id));

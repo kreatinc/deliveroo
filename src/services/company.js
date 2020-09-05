@@ -35,12 +35,14 @@ const updatecompanyInformation = (informations) => {
 };
 
 const getCommands = () => {
-  return apiClient.get("clients/commands");
+  return apiClient.get("companies/commands");
 };
 
 const getCommand = (commandGroupId) => {
-  return apiClient.get(`clients/commands/${commandGroupId}`);
+  return apiClient.get(`companies/commands/${commandGroupId}`);
 };
+
+const getProducts = () => apiClient.get("companies/products");
 
 export {
   login,
@@ -51,4 +53,5 @@ export {
   updatecompanyInformation,
   getCommands,
   getCommand,
+  getProducts,
 };

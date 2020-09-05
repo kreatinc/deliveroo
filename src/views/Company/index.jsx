@@ -13,23 +13,39 @@ import Register from "components/companyComponents/Register";
 import { useAuthenticatedCompany } from "customHooks";
 import { getCompany } from "utils/localStorageHelpers";
 import * as actions from "store/actions/companyActions";
+import * as selectors from "store/reducers";
 import { connect } from "react-redux";
 
-let Company = ({ receiveCompany }) => {
+const mapStateToProps = (state) => ({
+  products: selectors.getVisibleProducts(state),
+  commands: selectors.getCommands(state),
+  // customers,
+  // likes: selectors.getCompanyLikes(state),
+});
+
+let Company = ({
+  receiveCompany,
+  products,
+  commands,
+  getProducts,
+  getCommands,
+}) => {
   let { slug } = useParams();
 
   const isAuthenticated = useAuthenticatedCompany();
-  const history = useHistory();
-  const location = useLocation();
 
   useEffect(() => {
     if (!isAuthenticated) {
       const company = getCompany();
       if (company && company.email) {
         receiveCompany({ data: company });
+        getProducts();
+        getCommands();
       }
     }
-  }, []);
+  }, [isAuthenticated, receiveCompany, getProducts, getCommands]);
+
+  useEffect(() => {}, []);
 
   if (slug && slug === "products") {
     return <Products />;
@@ -54,10 +70,10 @@ let Company = ({ receiveCompany }) => {
       <Container className="welcome__container">
         <Columns>
           <Columns.Column>
-            <CompanyCard />
+            <CompanyCard title="Products" data={products.length} />
           </Columns.Column>
           <Columns.Column>
-            <CompanyCard />
+            <CompanyCard title="Commands" data={commands.length} />
           </Columns.Column>
           <Columns.Column>
             <CompanyCard />
@@ -81,6 +97,6 @@ let Company = ({ receiveCompany }) => {
   );
 };
 
-Company = connect(null, actions)(Company);
+Company = connect(mapStateToProps, actions)(Company);
 
 export default Company;
