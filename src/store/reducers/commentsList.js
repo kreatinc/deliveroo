@@ -1,5 +1,3 @@
-import { product } from "utils/schema";
-
 const comments = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_PRODUCTS_SUCCESS":
@@ -40,20 +38,32 @@ const comments = (state = {}, action) => {
   }
 };
 
-const retrieveComments = (state, action) => {
-  const productIds = action.response.result;
-  const products = action.response.entities.products;
+const Box = (x) => ({
+  map: (f) => Box(f(x)),
+  fold: (f) => f(x),
+});
 
-  const nextState = {
-    ...state,
-  };
+/*
+ * the reason data is distructured this way is because
+ * is normalized to come in this shape using normalizer lib
+ */
+const getItems = (itemsIds, items) => itemsIds.map((id) => items[id]);
 
-  productIds.forEach((id) => {
-    nextState[id] = products[id].comments;
-  });
+const getItemFromItems = (items, item) =>
+  items.reduce(
+    (acc, curr) => Object.assign(acc, { [curr.id]: curr[item] }),
+    {}
+  );
 
-  return nextState;
-};
+const retrieveComments = (state, action) =>
+  Box(action)
+    .map((action) => ({
+      productIds: action.response.result,
+      products: action.response.entities.products,
+    }))
+    .map(({ productIds, products }) => getItems(productIds, products))
+    .map((products) => getItemFromItems(products, "comments"))
+    .fold((x) => ({ ...state, ...x }));
 
 export default comments;
 
