@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-//what does link mean 🤦🏻‍♂️
+
 const fetchProducts = (paginationLink, category) => {
   if (paginationLink !== null) {
     const res = paginationLink?.replace("http://localhost:8000/api", "");
@@ -46,6 +46,8 @@ const getCommand = (commandGroupId) => {
   return apiClient.get(`clients/commands/${commandGroupId}`);
 };
 
+const getRunOutProducts = () => apiClient.get("/companies/products/runout");
+
 export {
   fetchProducts,
   fetchProduct,
@@ -56,4 +58,5 @@ export {
   sendCommand,
   getCommands,
   getCommand,
+  getRunOutProducts,
 };

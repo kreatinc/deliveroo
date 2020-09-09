@@ -91,4 +91,20 @@ const getCommands = () => (dispatch) => {
     });
 };
 
-export { login, register, logout, receiveCompany, getProducts, getCommands };
+const getRunOutProducts = () => (dispatch) => {
+  return ProductServices.getRunOutProducts()
+    .then((response) => dispatch(receiveProducts(response)))
+    .catch(() =>
+      addNotification("There was an error while fetching the products")
+    );
+};
+
+export {
+  login,
+  register,
+  logout,
+  receiveCompany,
+  getProducts,
+  getCommands,
+  getRunOutProducts,
+};

@@ -63,7 +63,7 @@ let Company = ({
     return <Commands />;
   }
   if (slug && slug === "stock") {
-    return <Stock />;
+    return <Stock products={products} />;
   }
 
   return (

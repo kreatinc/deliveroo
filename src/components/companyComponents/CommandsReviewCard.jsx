@@ -8,13 +8,6 @@ const CommandsReviewCard = ({ title, items, comments }) => {
     <Card className="company__card">
       <header className="card-header">
         <h3 style={{ paddingLeft: "20px" }}>{title}</h3>
-        <Link
-          to="/company/commands"
-          className="card-header-icon"
-          aria-label="more options"
-        >
-          Learn more &rarr;
-        </Link>
       </header>
       <div className="card-content">
         <h2 className="statistic">
