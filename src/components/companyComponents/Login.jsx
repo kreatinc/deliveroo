@@ -83,7 +83,7 @@ let SignInSide = ({ notifications }) => {
     }
   }, [notifications]);
   const classes = useStyles();
-  const isAuthenticated = useAuthenticated();
+  const isAuthenticated = useAuthenticated("company");
   if (!isAuthenticated) {
     return (
       <Grid container component="main" className={classes.root}>

@@ -14,6 +14,12 @@ export const useAuthenticated = (item = "user") => {
       ) {
         history.push("/home");
       }
+      if (
+        ["/login/company", "/register/company"].includes(location.pathname) &&
+        item === "company"
+      ) {
+        history.push("/company");
+      }
     }
   }, []);
   return authenticated;
