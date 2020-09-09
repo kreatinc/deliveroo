@@ -77,10 +77,13 @@ let Product = ({
       const user = getUser();
       if (user) {
         receiveUser({ data: user });
-        fetchCategories();
       }
     }
-  }, []);
+  }, [isAuthenticated, receiveUser]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const [isEditing, setIsEditing] = useState(false);
   const [commentId, setCommentId] = useState(null);

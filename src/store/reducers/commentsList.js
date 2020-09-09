@@ -45,7 +45,7 @@ const Box = (x) => ({
 
 /*
  * the reason data is distructured this way is because
- * is normalized to come in this shape using normalizer lib
+ * its normalized to come in this shape using normalizer lib
  */
 const getItems = (itemsIds, items) => itemsIds.map((id) => items[id]);
 
