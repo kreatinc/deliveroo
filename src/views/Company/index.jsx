@@ -39,11 +39,14 @@ let Company = ({
       const company = getCompany();
       if (company && company.email) {
         receiveCompany({ data: company });
-        getProducts();
-        getCommands();
       }
     }
-  }, [isAuthenticated, receiveCompany, getProducts, getCommands]);
+  }, []);
+
+  useEffect(() => {
+    getProducts();
+    getCommands();
+  }, []);
 
   useEffect(() => {}, []);
 
