@@ -36,3 +36,11 @@ export default combineReducers({ commands, isFetching });
 export const getCommands = (state) => state;
 
 export const getIsFetchingCommands = (state) => state;
+
+export const getLatestCommands = (state) =>
+  state.reverse().map((item, i) => {
+    if (i <= 3) {
+      return item;
+    }
+    return;
+  });

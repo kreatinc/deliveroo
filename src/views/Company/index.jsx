@@ -19,6 +19,8 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => ({
   products: selectors.getVisibleProducts(state),
   commands: selectors.getCommands(state),
+  latestCommands: selectors.getLatestCommands(state),
+  commentsCount: selectors.getCommentsCount(state),
   // customers,
   // likes: selectors.getCompanyLikes(state),
 });
@@ -27,10 +29,13 @@ let Company = ({
   receiveCompany,
   products,
   commands,
+  commentsCount,
   getProducts,
+  latestCommands,
   getCommands,
 }) => {
   let { slug } = useParams();
+  console.log("latestCommands :>> ", latestCommands);
 
   const isAuthenticated = useAuthenticated("company");
 
@@ -72,7 +77,7 @@ let Company = ({
             <CompanyCard title="Commands" data={commands.length} />
           </Columns.Column>
           <Columns.Column>
-            <CompanyCard />
+            <CompanyCard title="Comments" data={commentsCount} />
           </Columns.Column>
           <Columns.Column>
             <CompanyCard />

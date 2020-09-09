@@ -70,3 +70,5 @@ export default comments;
 export const getComments = (state, productId) => {
   return state[productId];
 };
+
+export const getCommentsCount = (state) => Object.keys(state).length;
