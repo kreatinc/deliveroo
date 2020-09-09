@@ -10,7 +10,7 @@ import Commands from "components/companyComponents/Commands";
 import Stock from "components/companyComponents/Stock";
 import Login from "components/companyComponents/Login";
 import Register from "components/companyComponents/Register";
-import { useAuthenticatedCompany } from "customHooks";
+import { useAuthenticated } from "customHooks";
 import { getCompany } from "utils/localStorageHelpers";
 import * as actions from "store/actions/companyActions";
 import * as selectors from "store/reducers";
@@ -32,7 +32,7 @@ let Company = ({
 }) => {
   let { slug } = useParams();
 
-  const isAuthenticated = useAuthenticatedCompany();
+  const isAuthenticated = useAuthenticated("company");
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -58,13 +58,6 @@ let Company = ({
   }
   if (slug && slug === "stock") {
     return <Stock />;
-  }
-
-  if (slug && slug === "login") {
-    return <Login />;
-  }
-  if (slug && slug === "register") {
-    return <Register />;
   }
 
   return (

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import routes from "router";
 
 export const useAuthenticated = (item = "user") => {
   const [authenticated, setAuthenticated] = useState(false);

@@ -59,7 +59,7 @@ let LoginForm = ({ classes, login }) => {
         </Button>
         <Grid container style={{ marginTop: "5%" }}>
           <Grid item>
-            <Link to="/company/register" variant="body2">
+            <Link to="/register/company" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

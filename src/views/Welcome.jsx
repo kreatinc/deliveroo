@@ -43,7 +43,7 @@ const Welcome = () => {
                       style={{
                         color: "white",
                       }}
-                      to="/company/login"
+                      to="/login/company"
                     >
                       Company space &rarr;
                     </NavLink>
