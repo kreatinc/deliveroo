@@ -8,7 +8,7 @@ const NavBar = () => {
     <Navbar>
       <Navbar.Header>
         <a href="#" className="navbar-brand logo">
-          Company
+          Deliveroo
         </a>
       </Navbar.Header>
       <Navbar.Body>

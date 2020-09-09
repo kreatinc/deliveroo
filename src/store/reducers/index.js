@@ -146,8 +146,8 @@ export const getNotifications = (state) => {
   return fromNotifications.getNotifications(state.notifications);
 };
 
-export const getCommentsCount = (state) =>
-  fromCommentsList.getCommentsCount(state.commentsList);
+export const getComments = (state) =>
+  fromCommentsList.getCompanyComments(state.commentsList);
 
 export const getLatestCommands = (state) =>
   fromCommandsList.getLatestCommands(state.commandsList.commands);

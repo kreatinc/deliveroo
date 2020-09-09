@@ -3,11 +3,11 @@ import React from "react";
 import Card from "react-bulma-components/lib/components/card";
 import { Link } from "react-router-dom";
 
-const ReviewCard = ({ review }) => {
+const CommandsReviewCard = ({ title, items, comments }) => {
   return (
     <Card className="company__card">
       <header className="card-header">
-        <h3 style={{ paddingLeft: "20px" }}>Latest commands</h3>
+        <h3 style={{ paddingLeft: "20px" }}>{title}</h3>
         <Link
           to="/company/commands"
           className="card-header-icon"
@@ -18,12 +18,17 @@ const ReviewCard = ({ review }) => {
       </header>
       <div className="card-content">
         <h2 className="statistic">
-          <Product />
-          <Product />
+          {items && (
+            <ul>
+              {items.map((item) => (
+                <Product command={item} key={item.id} />
+              ))}
+            </ul>
+          )}
         </h2>
       </div>
     </Card>
   );
 };
 
-export default ReviewCard;
+export default CommandsReviewCard;

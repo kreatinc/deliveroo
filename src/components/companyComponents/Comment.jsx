@@ -2,19 +2,19 @@ import { Avatar } from "rsuite";
 import React from "react";
 import { Columns } from "react-bulma-components/lib";
 
-const Product = ({ command }) => {
+const Comment = ({ comment }) => {
   return (
     <ul>
       <li>
         <Columns>
           <Columns.Column className="is-2">
-            <Avatar circle size="md" src={command.product.image} />
+            <h6>{comment.created_at}</h6>
           </Columns.Column>
           <Columns.Column className="is-6">
-            <h3>{command.product.title}</h3>
+            <h4>{comment.client_name}</h4>
           </Columns.Column>
           <Columns.Column>
-            <h3>{command.quantity} Unit</h3>
+            <h4>{comment.comment}</h4>
           </Columns.Column>
         </Columns>
       </li>
@@ -22,4 +22,4 @@ const Product = ({ command }) => {
   );
 };
 
-export default Product;
+export default Comment;

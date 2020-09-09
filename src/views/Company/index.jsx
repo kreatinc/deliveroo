@@ -3,7 +3,8 @@ import NavBar from "components/companyComponents/Navbar";
 import "./index.css";
 import { Columns, Container } from "react-bulma-components/lib";
 import CompanyCard from "components/companyComponents/Card";
-import ReviewCard from "components/companyComponents/ReviewCard";
+import CommandsReviewCard from "components/companyComponents/CommandsReviewCard";
+import CommentsReviewCard from "components/companyComponents/CommentsReviewCard";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import Products from "components/companyComponents/Products";
 import Commands from "components/companyComponents/Commands";
@@ -20,7 +21,7 @@ const mapStateToProps = (state) => ({
   products: selectors.getVisibleProducts(state),
   commands: selectors.getCommands(state),
   latestCommands: selectors.getLatestCommands(state),
-  commentsCount: selectors.getCommentsCount(state),
+  comments: selectors.getComments(state),
   // customers,
   // likes: selectors.getCompanyLikes(state),
 });
@@ -29,13 +30,13 @@ let Company = ({
   receiveCompany,
   products,
   commands,
-  commentsCount,
+  comments,
   getProducts,
   latestCommands,
   getCommands,
 }) => {
   let { slug } = useParams();
-  console.log("latestCommands :>> ", latestCommands);
+  console.log("comments :>> ", comments);
 
   const isAuthenticated = useAuthenticated("company");
 
@@ -77,19 +78,22 @@ let Company = ({
             <CompanyCard title="Commands" data={commands.length} />
           </Columns.Column>
           <Columns.Column>
-            <CompanyCard title="Comments" data={commentsCount} />
+            <CompanyCard title="Comments" data={comments.length} />
           </Columns.Column>
           <Columns.Column>
-            <CompanyCard />
+            <CompanyCard title="Total likes" data={20} />
           </Columns.Column>
         </Columns>
         <div style={{ marginTop: "5%" }}>
           <Columns>
-            <Columns.Column>
-              <ReviewCard />
+            <Columns.Column className="is-two-fifths">
+              <CommandsReviewCard
+                title="Latest commands"
+                items={latestCommands}
+              />
             </Columns.Column>
             <Columns.Column>
-              <ReviewCard />
+              <CommentsReviewCard title="Latest comments" items={comments} />
             </Columns.Column>
           </Columns>
         </div>
