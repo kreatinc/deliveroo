@@ -63,7 +63,7 @@ const retrieveComments = (state, action) =>
     }))
     .map(({ productIds, products }) => getItems(productIds, products))
     .map((products) => getItemFromItems(products, "comments"))
-    .fold((x) => ({ ...state, ...x }));
+    .fold((comments) => ({ ...state, ...comments }));
 
 export default comments;
 

@@ -75,7 +75,6 @@ const CompanySettingsModal = () => {
           onClick={() => setShow(true)}
           style={{ margin: "10px 10px" }}
         >
-          <Icon icon="cog" spin style={{ paddingRight: "0px" }} />
           settings
         </Button>
       </ButtonToolbar>

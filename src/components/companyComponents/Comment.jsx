@@ -1,4 +1,3 @@
-import { Avatar } from "rsuite";
 import React from "react";
 import { Columns } from "react-bulma-components/lib";
 

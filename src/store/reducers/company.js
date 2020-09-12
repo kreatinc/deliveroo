@@ -12,6 +12,8 @@ const company = (state = {}, action) => {
     case "COMPANY_LOGIN_FAILURE":
     case "COMPANY_LOGOUT_SUCCESS":
       return removeCompany();
+    case "COMPANY_LOGOUT_FAILURE":
+      return state;
     default:
       return state;
   }

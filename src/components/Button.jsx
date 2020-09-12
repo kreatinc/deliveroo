@@ -2,7 +2,7 @@ import React from "react";
 
 const Button = ({ handleClick, icon, children }) => {
   return (
-    <button className="btn search__btn" onClick={handleClick}>
+    <button className="btn btn__search" onClick={handleClick}>
       {icon && (
         <svg className="search__icon">
           <use href={icon}></use>

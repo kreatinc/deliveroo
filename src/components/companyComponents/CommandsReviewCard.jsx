@@ -3,7 +3,27 @@ import React from "react";
 import Card from "react-bulma-components/lib/components/card";
 import { Link } from "react-router-dom";
 
-const CommandsReviewCard = ({ title, items, comments }) => {
+const CommandsReviewCard = ({
+  title,
+  items = [
+    {
+      id: 1,
+      quantity: "20",
+      product: { image: "https://fr.wikipedia.org/wiki/Pizza", title: "Tacos" },
+    },
+    {
+      id: 1,
+      quantity: "20",
+      product: { image: "https://fr.wikipedia.org/wiki/Pizza", title: "Tacos" },
+    },
+    {
+      id: 1,
+      quantity: "20",
+      product: { image: "https://fr.wikipedia.org/wiki/Pizza", title: "Tacos" },
+    },
+  ],
+  comments,
+}) => {
   return (
     <Card className="company__card">
       <header className="card-header">
