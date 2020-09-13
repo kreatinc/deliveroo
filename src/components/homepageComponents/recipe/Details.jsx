@@ -15,11 +15,10 @@ const RecipeDetails = ({
   return (
     <div className="recipe__details">
       <div className="recipe__info">
-        <svg className="recipe__info-icon">
-          <use href={icons + "#icon-stopwatch"}></use>
-        </svg>
-        <span className="recipe__info-data recipe__info-data--minutes">45</span>
-        <span className="recipe__info-text"> minutes</span>
+        <span className="recipe__info-data recipe__info-data--minutes">
+          {product.price}
+        </span>
+        <span className="recipe__info-text"> &#36;</span>
       </div>
       <RecipeInfo likes={likes} />
       {
