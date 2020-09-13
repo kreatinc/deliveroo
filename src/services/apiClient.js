@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "../index";
 
-const BASE_URL = "https://deliver-me-api.herokuapp.com/api";
+const BASE_URL = "http://127.0.0.1:8000/api";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,

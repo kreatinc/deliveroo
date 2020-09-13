@@ -21,18 +21,14 @@ const search = (dispatch) => {
   function getSearchProductsResults(productName) {
     return Observable.create(function (observer) {
       dispatch(fetchSearchProductsRequest());
-      apiClient
-        .get(
-          `https://deliver-me-api.herokuapp.com/api/products?title=${productName}`
-        )
-        .then(
-          (res) => {
-            observer.next(res);
-          },
-          (error) => {
-            observer.error(error);
-          }
-        );
+      apiClient.get(`http://127.0.0.1:8000/products?title=${productName}`).then(
+        (res) => {
+          observer.next(res);
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
     });
   }
 

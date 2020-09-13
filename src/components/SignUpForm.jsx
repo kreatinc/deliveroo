@@ -24,12 +24,15 @@ let SignUpForm = ({ classes, register, notifications }) => {
       firstName: "",
       phone: "",
       email: "",
+      address: "",
       password: "",
+      passwordConfirmation: "",
     },
     validate,
     onSubmit: (values) => {
       setSpinning(true);
       register(values, history);
+      history.push("/login");
     },
   });
   useEffect(() => {
@@ -96,6 +99,19 @@ let SignUpForm = ({ classes, register, notifications }) => {
               variant="outlined"
               required
               fullWidth
+              id="email"
+              label="Address"
+              name="address"
+              autoComplete="address"
+              onChange={formik.handleChange}
+              value={formik.values.address}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
@@ -103,6 +119,20 @@ let SignUpForm = ({ classes, register, notifications }) => {
               autoComplete="current-password"
               onChange={formik.handleChange}
               value={formik.values.password}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="passwordConfirmation"
+              label="Password confirmation"
+              type="password"
+              id="passwordConfirmation"
+              autoComplete="current-password"
+              onChange={formik.handleChange}
+              value={formik.values.passwordConfirmation}
             />
           </Grid>
           <Grid item xs={12}></Grid>
@@ -135,8 +165,8 @@ const validate = (values) => {
 
   if (!values.phone) {
     errors.phone = "Required";
-  } else if (values.phone.length > 20) {
-    errors.phone = "too long";
+  } else if (values.phone.length !== 10) {
+    errors.phone = "10 digits";
   } else if (isNaN(values.phone)) {
     errors.phone = "not a number";
   }
@@ -150,7 +180,19 @@ const validate = (values) => {
   if (!values.password) {
     errors.password = "Required";
   } else if (values.password.length > 20) {
-    errors.password = "characters or less";
+    errors.password = "20 characters or less";
+  }
+
+  if (!values.passwordConfirmation) {
+    errors.passwordConfirmation = "Required";
+  } else if (values.passwordConfirmation !== values.password) {
+    errors.passwordConfirmation = "doesn't match";
+  }
+
+  if (!values.address) {
+    errors.password = "Required";
+  } else if (values.address.length < 20) {
+    errors.email = "20 characters or less";
   }
 
   return errors;
