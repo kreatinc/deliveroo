@@ -1,7 +1,7 @@
-const runout = (state, action) => {
+const runout = (state = [], action) => {
   switch (action.type) {
     case "FETCH_RUNOUT_PRODUCT":
-      return state;
+      return [...state, ...action.response.entities.products];
     case "FETCH_RUNOUT_PRODUCT_FAILURE":
       return state;
     default:
@@ -10,3 +10,5 @@ const runout = (state, action) => {
 };
 
 export default runout;
+
+export const getRunOutProducts = (state) => state;

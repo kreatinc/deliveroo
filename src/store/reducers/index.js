@@ -12,6 +12,7 @@ import user, * as fromUser from "./user";
 import commandsList, * as fromCommandsList from "./commandsList";
 import notifications, * as fromNotifications from "./notifications";
 import company, * as fromCompany from "./company";
+import runout, * as fromRunout from "./runout";
 
 const idsByCategory = combineReducers({
   tortya: createList("tortya"),
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   notifications,
   user,
   company,
+  runout,
 });
 
 export default rootReducer;
@@ -151,3 +153,6 @@ export const getComments = (state) =>
 
 export const getLatestCommands = (state) =>
   fromCommandsList.getLatestCommands(state.commandsList.commands);
+
+export const getRunOutProducts = (state) =>
+  fromRunout.getRunOutProducts(state.runout);

@@ -8,7 +8,7 @@ import * as selectors from "store/reducers";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
-  products: selectors.getVisibleProducts(state),
+  products: selectors.getRunOutProducts(state),
 });
 
 // nearly ended products in stock

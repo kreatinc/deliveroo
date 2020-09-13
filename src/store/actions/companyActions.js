@@ -1,3 +1,4 @@
+import { normalize } from "normalizr";
 import * as companyServices from "services/company";
 import * as ProductServices from "services/product";
 import {
@@ -5,6 +6,17 @@ import {
   fetchProductsFailure,
   receiveProducts,
 } from "store/actions/userActions";
+import { arrayOfProducts } from "utils/schema";
+
+const receiveRunoutProducts = (response, category = "others") => {
+  return {
+    type: "FETCH_RUNOUT_PRODUCT",
+    response: normalize(response.data.data, arrayOfProducts),
+    category,
+    links: response.data.links,
+    meta: response.data.meta,
+  };
+};
 
 const login = (credentials, history) => (dispatch) => {
   dispatch({ type: "COMPANY_LOGIN_REQUEST" });
@@ -94,7 +106,7 @@ const getCommands = () => (dispatch) => {
 
 const getRunOutProducts = () => (dispatch) => {
   return ProductServices.getRunOutProducts()
-    .then((response) => dispatch(receiveProducts(response)))
+    .then((response) => dispatch(receiveRunoutProducts(response)))
     .catch(() =>
       addNotification("There was an error while fetching the products")
     );
