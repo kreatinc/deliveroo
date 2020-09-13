@@ -20,12 +20,13 @@ const login = (credentials, history) => (dispatch) => {
     );
 };
 
-const register = (credentials) => (dispatch) => {
+const register = (credentials, history) => (dispatch) => {
   dispatch({ type: "COMPANY_LOGOUT_REQUEST" });
   return companyServices
     .register(credentials)
     .then((response) => {
       dispatch({ type: "COMPANY_REGISTER_SUCCESS", response });
+      history.push("/login");
       dispatch(addNotification("Your account has been created"));
     })
     .catch((error) => {

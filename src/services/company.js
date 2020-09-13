@@ -4,10 +4,26 @@ const login = ({ email, password }) => {
   return apiClient.post("companies/login", JSON.stringify({ email, password }));
 };
 
-const register = ({ firstName, phone, email, password }) => {
+const register = ({
+  firstName,
+  phone,
+  email,
+  address,
+  description,
+  password,
+  passwordConfirmation,
+}) => {
   return apiClient.post(
     "companies/register",
-    JSON.stringify({ firstName, phone, email, password })
+    JSON.stringify({
+      title: firstName,
+      phone,
+      address,
+      email,
+      description,
+      password,
+      password_confirmation: passwordConfirmation,
+    })
   );
 };
 

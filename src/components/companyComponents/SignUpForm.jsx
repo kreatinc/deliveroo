@@ -9,6 +9,7 @@ import SignUp from "views/Register";
 import { connect } from "react-redux";
 import { getNotifications } from "store/reducers";
 import { Notification } from "rsuite";
+import { Input } from "rsuite";
 
 const mapStateToProps = (state) => {
   return {
@@ -21,10 +22,12 @@ let SignUpForm = ({ classes, register, notifications }) => {
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
-      firstName: "",
+      title: "",
       phone: "",
       email: "",
+      description: "",
       password: "",
+      passwordConfirmation: "",
     },
     validate,
     onSubmit: (values) => {
@@ -54,15 +57,15 @@ let SignUpForm = ({ classes, register, notifications }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="fname"
-              name="firstName"
+              name="title"
               variant="outlined"
               required
               fullWidth
-              id="firstName"
-              label="First Name"
+              id="title"
+              label="Title"
               autoFocus
               onChange={formik.handleChange}
-              value={formik.values.firstName}
+              value={formik.values.title}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -96,6 +99,19 @@ let SignUpForm = ({ classes, register, notifications }) => {
               variant="outlined"
               required
               fullWidth
+              label="Description"
+              id="description"
+              name="description"
+              autoComplete="description"
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
@@ -103,6 +119,20 @@ let SignUpForm = ({ classes, register, notifications }) => {
               autoComplete="current-password"
               onChange={formik.handleChange}
               value={formik.values.password}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="passwordConfirmation"
+              label="Password confirmation"
+              type="password"
+              id="passwordConfirmation"
+              autoComplete="current-password"
+              onChange={formik.handleChange}
+              value={formik.values.passwordConfirmation}
             />
           </Grid>
           <Grid item xs={12}></Grid>
@@ -127,16 +157,16 @@ SignUpForm = connect(mapStateToProps, actions)(SignUpForm);
 export default SignUpForm;
 const validate = (values) => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  } else if (values.firstName.length > 15) {
-    errors.firstName = "15 characters or less";
+  if (!values.title) {
+    errors.title = "Required";
+  } else if (values.title.length > 15) {
+    errors.title = "15 characters or less";
   }
 
   if (!values.phone) {
     errors.phone = "Required";
-  } else if (values.phone.length > 20) {
-    errors.phone = "too long";
+  } else if (values.phone.length !== 10) {
+    errors.phone = "10 digits";
   } else if (isNaN(values.phone)) {
     errors.phone = "not a number";
   }
@@ -150,7 +180,18 @@ const validate = (values) => {
   if (!values.password) {
     errors.password = "Required";
   } else if (values.password.length > 20) {
-    errors.password = "characters or less";
+    errors.password = "20 characters or less";
+  }
+
+  if (!values.passwordConfirmation) {
+    errors.passwordConfirmation = "Required";
+  } else if (values.passwordConfirmation !== values.password) {
+    errors.passwordConfirmation = "doesn't match";
+  }
+  if (!values.description) {
+    errors.description = "Required";
+  } else if (values.description.length !== 40) {
+    errors.description = "40 characters";
   }
 
   return errors;

@@ -32,7 +32,6 @@ let SignUpForm = ({ classes, register, notifications }) => {
     onSubmit: (values) => {
       setSpinning(true);
       register(values, history);
-      history.push("/login");
     },
   });
   useEffect(() => {

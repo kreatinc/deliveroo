@@ -308,12 +308,13 @@ const updateUserInformation = (informations) => (dispatch) => {
     });
 };
 
-const register = (credentials) => (dispatch) => {
+const register = (credentials, history) => (dispatch) => {
   dispatch(userRegisterRequest());
   return userServices
     .register(credentials)
     .then((response) => {
       dispatch(userRegisterSuccess(response));
+      history.push("/login");
       dispatch(addNotification("Your account has been created"));
     })
     .catch((error) => {
