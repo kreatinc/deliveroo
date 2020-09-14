@@ -60,17 +60,46 @@ const getCommand = (commandGroupId) => {
 
 const getProducts = () => apiClient.get("companies/products");
 
-const addProduct = ({ product }) => {
+const addProduct = (product) => {
   const _product = {
     title: product.title,
     recipe: product.recipe,
     price: product.price,
     quantity: product.quantity,
-    category_id: product.category.id,
+    category_id: product.category,
     description: product.description,
   };
-  console.log(_product);
+  console.log("the product is : ", _product);
   return apiClient.post("companies/products", JSON.stringify(_product));
+};
+const editProduct = (product) => {
+  const _product = {
+    title: product.title,
+    recipe: product.recipe,
+    price: product.price,
+    quantity: product.quantity,
+    category_id: product.category,
+    description: product.description,
+  };
+  return apiClient.patch(
+    `companies/products/${product.id}`,
+    JSON.stringify(_product)
+  );
+};
+const removeProduct = (product) => {
+  console.log("the product is : ", product);
+  const _product = {
+    title: product.title,
+    recipe: product.recipe,
+    price: product.price,
+    quantity: product.quantity,
+    category_id: product.category,
+    description: product.description,
+  };
+  return apiClient.delete(
+    `companies/products/${product.id}`,
+    JSON.stringify(_product)
+  );
 };
 
 const fetchCategories = () => {
@@ -89,4 +118,6 @@ export {
   getProducts,
   addProduct,
   fetchCategories,
+  editProduct,
+  removeProduct,
 };

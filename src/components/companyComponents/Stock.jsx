@@ -25,10 +25,7 @@ let Stock = ({ products, getRunOutProducts }) => {
       <Container className="welcome__container">
         <Columns>
           <Columns.Column>
-            <CommandsReviewCard title="Nearly out of stock" />
-          </Columns.Column>
-          <Columns.Column>
-            <CommandsReviewCard title="Shopping List" />
+            <CommandsReviewCard title="Nearly out of stock" items={products} />
           </Columns.Column>
         </Columns>
         <Columns.Column>

@@ -10,6 +10,7 @@ const CommentsReviewCard = ({ title, items }) => {
       </header>
       <div className="card-content">
         <h2 className="statistic">
+          {!items && <p>No data available</p>}
           {items && (
             <ul>
               {items.map((item) => (

@@ -115,6 +115,28 @@ const addProduct = (product) => (dispatch) => {
       addNotification("There was a problem while adding the product")
     );
 };
+const editProduct = (product) => (dispatch) => {
+  return companyServices
+    .editProduct(product)
+    .then((response) => {
+      dispatch(receiveProduct(response));
+      addNotification("Product added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the product")
+    );
+};
+const removeProduct = (product) => (dispatch) => {
+  return companyServices
+    .removeProduct(product)
+    .then((response) => {
+      dispatch({ type: "REMOVE_PRODUCT", id: product.id });
+      addNotification("Product added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the product")
+    );
+};
 
 const receiveProduct = (response) => {
   return {
@@ -156,5 +178,7 @@ export {
   getCommands,
   getRunOutProducts,
   addProduct,
+  removeProduct,
+  editProduct,
   fetchCategories,
 };

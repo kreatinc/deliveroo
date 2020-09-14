@@ -11,7 +11,14 @@ const mapStateToProps = (state) => ({
   categories: selectors.getCategories(state),
 });
 
-let Products = ({ products, categories, fetchCategories }) => {
+let Products = ({
+  products,
+  categories,
+  fetchCategories,
+  addProduct,
+  editProduct,
+  removeProduct,
+}) => {
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
@@ -41,6 +48,7 @@ let Products = ({ products, categories, fetchCategories }) => {
             },
           ]}
           data={products.map((product) => ({
+            id: product.id,
             price: product.price,
             title: product.title,
             quantity: product.quantity,
@@ -48,6 +56,9 @@ let Products = ({ products, categories, fetchCategories }) => {
             description: product.description,
             recipe: product.recipe,
           }))}
+          addAction={addProduct}
+          editAction={editProduct}
+          removeAction={removeProduct}
         />
       </Container>
     </>

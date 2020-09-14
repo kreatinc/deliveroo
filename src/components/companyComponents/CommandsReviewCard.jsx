@@ -10,6 +10,7 @@ const CommandsReviewCard = ({ title, items }) => {
         <h3 style={{ paddingLeft: "20px" }}>{title}</h3>
       </header>
       <div className="card-content">
+        {!items && <p>No data available</p>}
         <h2 className="statistic">
           {items && (
             <ul>
