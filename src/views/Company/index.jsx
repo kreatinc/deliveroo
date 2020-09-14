@@ -56,7 +56,7 @@ let Company = ({
   useEffect(() => {}, []);
 
   if (slug && slug === "products") {
-    return <Products />;
+    return <Products products={products} />;
   }
   if (slug && slug === "commands") {
     return <Commands />;
