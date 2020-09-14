@@ -8,13 +8,10 @@ import {
 } from "store/actions/userActions";
 import { arrayOfProducts, product } from "utils/schema";
 
-const receiveRunoutProducts = (response, category = "others") => {
+const receiveRunoutProducts = (response) => {
   return {
     type: "FETCH_RUNOUT_PRODUCT",
     response: normalize(response.data.data, arrayOfProducts),
-    category,
-    links: response.data.links,
-    meta: response.data.meta,
   };
 };
 

@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
   products: selectors.getVisibleProducts(state),
+  runOutProducts: selectors.getRunOutProducts(state),
   commands: selectors.getCommands(state),
   latestCommands: selectors.getLatestCommands(state),
   comments: selectors.getComments(state),
@@ -34,6 +35,8 @@ let Company = ({
   getProducts,
   latestCommands,
   getCommands,
+  getRunOutProducts,
+  runOutProducts,
 }) => {
   let { slug } = useParams();
 
@@ -49,11 +52,12 @@ let Company = ({
   }, []);
 
   useEffect(() => {
+    getRunOutProducts();
     getProducts();
     getCommands();
-  }, [getCommands, getProducts]);
+  }, [getCommands, getProducts, getRunOutProducts]);
 
-  useEffect(() => {}, []);
+  console.log("runOutProducts :>> ", runOutProducts);
 
   if (slug && slug === "products") {
     return <Products products={products} />;
@@ -62,7 +66,7 @@ let Company = ({
     return <Commands commands={commands} />;
   }
   if (slug && slug === "stock") {
-    return <Stock products={products} />;
+    return <Stock runout={[runOutProducts]} />;
   }
 
   return (

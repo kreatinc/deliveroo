@@ -15,7 +15,7 @@ const CommandsReviewCard = ({ title, items }) => {
           {items && (
             <ul>
               {items.map((item, i) => (
-                <Product command={item} key={i} />
+                <Product item={item} key={i} />
               ))}
             </ul>
           )}

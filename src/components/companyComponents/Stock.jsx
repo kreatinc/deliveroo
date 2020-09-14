@@ -7,25 +7,17 @@ import * as actions from "store/actions/companyActions";
 import * as selectors from "store/reducers";
 import { connect } from "react-redux";
 
-const mapStateToProps = (state) => ({
-  products: selectors.getRunOutProducts(state),
-});
-
 // nearly ended products in stock
 // shopping list
-let Stock = ({ products, getRunOutProducts }) => {
-  useEffect(() => {
-    getRunOutProducts();
-  }, [getRunOutProducts]);
-
-  console.log("products :>> ", products);
+const Stock = ({ runout }) => {
+  console.log("products :>> ", runout);
   return (
     <>
       <NavBar />
       <Container className="welcome__container">
         <Columns>
           <Columns.Column>
-            <CommandsReviewCard title="Nearly out of stock" items={products} />
+            <CommandsReviewCard title="Nearly out of stock" items={runout} />
           </Columns.Column>
         </Columns>
         <Columns.Column>
@@ -35,7 +27,5 @@ let Stock = ({ products, getRunOutProducts }) => {
     </>
   );
 };
-
-Stock = connect(mapStateToProps, actions)(Stock);
 
 export default Stock;
