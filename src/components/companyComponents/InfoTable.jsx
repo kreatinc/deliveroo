@@ -1,29 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MaterialTable from "material-table";
+import * as actions from "store/actions/companyActions";
+import { connect } from "react-redux";
 
-export default function MaterialTableDemo({ columns, data, title }) {
-  // const [state, setState] = React.useState({
-  // columns: [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  //   {
-  //     title: "Birth Place",
-  //     field: "birthCity",
-  //     lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
-  //   },
-  // ],
-  //   data: [
-  //     { name: "Mehmet", surname: "Baran", birthYear: 1987, birthCity: 63 },
-  //     {
-  //       name: "Zerya Betül",
-  //       surname: "Baran",
-  //       birthYear: 2017,
-  //       birthCity: 34,
-  //     },
-  //   ],
-  // });
-
+let MaterialTableDemo = ({ columns, data, title, addProduct }) => {
   return (
     <MaterialTable
       style={{ marginTop: "5%" }}
@@ -31,17 +11,9 @@ export default function MaterialTableDemo({ columns, data, title }) {
       columns={columns}
       data={data}
       editable={{
-        onRowAdd: (newData) =>
-          new Promise((resolve) => {
-            // setTimeout(() => {
-            //   resolve();
-            //   setState((prevState) => {
-            //     const data = [...prevState.data];
-            //     data.push(newData);
-            //     return { ...prevState, data };
-            //   });
-            // }, 600);
-          }),
+        onRowAdd: (newData) => {
+          addProduct(newData);
+        },
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
             // setTimeout(() => {
@@ -69,4 +41,8 @@ export default function MaterialTableDemo({ columns, data, title }) {
       }}
     />
   );
-}
+};
+
+MaterialTableDemo = connect(null, actions)(MaterialTableDemo);
+
+export default MaterialTableDemo;

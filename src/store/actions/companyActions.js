@@ -6,7 +6,7 @@ import {
   fetchProductsFailure,
   receiveProducts,
 } from "store/actions/userActions";
-import { arrayOfProducts } from "utils/schema";
+import { arrayOfProducts, product } from "utils/schema";
 
 const receiveRunoutProducts = (response, category = "others") => {
   return {
@@ -103,11 +103,47 @@ const getCommands = () => (dispatch) => {
       );
     });
 };
+
+const addProduct = (product) => (dispatch) => {
+  return companyServices
+    .addProduct(product)
+    .then((response) => {
+      dispatch(receiveProduct(response));
+      addNotification("Product added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the product")
+    );
+};
+
+const receiveProduct = (response) => {
+  return {
+    type: "FETCH_PRODUCT_SUCCESS",
+    response: normalize(response.data.data, product),
+  };
+};
+
 const getRunOutProducts = () => (dispatch) => {
   return ProductServices.getRunOutProducts()
     .then((response) => dispatch(receiveRunoutProducts(response)))
     .catch(() =>
       addNotification("There was an error while fetching the products")
+    );
+};
+
+const fetchCategories = () => (dispatch) => {
+  return ProductServices.fetchCategories()
+    .then((response) => {
+      dispatch({
+        type: "FETCH_CATEGORIES_SUCCESS",
+        response: response.data.data,
+      });
+      dispatch(addNotification("Categories fetched successfuly"));
+    })
+    .catch((error) =>
+      dispatch(
+        addNotification("There was an error while fetching the categories")
+      )
     );
 };
 
@@ -119,4 +155,6 @@ export {
   getProducts,
   getCommands,
   getRunOutProducts,
+  addProduct,
+  fetchCategories,
 };

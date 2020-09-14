@@ -60,6 +60,23 @@ const getCommand = (commandGroupId) => {
 
 const getProducts = () => apiClient.get("companies/products");
 
+const addProduct = ({ product }) => {
+  const _product = {
+    title: product.title,
+    recipe: product.recipe,
+    price: product.price,
+    quantity: product.quantity,
+    category_id: product.category.id,
+    description: product.description,
+  };
+  console.log(_product);
+  return apiClient.post("companies/products", JSON.stringify(_product));
+};
+
+const fetchCategories = () => {
+  return apiClient.get("/categories");
+};
+
 export {
   login,
   register,
@@ -70,4 +87,6 @@ export {
   getCommands,
   getCommand,
   getProducts,
+  addProduct,
+  fetchCategories,
 };
