@@ -3,24 +3,41 @@ import Table from "./InfoTable";
 import NavBar from "./Navbar";
 import { Container } from "@material-ui/core";
 
-const Commands = () => {
+const DELIVERY_STATE = {
+  WAITING: "waiting",
+  DELIVERED: "delivered",
+  REJECTED: "rejected",
+};
+
+const Commands = ({ commands }) => {
   return (
     <>
       <NavBar />
       <Container>
         <Table
+          title="Commands informations"
           columns={[
             { title: "Price", field: "price" },
-            { title: "Title", field: "title" },
             { title: "Quantity", field: "quantity" },
-            { title: "Category", field: "category" },
-            { title: "Recipe", field: "recipe" },
-            // {
-            //   title: "Birth Place",
-            //   field: "birthCity",
-            //   lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
-            // },
+            { title: "Description", field: "description" },
+            { title: "Address", field: "address" },
+            {
+              title: "Delivery state",
+              field: "delivery",
+              lookup: {
+                [DELIVERY_STATE.WAITING]: "Waiting",
+                [DELIVERY_STATE.DELIVERED]: "Delivered",
+                [DELIVERY_STATE.REJECTED]: "Rejected",
+              },
+            },
           ]}
+          data={commands.map((command) => ({
+            price: command.price,
+            quantity: command.quantity,
+            description: command.description,
+            address: command.address,
+            delivery: command.delivery_state,
+          }))}
         />
       </Container>
     </>

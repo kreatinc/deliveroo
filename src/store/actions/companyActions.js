@@ -94,7 +94,7 @@ const getCommands = () => (dispatch) => {
         type: "FETCH_COMMANDS_SUCCESS",
         response: response.data.data,
       });
-      // dispatch(addNotification("Commands fetched successfuly"));
+      dispatch(addNotification("Commands fetched successfuly"));
     })
     .catch(() => {
       dispatch({ type: "FETCH_COMMANDS_FAILURE" });
