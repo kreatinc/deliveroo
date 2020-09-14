@@ -103,7 +103,6 @@ const getCommands = () => (dispatch) => {
       );
     });
 };
-
 const getRunOutProducts = () => (dispatch) => {
   return ProductServices.getRunOutProducts()
     .then((response) => dispatch(receiveRunoutProducts(response)))

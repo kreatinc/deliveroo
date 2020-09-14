@@ -36,7 +36,6 @@ let Company = ({
   getCommands,
 }) => {
   let { slug } = useParams();
-  console.log("comments :>> ", comments);
 
   const isAuthenticated = useAuthenticated("company");
 
@@ -52,7 +51,7 @@ let Company = ({
   useEffect(() => {
     getProducts();
     getCommands();
-  }, []);
+  }, [getCommands, getProducts]);
 
   useEffect(() => {}, []);
 

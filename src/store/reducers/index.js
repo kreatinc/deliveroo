@@ -140,6 +140,9 @@ export const getCommands = (state) => {
   return fromCommandsList.getCommands(state.commandsList.commands);
 };
 
+export const getLatestCommands = (state) =>
+  fromCommandsList.getLatestCommands(state.commandsList.latestCommands);
+
 export const getIsFetchingCommands = (state) => {
   return fromCommandsList.getIsFetchingCommands(state.commandsList.isFetching);
 };
@@ -150,9 +153,6 @@ export const getNotifications = (state) => {
 
 export const getComments = (state) =>
   fromCommentsList.getCompanyComments(state.commentsList);
-
-export const getLatestCommands = (state) =>
-  fromCommandsList.getLatestCommands(state.commandsList.commands);
 
 export const getRunOutProducts = (state) =>
   fromRunout.getRunOutProducts(state.runout);

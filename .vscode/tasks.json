@@ -21,15 +21,15 @@
       "runOptions": {
         "runOn": "folderOpen"
       }
+    },
+    {
+      "label": "Init",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": ["go develop", "start dev"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
-    // {
-    //   "label": "Init",
-    //   "type": "shell",
-    //   "dependsOrder": "sequence",
-    //   "dependsOn": ["go develop", "refresh", "get dependecies", "start dev"],
-    //   "runOptions": {
-    //     "runOn": "folderOpen"
-    //   }
-    // }
   ]
 }

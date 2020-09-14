@@ -32,10 +32,12 @@ const unlikeProduct = (productId) => {
 };
 
 const sendCommand = (command) => {
-  const req = JSON.stringify({
-    command: command,
-  });
-  return apiClient.post(`clients/commands`, req);
+  return apiClient.post(
+    `clients/commands`,
+    JSON.stringify({
+      command: command,
+    })
+  );
 };
 
 const getCommands = () => {
