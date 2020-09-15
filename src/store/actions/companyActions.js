@@ -85,7 +85,8 @@ const getProducts = () => (dispatch) => {
 
 const getCommands = () => (dispatch) => {
   dispatch({ type: "FETCH_COMMANDS_REQUEST" });
-  return ProductServices.getCommands()
+  return companyServices
+    .getCommands()
     .then((response) => {
       console.log("the commands are", response);
       dispatch({
