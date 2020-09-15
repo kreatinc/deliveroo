@@ -189,8 +189,8 @@ const validate = (values) => {
   const errors = {};
   if (!values.title) {
     errors.title = "Required";
-  } else if (values.title.length > 15) {
-    errors.title = "15 characters or less";
+  } else if (values.title.length > 25) {
+    errors.title = "25 characters or less";
   }
   if (!values.description) {
     errors.description = "Required";
