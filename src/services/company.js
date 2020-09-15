@@ -116,7 +116,7 @@ const editCommand = (command) => {
   );
 };
 const removeCommand = (command) => {
-  return apiClient.delete(`companies/products/${command.id}`);
+  return apiClient.delete(`companies/commands/${command.id}`);
 };
 
 const fetchCategories = () => {
