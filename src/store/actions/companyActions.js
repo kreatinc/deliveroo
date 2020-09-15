@@ -199,6 +199,33 @@ const fetchCategories = () => (dispatch) => {
     );
 };
 
+const updatePassword = (oldPassword, newPassword, confirmation) => (
+  dispatch
+) => {
+  return companyServices
+    .updatePassword(oldPassword, newPassword, confirmation)
+    .then((response) => {
+      dispatch(addNotification("Password updated successfuly"));
+    })
+    .catch((error) => {
+      dispatch(
+        addNotification("There was an error while changing the password")
+      );
+    });
+};
+
+const updateCompanyInformation = (informations) => (dispatch) => {
+  return companyServices
+    .updatecompanyInformation(informations)
+    .then((response) => {
+      dispatch(receiveCompany(response.data));
+      dispatch(addNotification("Informations updated successfuly"));
+    })
+    .catch((error) => {
+      dispatch(addNotification("There was an error while updating profile"));
+    });
+};
+
 export {
   login,
   register,
@@ -214,4 +241,6 @@ export {
   removeCommand,
   editCommand,
   fetchCategories,
+  updatePassword,
+  updateCompanyInformation,
 };

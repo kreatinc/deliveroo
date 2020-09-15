@@ -135,6 +135,9 @@ export const getIsSearching = (state) => {
 export const getCurrentUser = (state) => {
   return fromUser.getUser(state.user);
 };
+export const getCurrentCompany = (state) => {
+  return fromUser.getUser(state.company);
+};
 
 export const getCommands = (state) => {
   return fromCommandsList.getCommands(state.commandsList.commands);

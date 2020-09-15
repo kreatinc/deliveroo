@@ -53,20 +53,28 @@ const removeUser = () => {
     );
   }
 };
-const setCompany = ({ email, name, phone, address, token }) => {
+const setCompany = ({ email, title, description, phone, address, token }) => {
   try {
     const company = getCompany();
 
     if (company) {
-      const editedCompany = { ...company, email, name, phone, address };
+      const editedCompany = {
+        ...company,
+        email,
+        description,
+        title,
+        phone,
+        address,
+      };
       localStorage.setItem("company", JSON.stringify(editedCompany));
     } else {
       localStorage.setItem(
         "company",
         JSON.stringify({
           email,
-          name,
+          title,
           phone,
+          description,
           address,
           token,
         })

@@ -4,34 +4,33 @@ import {
   Modal,
   Button,
   ButtonToolbar,
-  Avatar,
   FormGroup,
   ControlLabel,
   Form,
 } from "rsuite";
 
-import * as selectors from "../store/reducers";
-import * as actions from "../store/actions/userActions";
+import * as selectors from "store/reducers";
+import * as actions from "store/actions/companyActions";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
-import UserPasswordModal from "./UserPasswordModal";
-import ErrorsContainer from "./ErrorsContainer";
+import ErrorsContainer from "components/ErrorsContainer";
 
 const mapStateToProps = (state) => ({
-  currentUser: selectors.getCurrentUser(state),
+  currentCompany: selectors.getCurrentCompany(state),
 });
 
-let UserInformationForm = ({
-  currentUser,
-  updateUserInformation,
+let CompanyInformationForm = ({
+  currentCompany,
+  updateCompanyInformation,
   closeModal,
 }) => {
   const formik = useFormik({
     initialValues: {
-      firstName: currentUser.name,
-      email: currentUser.email,
-      phone: currentUser.phone,
-      address: currentUser.address,
+      title: currentCompany.title,
+      email: currentCompany.email,
+      phone: currentCompany.phone,
+      address: currentCompany.address,
+      description: currentCompany.address,
     },
     validate,
     onSubmit: (values) => {
@@ -40,18 +39,19 @@ let UserInformationForm = ({
       );
 
       if (isSure) {
-        updateUserInformation({
-          name: values.firstName,
+        updateCompanyInformation({
+          title: values.title,
           email: values.email,
           phone: values.phone,
           address: values.address,
+          description: values.description,
         });
         closeModal();
       }
     },
   });
 
-  if (currentUser) {
+  if (currentCompany) {
     return (
       <>
         {Object.keys(formik.errors).length !== 0 && (
@@ -67,15 +67,15 @@ let UserInformationForm = ({
             <ControlLabel></ControlLabel>
             <TextField
               autoComplete="fname"
-              name="firstName"
+              name="title"
               variant="outlined"
               required
               fullWidth
-              id="firstName"
-              label="First Name"
+              id="title"
+              label="title"
               autoFocus
               onChange={formik.handleChange}
-              value={formik.values.firstName}
+              value={formik.values.title}
             />
           </FormGroup>
 
@@ -92,6 +92,20 @@ let UserInformationForm = ({
               autoFocus
               onChange={formik.handleChange}
               value={formik.values.phone}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextField
+              autoComplete="fname"
+              name="description"
+              variant="outlined"
+              required
+              fullWidth
+              id="description"
+              label="Description"
+              autoFocus
+              onChange={formik.handleChange}
+              value={formik.values.description}
             />
           </FormGroup>
 
@@ -131,7 +145,6 @@ let UserInformationForm = ({
               <Button appearance="primary" type="submit">
                 Submit
               </Button>
-              <UserPasswordModal />
             </ButtonToolbar>
           </FormGroup>
         </Form>
@@ -141,27 +154,25 @@ let UserInformationForm = ({
   return null;
 };
 
-UserInformationForm = connect(mapStateToProps, actions)(UserInformationForm);
+CompanyInformationForm = connect(
+  mapStateToProps,
+  actions
+)(CompanyInformationForm);
 
 const UserModal = () => {
   const [show, setShow] = useState(false);
   return (
     <>
       <ButtonToolbar>
-        <Avatar
-          onClick={() => setShow(true)}
-          circle
-          size="md"
-          src="https://lorempixel.com/640/480/?32997"
-        />
+        <Button onClick={() => setShow(true)}>Edit informations</Button>
       </ButtonToolbar>
 
       <Modal size="sm" show={show} onHide={() => setShow(false)}>
         <Modal.Header>
-          <Modal.Title>User informations</Modal.Title>
+          <Modal.Title>Company informations</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UserInformationForm closeModal={() => setShow(false)} />
+          <CompanyInformationForm closeModal={() => setShow(false)} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setShow(false)} appearance="subtle">
@@ -176,18 +187,24 @@ export default UserModal;
 
 const validate = (values) => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  } else if (values.firstName.length > 15) {
-    errors.firstName = "15 characters or less";
+  if (!values.title) {
+    errors.title = "Required";
+  } else if (values.title.length > 15) {
+    errors.title = "15 characters or less";
+  }
+  if (!values.description) {
+    errors.description = "Required";
+  } else if (values.description.length >= 40) {
+    errors.description = "40 characters";
+  }
+  if (!values.phone) {
+    errors.phone = "Required";
   }
   if (!values.email) {
     errors.email = "Required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = "Invalid";
   }
-  if (!values.phone) {
-    errors.phone = "Required";
-  }
+
   return errors;
 };
