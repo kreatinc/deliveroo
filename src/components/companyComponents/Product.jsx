@@ -18,7 +18,7 @@ const Product = ({ item }) => {
             <h4>id: {item.product.id}</h4>
           </Columns.Column>
           <Columns.Column>
-            <h4>{item.quantity} Unit</h4>
+            <h4>{item.product.quantity} Unit</h4>
           </Columns.Column>
         </Columns>
       </li>
