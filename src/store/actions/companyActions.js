@@ -105,6 +105,7 @@ const addProduct = (product) => (dispatch) => {
   return companyServices
     .addProduct(product)
     .then((response) => {
+      window.location.reload();
       dispatch(receiveProduct(response));
       addNotification("Product added successfully");
     })
@@ -168,7 +169,6 @@ const removeCommand = (command) => (dispatch) => {
 };
 
 const receiveProduct = (response) => {
-  window.location.reload();
   return {
     type: "FETCH_PRODUCT_SUCCESS",
     response: normalize(response.data.data, product),
