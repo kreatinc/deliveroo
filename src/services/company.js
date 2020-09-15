@@ -87,7 +87,7 @@ const editProduct = (product) => {
   );
 };
 const removeProduct = (product) => {
-  console.log("product is the following : ", product);
+  console.log("product to is the following : ", product);
   return apiClient.delete(`companies/products/${product.id}`);
 };
 const addCommand = (product) => {
@@ -116,7 +116,8 @@ const editCommand = (command) => {
   );
 };
 const removeCommand = (command) => {
-  return apiClient.delete(`companies/commands/${command.id}`);
+  console.log("command to remove:", command);
+  return apiClient.delete(`companies/commands/delete/${command.id}`);
 };
 
 const fetchCategories = () => {

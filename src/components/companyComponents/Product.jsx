@@ -12,13 +12,13 @@ const Product = ({ item }) => {
             <Avatar circle size="md" src={item.product.image} />
           </Columns.Column>
           <Columns.Column className="is-6">
-            <h3>{item.product.title}</h3>
+            <h4>{item.product.title}</h4>
           </Columns.Column>
           <Columns.Column>
-            <h3>id: {item.product.id}</h3>
+            <h4>id: {item.product.id}</h4>
           </Columns.Column>
           <Columns.Column>
-            <h3>{item.quantity} Unit</h3>
+            <h4>{item.quantity} Unit</h4>
           </Columns.Column>
         </Columns>
       </li>

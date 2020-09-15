@@ -5,7 +5,7 @@ const Review = () => {
       <div className="card-image">
         <figure className="image is-4by3">
           <img
-            src="https://bulma.io/images/placeholders/1280x960.png"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rd.com%2Fwp-content%2Fuploads%2F2017%2F09%2F01-shutterstock_476340928-Irina-Bg-1024x683.jpg&f=1&nofb=1"
             alt="Placeholder image"
           />
         </figure>

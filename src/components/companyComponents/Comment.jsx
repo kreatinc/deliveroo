@@ -10,10 +10,10 @@ const Comment = ({ comment }) => {
             <h6>{comment.created_at}</h6>
           </Columns.Column>
           <Columns.Column className="is-6">
-            <h4>{comment.client_name}</h4>
+            <h5>{comment.client_name}</h5>
           </Columns.Column>
           <Columns.Column>
-            <h4>{comment.comment}</h4>
+            <h5>{comment.comment}</h5>
           </Columns.Column>
         </Columns>
       </li>

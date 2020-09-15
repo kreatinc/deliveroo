@@ -113,7 +113,10 @@ let Company = ({
               />
             </Columns.Column>
             <Columns.Column>
-              <CommentsReviewCard title="Latest comments" items={comments} />
+              <CommentsReviewCard
+                title="Latest comments"
+                items={comments.slice(0, 6)}
+              />
             </Columns.Column>
           </Columns>
         </div>

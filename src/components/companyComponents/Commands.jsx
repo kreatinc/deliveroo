@@ -11,7 +11,7 @@ const DELIVERY_STATE = {
   REJECTED: "canceled",
 };
 
-let Commands = ({ commands, editCommand, removeCommand, addCommand }) => {
+let Commands = ({ commands, editCommand, removeCommand }) => {
   return (
     <>
       <NavBar />

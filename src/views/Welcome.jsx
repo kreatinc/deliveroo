@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBarComponent from "components/NavBar";
 import HomeProduct from "components/HomeProduct";
 import { Container, Columns } from "react-bulma-components/lib";
@@ -8,8 +8,20 @@ import bannerImg from "../assets/img/bannerImg.png";
 import Review from "components/Review";
 import { useAuthenticated } from "customHooks";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import * as selectors from "store/reducers";
+import * as actions from "store/actions/userActions";
 
-const Welcome = () => {
+const mapStateToProps = (state) => ({
+  products: selectors.getVisibleProducts(state),
+});
+
+let Welcome = ({ fetchProducts, products }) => {
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  console.log("products :>> ", products);
   const isAuthenticated = useAuthenticated();
   if (!isAuthenticated) {
     return (
@@ -53,18 +65,14 @@ const Welcome = () => {
             </Card>
             <div className="categories-list">
               <Columns>
-                <Columns.Column>
-                  <HomeProduct />
-                </Columns.Column>
-                <Columns.Column>
-                  <HomeProduct />
-                </Columns.Column>
-                <Columns.Column>
-                  <HomeProduct />
-                </Columns.Column>
-                <Columns.Column>
-                  <HomeProduct />
-                </Columns.Column>
+                {products.map(
+                  (product, i) =>
+                    i <= 3 && (
+                      <Columns.Column>
+                        <HomeProduct product={product} key={i} />
+                      </Columns.Column>
+                    )
+                )}
               </Columns>
               <hr></hr>
               <p className="heading-2">What our clients say about us</p>
@@ -89,5 +97,7 @@ const Welcome = () => {
     );
   }
 };
+
+Welcome = connect(mapStateToProps, actions)(Welcome);
 
 export default Welcome;
