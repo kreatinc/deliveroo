@@ -2,15 +2,12 @@ import { Container } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Columns } from "react-bulma-components/lib";
 import NavBar from "./Navbar";
-import CommandsReviewCard from "./CommandsReviewCard";
-import * as actions from "store/actions/companyActions";
-import * as selectors from "store/reducers";
-import { connect } from "react-redux";
 import RunoutReviewCard from "./RunoutReviewCard";
+import SalesChart from "./SalesChart";
 
 // nearly ended products in stock
 // shopping list
-const Stock = ({ runout }) => {
+const Stock = ({ runout, commands }) => {
   return (
     <>
       <NavBar />
@@ -21,7 +18,7 @@ const Stock = ({ runout }) => {
           </Columns.Column>
         </Columns>
         <Columns.Column>
-          <CommandsReviewCard title="Sales Chart" />
+          <SalesChart title="Commands Chart" />
         </Columns.Column>
       </Container>
     </>
