@@ -43,7 +43,6 @@ let Commands = ({ commands, editCommand, removeCommand, addCommand }) => {
           }))}
           editAction={editCommand}
           removeAction={removeCommand}
-          addAction={addCommand}
         />
       </Container>
     </>

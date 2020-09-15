@@ -16,6 +16,7 @@ import { getCompany } from "utils/localStorageHelpers";
 import * as actions from "store/actions/companyActions";
 import * as selectors from "store/reducers";
 import { connect } from "react-redux";
+import { Notification } from "rsuite";
 
 const mapStateToProps = (state) => ({
   products: selectors.getVisibleProducts(state),
@@ -23,6 +24,8 @@ const mapStateToProps = (state) => ({
   commands: selectors.getCommands(state),
   latestCommands: selectors.getLatestCommands(state),
   comments: selectors.getComments(state),
+  notifications: selectors.getNotifications(state),
+
   // customers,
   // likes: selectors.getCompanyLikes(state),
 });
@@ -37,6 +40,7 @@ let Company = ({
   getCommands,
   getRunOutProducts,
   runOutProducts,
+  notifications,
 }) => {
   let { slug } = useParams();
 
@@ -52,12 +56,25 @@ let Company = ({
   }, []);
 
   useEffect(() => {
+    if (notifications) {
+      notifications.map((notification) => {
+        Notification.info({
+          title: "Notification",
+          placement: "bottomStart",
+          duration: 3000,
+          description: notification,
+        });
+      });
+    }
+  }, [notifications]);
+
+  useEffect(() => {
     getRunOutProducts();
     getProducts();
     getCommands();
   }, [getCommands, getProducts, getRunOutProducts]);
 
-  console.log("runOutProducts :>> ", runOutProducts);
+  console.log("commands :>> ", commands);
 
   if (slug && slug === "products") {
     return <Products products={products} />;

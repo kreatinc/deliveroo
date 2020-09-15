@@ -87,6 +87,7 @@ const getCommands = () => (dispatch) => {
   dispatch({ type: "FETCH_COMMANDS_REQUEST" });
   return ProductServices.getCommands()
     .then((response) => {
+      console.log("the commands are", response);
       dispatch({
         type: "FETCH_COMMANDS_SUCCESS",
         response: response.data.data,
@@ -101,27 +102,51 @@ const getCommands = () => (dispatch) => {
     });
 };
 
+const productCheck = (product, isEditing) => {
+  const errors = [];
+  if (isEditing && !product.id) errors.push("the product id is not provided");
+  if (!product.price && typeof price !== "number")
+    errors.push("price is not a number");
+  if (!product.title) errors.push("the title is required");
+  if (!product.quantity) errors.push("the quantity is required");
+  if (!product.category) errors.push("the category is required");
+  if (!product.description) errors.push("the description is required");
+  if (!product.recipe) errors.push("the recipe is required");
+
+  return errors;
+};
+
 const addProduct = (product) => (dispatch) => {
+  const errors = productCheck(product, false);
+  if (errors.length !== 0) {
+    dispatch(addNotification("Please verify the inserted informations"));
+    return Promise.resolve();
+  }
   return companyServices
     .addProduct(product)
     .then((response) => {
       window.location.reload();
       dispatch(receiveProduct(response));
-      addNotification("Product added successfully");
+      dispatch(addNotification("Product added successfully"));
     })
     .catch((err) =>
       addNotification("There was a problem while adding the product")
     );
 };
 const editProduct = (product) => (dispatch) => {
+  const errors = productCheck(product, true);
+  if (errors.length !== 0) {
+    dispatch(addNotification("Please verify the inserted informations"));
+    return Promise.resolve();
+  }
   return companyServices
     .editProduct(product)
     .then((response) => {
       dispatch(receiveProduct(response));
-      addNotification("Product added successfully");
+      dispatch(addNotification("Product added successfully"));
     })
     .catch((err) =>
-      addNotification("There was a problem while adding the product")
+      dispatch(addNotification("There was a problem while adding the product"))
     );
 };
 const removeProduct = (product) => (dispatch) => {
@@ -129,31 +154,31 @@ const removeProduct = (product) => (dispatch) => {
     .removeProduct(product)
     .then((response) => {
       window.location.reload();
-      addNotification("Product added successfully");
+      dispatch(addNotification("Product added successfully"));
     })
     .catch((err) =>
-      addNotification("There was a problem while adding the product")
+      dispatch(addNotification("There was a problem while adding the product"))
     );
 };
 const addCommand = (command) => (dispatch) => {
   return companyServices
     .addCommand(command)
     .then((response) => {
-      addNotification("command added successfully");
+      dispatch(addNotification("command added successfully"));
     })
     .catch((err) =>
-      addNotification("There was a problem while adding the command")
+      dispatch(addNotification("There was a problem while adding the command"))
     );
 };
 const editCommand = (command) => (dispatch) => {
   return companyServices
     .editCommand(command)
     .then((response) => {
+      dispatch(addNotification("command added successfully"));
       window.location.reload();
-      addNotification("command added successfully");
     })
     .catch((err) =>
-      addNotification("There was a problem while adding the command")
+      dispatch(addNotification("There was a problem while adding the command"))
     );
 };
 const removeCommand = (command) => (dispatch) => {
@@ -161,10 +186,10 @@ const removeCommand = (command) => (dispatch) => {
     .removeCommand(command)
     .then((response) => {
       window.location.reload();
-      addNotification("command added successfully");
+      dispatch(addNotification("command added successfully"));
     })
     .catch((err) =>
-      addNotification("There was a problem while adding the command")
+      dispatch(addNotification("There was a problem while adding the command"))
     );
 };
 
@@ -179,7 +204,9 @@ const getRunOutProducts = () => (dispatch) => {
   return ProductServices.getRunOutProducts()
     .then((response) => dispatch(receiveRunoutProducts(response)))
     .catch(() =>
-      addNotification("There was an error while fetching the products")
+      dispatch(
+        addNotification("There was an error while fetching the products")
+      )
     );
 };
 
