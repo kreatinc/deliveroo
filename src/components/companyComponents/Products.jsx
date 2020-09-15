@@ -47,15 +47,18 @@ let Products = ({
               },
             },
           ]}
-          data={products.map((product) => ({
-            id: product.id,
-            price: product.price,
-            title: product.title,
-            quantity: product.quantity,
-            category: product.category.id,
-            description: product.description,
-            recipe: product.recipe,
-          }))}
+          data={
+            products &&
+            products.map((product) => ({
+              id: product.id,
+              price: product.price,
+              title: product.title,
+              quantity: product.quantity,
+              category: product.category.id,
+              description: product.description,
+              recipe: product.recipe,
+            }))
+          }
           addAction={addProduct}
           editAction={editProduct}
           removeAction={removeProduct}

@@ -87,19 +87,8 @@ const editProduct = (product) => {
   );
 };
 const removeProduct = (product) => {
-  console.log("the product is : ", product);
-  const _product = {
-    title: product.title,
-    recipe: product.recipe,
-    price: product.price,
-    quantity: product.quantity,
-    category_id: product.category,
-    description: product.description,
-  };
-  return apiClient.delete(
-    `companies/products/${product.id}`,
-    JSON.stringify(_product)
-  );
+  console.log("product is the following : ", product);
+  return apiClient.delete(`companies/products/${product.id}`);
 };
 
 const fetchCategories = () => {

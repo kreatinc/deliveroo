@@ -3,8 +3,8 @@ import React from "react";
 import Card from "react-bulma-components/lib/components/card";
 import { Link } from "react-router-dom";
 
-const CommandsReviewCard = ({ title, items }) => {
-  console.log("itemssss :>> ", items);
+const RunoutReviewCard = ({ title, items }) => {
+  console.log("the runout products are :>> ", items);
   return (
     <Card className="company__card">
       <header className="card-header">
@@ -16,7 +16,7 @@ const CommandsReviewCard = ({ title, items }) => {
           {items && (
             <ul>
               {items.map((item, i) => (
-                <Product item={item} key={i} />
+                <Product item={{ product: item }} key={i} />
               ))}
             </ul>
           )}
@@ -26,4 +26,4 @@ const CommandsReviewCard = ({ title, items }) => {
   );
 };
 
-export default CommandsReviewCard;
+export default RunoutReviewCard;

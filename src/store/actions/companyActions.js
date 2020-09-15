@@ -127,7 +127,7 @@ const removeProduct = (product) => (dispatch) => {
   return companyServices
     .removeProduct(product)
     .then((response) => {
-      dispatch({ type: "REMOVE_PRODUCT", id: product.id });
+      window.location.reload();
       addNotification("Product added successfully");
     })
     .catch((err) =>
@@ -136,6 +136,7 @@ const removeProduct = (product) => (dispatch) => {
 };
 
 const receiveProduct = (response) => {
+  window.location.reload();
   return {
     type: "FETCH_PRODUCT_SUCCESS",
     response: normalize(response.data.data, product),

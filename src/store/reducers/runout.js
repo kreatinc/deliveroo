@@ -1,7 +1,11 @@
 const runout = (state = [], action) => {
   switch (action.type) {
     case "FETCH_RUNOUT_PRODUCT":
-      return action.response.entities.products;
+      const nextState = [];
+      Object.keys(action.response.entities.products).forEach((key) =>
+        nextState.push(action.response.entities.products[key])
+      );
+      return nextState;
     case "FETCH_RUNOUT_PRODUCT_FAILURE":
       return state;
     default:

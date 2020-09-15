@@ -5,6 +5,7 @@ const byId = (state = {}, action) => {
     case "FETCH_PRODUCT_SUCCESS":
       return { ...state, ...action.response.entities.products };
     case "REMOVE_PRODUCT":
+      console.log("i am here");
       const nextState = Object.keys(state).filter((key) => key !== action.id);
       return { ...nextState };
     case "REMOVE_INGREDIENT":

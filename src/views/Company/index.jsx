@@ -66,7 +66,7 @@ let Company = ({
     return <Commands commands={commands} />;
   }
   if (slug && slug === "stock") {
-    return <Stock runout={[runOutProducts]} />;
+    return <Stock runout={runOutProducts} />;
   }
 
   return (
@@ -89,7 +89,7 @@ let Company = ({
         </Columns>
         <div style={{ marginTop: "5%" }}>
           <Columns>
-            <Columns.Column className="is-two-fifths">
+            <Columns.Column className="is-two-forth">
               <CommandsReviewCard
                 title="Latest commands"
                 items={latestCommands}

@@ -6,18 +6,18 @@ import CommandsReviewCard from "./CommandsReviewCard";
 import * as actions from "store/actions/companyActions";
 import * as selectors from "store/reducers";
 import { connect } from "react-redux";
+import RunoutReviewCard from "./RunoutReviewCard";
 
 // nearly ended products in stock
 // shopping list
 const Stock = ({ runout }) => {
-  console.log("products :>> ", runout);
   return (
     <>
       <NavBar />
       <Container className="welcome__container">
         <Columns>
           <Columns.Column>
-            <CommandsReviewCard title="Nearly out of stock" items={runout} />
+            <RunoutReviewCard title="Nearly out of stock" items={runout} />
           </Columns.Column>
         </Columns>
         <Columns.Column>
