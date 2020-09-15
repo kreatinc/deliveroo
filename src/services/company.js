@@ -90,6 +90,34 @@ const removeProduct = (product) => {
   console.log("product is the following : ", product);
   return apiClient.delete(`companies/products/${product.id}`);
 };
+const addCommand = (product) => {
+  const _product = {
+    title: product.title,
+    recipe: product.recipe,
+    price: product.price,
+    quantity: product.quantity,
+    description: product.description,
+  };
+  console.log("the product is : ", _product);
+  return apiClient.post("companies/commands", JSON.stringify(_product));
+};
+const editCommand = (command) => {
+  const _command = {
+    price: command.price,
+    quantity: command.quantity,
+    description: command.description,
+    address: command.address,
+    delivery_state: command.delivery_state,
+  };
+  console.log("edited command", _command);
+  return apiClient.patch(
+    `companies/commands/${command.id}`,
+    JSON.stringify(_command)
+  );
+};
+const removeCommand = (command) => {
+  return apiClient.delete(`companies/products/${command.id}`);
+};
 
 const fetchCategories = () => {
   return apiClient.get("/categories");
@@ -105,8 +133,11 @@ export {
   getCommands,
   getCommand,
   getProducts,
-  addProduct,
   fetchCategories,
+  addProduct,
   editProduct,
   removeProduct,
+  addCommand,
+  editCommand,
+  removeCommand,
 };

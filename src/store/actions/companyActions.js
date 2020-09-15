@@ -134,6 +134,38 @@ const removeProduct = (product) => (dispatch) => {
       addNotification("There was a problem while adding the product")
     );
 };
+const addCommand = (command) => (dispatch) => {
+  return companyServices
+    .addCommand(command)
+    .then((response) => {
+      addNotification("command added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the command")
+    );
+};
+const editCommand = (command) => (dispatch) => {
+  return companyServices
+    .editCommand(command)
+    .then((response) => {
+      window.location.reload();
+      addNotification("command added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the command")
+    );
+};
+const removeCommand = (command) => (dispatch) => {
+  return companyServices
+    .removeCommand(command)
+    .then((response) => {
+      window.location.reload();
+      addNotification("command added successfully");
+    })
+    .catch((err) =>
+      addNotification("There was a problem while adding the command")
+    );
+};
 
 const receiveProduct = (response) => {
   window.location.reload();
@@ -178,5 +210,8 @@ export {
   addProduct,
   removeProduct,
   editProduct,
+  addCommand,
+  removeCommand,
+  editCommand,
   fetchCategories,
 };

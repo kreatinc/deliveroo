@@ -2,14 +2,16 @@ import React from "react";
 import Table from "./InfoTable";
 import NavBar from "./Navbar";
 import { Container } from "@material-ui/core";
+import { connect } from "react-redux";
+import * as actions from "store/actions/companyActions";
 
 const DELIVERY_STATE = {
   WAITING: "waiting",
   DELIVERED: "delivered",
-  REJECTED: "rejected",
+  REJECTED: "canceled",
 };
 
-const Commands = ({ commands }) => {
+let Commands = ({ commands, editCommand, removeCommand, addCommand }) => {
   return (
     <>
       <NavBar />
@@ -23,25 +25,31 @@ const Commands = ({ commands }) => {
             { title: "Address", field: "address" },
             {
               title: "Delivery state",
-              field: "delivery",
+              field: "delivery_state",
               lookup: {
-                [DELIVERY_STATE.WAITING]: "Waiting",
-                [DELIVERY_STATE.DELIVERED]: "Delivered",
-                [DELIVERY_STATE.REJECTED]: "Rejected",
+                [DELIVERY_STATE.WAITING]: "waiting",
+                [DELIVERY_STATE.DELIVERED]: "delivered",
+                [DELIVERY_STATE.REJECTED]: "canceled",
               },
             },
           ]}
           data={commands.map((command) => ({
+            id: command.command_group_id,
             price: command.price,
             quantity: command.quantity,
             description: command.description,
             address: command.address,
-            delivery: command.delivery_state,
+            delivery_state: command.delivery_state,
           }))}
+          editAction={editCommand}
+          removeAction={removeCommand}
+          addAction={addCommand}
         />
       </Container>
     </>
   );
 };
+
+Commands = connect(null, actions)(Commands);
 
 export default Commands;
